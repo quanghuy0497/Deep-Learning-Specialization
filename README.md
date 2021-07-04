@@ -10,8 +10,8 @@ The Lecture Notes were created by [Mahmoud Badry](https://github.com/mbadry1/Dee
 
 # Syllabus:
 ### Course 1: Neural Networks and Deep Learning:
-[[Lecture Slide]](https://github.com/quanghuy0497/Deep-Learning-Specialization/tree/main/Course%201%20-%20Neural%20Network%20and%20Deep%20Learning/Slide) [[Assignment]](https://github.com/quanghuy0497/Deep-Learning-Specialization/tree/main/Course%201%20-%20Neural%20Network%20and%20Deep%20Learning/Assigmnent)
-[[Lecture Note]](https://github.com/quanghuy0497/Deep-Learning-Specialization/tree/main/Course%201%20-%20Neural%20Network%20and%20Deep%20Learning/Lecture%20Notes)
+[[Lecture Slide]](https://github.com/quanghuy0497/Deep-Learning-Specialization/tree/main/Course%201%20-%20Neural%20Network%20and%20Deep%20Learning/Lecture%20Slide) [[Assignment]](https://github.com/quanghuy0497/Deep-Learning-Specialization/tree/main/Course%201%20-%20Neural%20Network%20and%20Deep%20Learning/Assigmnent)
+[[Lecture Note]](https://github.com/quanghuy0497/Deep-Learning-Specialization/tree/main/Course%201%20-%20Neural%20Network%20and%20Deep%20Learning/Lecture%20Note)
 - Week 1: Introduction to Deep Learning
 - Week 2: Neural Networks Basics
 - Week 3: Shallow Neural Networks

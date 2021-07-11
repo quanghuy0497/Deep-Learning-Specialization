@@ -99,10 +99,10 @@ Here are the course summary as its given on the course [link](https://www.course
   - High variance (overfitting) for example:
     - Training error: 1%
     - Dev error: 11%
-  - high Bias (underfitting) for example:
+  - High Bias (underfitting) for example:
     - Training error: 15%
     - Dev error: 14%
-  - high Bias (underfitting) && High variance (overfitting) for example:
+  - High Bias (underfitting) && High variance (overfitting) for example:
     - Training error: 15%
     - Test error: 30%
   - Best:

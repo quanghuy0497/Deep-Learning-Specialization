@@ -232,7 +232,7 @@ _**Implementation tip**_: if you implement gradient descent, one of the steps to
     - ![](Images/02-_Early_stopping.png)
   - Andrew prefers to use L2 regularization instead of early stopping because this technique simultaneously tries to **minimize the cost function** and **not to overfit** which contradicts the orthogonalization approach (will be discussed further). => no longer can work on these 2 problems independently
   - But its advantage is that you don't need to search a hyperparameter like in other regularization approaches (like `lambda` in L2 regularization).
-- **Ensemble L**:
+- **Ensemble Learning**:
   - Algorithm:
     - Train multiple independent models.
     - At test time average their results.

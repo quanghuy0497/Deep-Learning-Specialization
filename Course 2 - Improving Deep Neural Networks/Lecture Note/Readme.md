@@ -208,7 +208,7 @@ _**Implementation tip**_: if you implement gradient descent, one of the steps to
 ### Understanding Dropout
 
 - In the previous video, the intuition was that dropout randomly knocks out units in your network. So it's as if on every iteration you're working with a smaller NN, and so using a smaller NN seems like it should have a regularizing effect.
-- Another intuition: can't rely on any one feature, so have to spread out weights.
+- Another intuition: **can't rely on any one feature**, so have to spread out weights.
 - It's possible to show that dropout has a similar effect to L2 regularization.
 - Dropout can have different `keep_prob` per layer.
 - The input layer dropout has to be near 1 (or 1 - no dropout) because you don't want to eliminate a lot of features.

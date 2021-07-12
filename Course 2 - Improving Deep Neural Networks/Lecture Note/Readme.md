@@ -74,7 +74,7 @@ Here are the course summary as its given on the course [link](https://www.course
 - You have to go through the loop many times to figure out your hyperparameters.
 - Your data will be split into three parts:
   - Training set.       (Has to be the largest set)
-  - Hold-out cross validation set / Development or "dev" set.
+  - Hold-out cross validation set / Development or "dev" set. (Validation set)
   - Testing set.
 - You will try to build a model upon training set then try to optimize hyperparameters on dev set as much as possible. Then after your model is ready you try and evaluate the testing set.
 - So the trend on the ratio of splitting the models:

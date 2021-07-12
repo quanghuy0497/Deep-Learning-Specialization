@@ -77,9 +77,10 @@ Here are the course summary as its given on the course [link](https://www.course
   - Hold-out cross validation set / Development or "dev" set.
   - Testing set.
 - You will try to build a model upon training set then try to optimize hyperparameters on dev set as much as possible. Then after your model is ready you try and evaluate the testing set.
-- so the trend on the ratio of splitting the models:
+- So the trend on the ratio of splitting the models:
   - If size of the  dataset is 100 to 1.000.000  ==> 60/20/20
   - If size of the  dataset is over 1.000.000    ==> 98/1/1 or  99.5/0.25/0.25
+- The dev/test set just needs to be big enough for evaluate different algorithm choices and quickly decides which one is better => does not need the whole 20% dataset for that (in a large dataset case)
 - The trend now gives the training data the biggest sets.
 - Make sure the dev and test set are coming from the same distribution.
   - For example if cat training pictures is from the web and the dev/test pictures are from users cell phone they will mismatch. It is better to make sure that dev and test set are from the same distribution.

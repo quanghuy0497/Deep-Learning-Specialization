@@ -85,7 +85,7 @@ Here are the course summary as its given on the course [link](https://www.course
 - Make sure the dev and test set are coming from the same distribution.
   - For example if cat training pictures is from the web and the dev/test pictures are from users cell phone they will mismatch. It is better to make sure that dev and test set are from the same distribution.
 - The dev set rule is to try them on some of the good models you've created.
-- Its OK to only have a dev set without a testing set. But a lot of people in this case call the dev set as the test set. A better terminology is to call it a dev set as its used in the development.
+- It's OK to only have a dev set without a testing set. But a lot of people in this case call the dev set as the test set. A better terminology is to call it a dev set as its used in the development.
 
 ### Bias / Variance
 

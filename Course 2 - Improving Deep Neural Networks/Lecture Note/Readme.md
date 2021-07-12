@@ -141,23 +141,18 @@ Here are the course summary as its given on the course [link](https://www.course
   - The L1 regularization version makes a lot of w values become zeros, which makes the model size smaller.
   - L2 regularization is being used much more often.
   - `lambda` here is the regularization parameter (hyperparameter)
+
 - Regularization for NN:
   - The normal cost function that we want to minimize is:   
     `J(W1,b1...,WL,bL) = (1/m) * Sum(L(y(i),y'(i)))`
-
   - The L2 regularization version:   
     `J(w,b) = (1/m) * Sum(L(y(i),y'(i))) + (lambda/2m) * Sum((||W[l]||^2)`
-
   - We stack the matrix as one vector `(mn,1)` and then we apply `sqrt(w1^2 + w2^2.....)`
-
   - To do back propagation (old way):   
     `dw[l] = (from back propagation)`
-
   - The new way:   
     `dw[l] = (from back propagation) + lambda/m * w[l]`
-
   - So plugging it in weight update step:
-
     - ```
       w[l] = w[l] - learning_rate * dw[l]         % original
            = w[l] - learning_rate * [(from back propagation) + w[l] * lambda/m ]  % 
@@ -176,6 +171,7 @@ Explanation:
   - As 'W' parameters decrease, some `w` parameters will be close to zeros
   - With `w`'s close to zeros, the Neural Network becomes simpler. Thus reduces the overfitting
   - The below intuitions will discuss this matter in some specific cases.  
+  
 Here are some intuitions:
   - Intuition 1:
      - If `lambda` is too large - a lot of w's will be close to zeros - by subtracting the **weight decay** - which will make the NN simpler (you can think of it as it would behave closer to logistic regression).

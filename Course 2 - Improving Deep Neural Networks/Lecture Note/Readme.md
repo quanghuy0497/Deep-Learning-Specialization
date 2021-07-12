@@ -171,7 +171,11 @@ Here are the course summary as its given on the course [link](https://www.course
 
 
 ### Why regularization reduces overfitting?
-
+Explanation:
+  - If we adapt regularization, then `Loss` increase, leading `W` decrease (through back propagation & gradient descent) through training
+  - As 'W' parameters decrease, some `w` parameters will be close to zeros
+  - With `w`'s close to zeros, the Neural Network becomes simpler. Thus reduces the overfitting
+  - The below intuitions will discuss this matter in some specific cases.
 Here are some intuitions:
   - Intuition 1:
      - If `lambda` is too large - a lot of w's will be close to zeros - by subtracting the **weight decay** - which will make the NN simpler (you can think of it as it would behave closer to logistic regression).

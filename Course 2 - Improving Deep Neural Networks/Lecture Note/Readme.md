@@ -159,25 +159,25 @@ Here are the course summary as its given on the course [link](https://www.course
   - So plugging it in weight update step:
 
     - ```
-      w[l] = w[l] - learning_rate * dw[l]
-           = w[l] - learning_rate * [(from back propagation) + w[l] * lambda/m ]
-           = w[l] - (learning_rate*lambda/m) * w[l] - learning_rate * (from back propagation) 
+      w[l] = w[l] - learning_rate * dw[l]         % original
+           = w[l] - learning_rate * [(from back propagation) + w[l] * lambda/m ]  % 
+           = w[l] - (learning_rate*lambda/m) * w[l] - learning_rate * (from back propagation)
            = [1 - (learning_rate*lambda)/m] * w[l] - learning_rate * (from back propagation)
       ```
 
   - In practice this penalizes large weights and effectively limits the freedom in your model.
-
-  - The new term `[1 - (learning_rate*lambda)/m] * w[l]`  causes the **weight to decay** in proportion to its size.
+  
+  - The new term **`(learning_rate*lambda)/m`** is little bit less than 1 and causes the **weight (to) decay** in proportion to its size.
 
 
 ### Why regularization reduces overfitting?
 
 Here are some intuitions:
   - Intuition 1:
-     - If `lambda` is too large - a lot of w's will be close to zeros which will make the NN simpler (you can think of it as it would behave closer to logistic regression).
+     - If `lambda` is too large - a lot of w's will be close to zeros (by subtracting the **weight decay** which will make the NN simpler (you can think of it as it would behave closer to logistic regression).
      - If `lambda` is good enough it will just reduce some weights that makes the neural network overfit.
   - Intuition 2 (with _tanh_ activation function):
-     - If `lambda` is too large, w's will be small (close to zero) - will use the linear part of the _tanh_ activation function, so we will go from non linear activation to _roughly_ linear which would make the NN a _roughly_ linear classifier.
+     - If `lambda` is too large, w's will be small (close to zero) => z small => will use the linear part of the _tanh_ activation function, so we will go from non linear activation to _roughly_ linear which would make the NN a _roughly_ linear classifier.
      - If `lambda` good enough it will just make some of _tanh_ activations _roughly_ linear which will prevent overfitting.
      
 _**Implementation tip**_: if you implement gradient descent, one of the steps to debug gradient descent is to plot the cost function J as a function of the number of iterations of gradient descent and you want to see that the cost function J decreases **monotonically** after every elevation of gradient descent with regularization. If you plot the old definition of J (no regularization) then you might not see it decrease monotonically.

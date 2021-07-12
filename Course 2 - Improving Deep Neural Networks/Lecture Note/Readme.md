@@ -167,7 +167,7 @@ Here are the course summary as its given on the course [link](https://www.course
 
   - In practice this penalizes large weights and effectively limits the freedom in your model.
   
-  - The new term **`(learning_rate*lambda)/m`** is little bit less than 1 and causes the **weight (to) decay** in proportion to its size.
+  - The new term `(learning_rate*lambda)/m` is little bit less than 1 and causes the **_weight to decay_** in proportion to its size.
 
 
 ### Why regularization reduces overfitting?

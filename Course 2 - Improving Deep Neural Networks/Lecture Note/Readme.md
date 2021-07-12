@@ -230,9 +230,9 @@ _**Implementation tip**_: if you implement gradient descent, one of the steps to
   - We will pick the point at which the training set error and dev set error are best (lowest training cost with lowest dev cost).
   - We will take these parameters as the best parameters.
     - ![](Images/02-_Early_stopping.png)
-  - Andrew prefers to use L2 regularization instead of early stopping because this technique simultaneously tries to minimize the cost function and not to overfit which contradicts the orthogonalization approach (will be discussed further).
+  - Andrew prefers to use L2 regularization instead of early stopping because this technique simultaneously tries to **minimize the cost function** and **not to overfit** which contradicts the orthogonalization approach (will be discussed further). => no longer can work on these 2 problems independently
   - But its advantage is that you don't need to search a hyperparameter like in other regularization approaches (like `lambda` in L2 regularization).
-- **Model Ensembles**:
+- **Ensemble L**:
   - Algorithm:
     - Train multiple independent models.
     - At test time average their results.

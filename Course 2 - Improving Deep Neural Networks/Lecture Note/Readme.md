@@ -311,15 +311,15 @@ _**Implementation tip**_: if you implement gradient descent, one of the steps to
   ![](Images/03-_Numerical_approximation_of_gradients.png)
 - Gradient checking approximates the gradients and is very helpful for finding the errors in your backpropagation implementation but it's slower than gradient descent (so use only for debugging).
 - Implementation of this is very simple.
-- Gradient checking:
-  - First take `W[1],b[1],...,W[L],b[L]` and reshape into one big vector (`theta`)
+- **Gradient checking**:
+  - First take `W[1],b[1],...,W[L],b[L]`, reshape and concat it into one big vector `theta`
   - The cost function will be `J(theta)`
-  - Then take `dW[1],db[1],...,dW[L],db[L]` into one big vector (`d_theta`)
-  - **Algorithm**:   
+  - Then take `dW[1],db[1],...,dW[L],db[L]`, reshap and concat it into one big vector `d_theta`
+  - **_Algorithm_**:   
     ```
     eps = 10^-7   # small number
     for i in len(theta):
-      d_theta_approx[i] = (J(theta1,...,theta[i] + eps) -  J(theta1,...,theta[i] - eps)) / 2*eps
+      d_theta_approx[i] = (J(theta[1],...,theta[i] + eps) -  J(theta[1],...,theta[i] - eps)) / 2*eps
     ```
   - Finally we evaluate this formula `(||d_theta_approx - d_theta||) / (||d_theta_approx||+||d_theta||)` (`||` - Euclidean vector norm) and check (with eps = 10^-7):
     - if it is < 10^-7  - great, very likely the backpropagation implementation is correct

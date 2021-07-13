@@ -16,7 +16,7 @@ The Lecture Notes were created by [Mahmoud Badry](https://github.com/mbadry1/Dee
 - Week 3: Shallow Neural Networks
 - Week 4: Deep Neural Network
 ### Course 2: Improving Deep Neural Networks: Hyperparameter tuning, Regularization and Optimization
-[[Lecture Slide]](https://github.com/quanghuy0497/Deep-Learning-Specialization/tree/main/Course%202%20-%20Improving%20Deep%20Neural%20Networks/Lecture%20Slide) [[Assignment]](https://github.com/quanghuy0497/Deep-Learning-Specialization/tree/main/Course%202%20-%20Improving%20Deep%20Neural%20Networks/Assigmnent)
+[[Lecture Slide]](https://github.com/quanghuy0497/Deep-Learning-Specialization/tree/main/Course%202%20-%20Improving%20Deep%20Neural%20Networks/Lecture%20Slide) [[Assignment]](https://github.com/quanghuy0497/Deep-Learning-Specialization/tree/main/Course%202%20-%20Improving%20Deep%20Neural%20Networks/Assignment)
 [[Lecture Note]](https://github.com/quanghuy0497/Deep-Learning-Specialization/tree/main/Course%202%20-%20Improving%20Deep%20Neural%20Networks/Lecture%20Note)
 - Week 1: Practical aspects of Deep Learning
 - Week 2: Optimization algorithms

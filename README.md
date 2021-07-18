@@ -22,7 +22,10 @@ The Lecture Notes were created by [Mahmoud Badry](https://github.com/mbadry1/Dee
 - Week 2: Optimization algorithms
 - Week 3: Hyperparameter tuning, Batch Normalization and Programming Frameworks
 ### Course 3: Structuring Machine Learning Projects
-- To be updated soon...
+[[Lecture Slide]](https://github.com/quanghuy0497/Deep-Learning-Specialization/tree/main/Course%203%20-%20Structuring%20Machine%20Learning%20Projects/Lecture%20Slide) [[Assignment]](https://github.com/quanghuy0497/Deep-Learning-Specialization/tree/main/Course%203%20-%20Structuring%20Machine%20Learning%20Projects/Assignment)
+[[Lecture Note]](https://github.com/quanghuy0497/Deep-Learning-Specialization/tree/main/Course%203%20-%20Structuring%20Machine%20Learning%20Projects/Lecture%20Note)
+- Week 1: ML Strategy 1
+- Week 2: ML Strategy 2
 ### Course 4: Convolutional Neural Networks
 - To be updated soon...
 ### Course 5: Sequence Models

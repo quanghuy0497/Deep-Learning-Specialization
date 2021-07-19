@@ -402,7 +402,7 @@ Implications of L2-regularization on:
   	grads = backward_prop(AL, caches)
   	update_parameters(grads)
   ```
-- Epoch is a single pass through the training set (going through all the batch gradient descent)
+- Epoch is a single pass through the training set (going through all the batch gradient descent steps)
 - The code inside an epoch should be vectorized.
 - Mini-batch gradient descent works much faster in the large datasets.
 
@@ -411,21 +411,21 @@ Implications of L2-regularization on:
 - In mini-batch algorithm, the cost won't go down with each step as it does in batch algorithm. It could contain some ups and downs but generally it has to go down (unlike the batch gradient descent where cost function descreases on each iteration).
   ![](Images/04-_batch_vs_mini_batch_cost.png)
 - Mini-batch size:
-  - (`mini batch size = m`)  ==>    Batch gradient descent
-  - (`mini batch size = 1`)  ==>    Stochastic gradient descent (SGD)
+  - (`mini batch size = m`)  ==>    Batch gradient descent (X{1}, Y{1}) = (X,Y)
+  - (`mini batch size = 1`)  ==>    Stochastic gradient descent (SGD)  (X{1}, (Y{1} = (x1, y1)
   - (`mini batch size = between 1 and m`) ==>    Mini-batch gradient descent
-- Batch gradient descent:
+- **Batch gradient descent**:
   - too long per iteration (epoch)
-- Stochastic gradient descent:
-  - too noisy regarding cost minimization (can be reduced by using smaller learning rate)
+- **Stochastic gradient descent**:
+  - extremely noisy regarding cost minimization (can be reduced by using smaller learning rate)
   - won't ever converge (reach the minimum cost)
   - lose speedup from vectorization
-- Mini-batch gradient descent:
+- **Mini-batch gradient descent**:
   1. faster learning:
       - you have the vectorization advantage
       - make progress without waiting to process the entire training set
   2. doesn't always exactly converge (oscelates in a very small region, but you can reduce learning rate)
-- Guidelines for choosing mini-batch size:
+- **Guidelines for choosing mini-batch size**:
   1. If small training set (< 2000 examples) - use batch gradient descent.
   2. It has to be a power of 2 (because of the way computer memory is layed out and accessed, sometimes your code runs faster if your mini-batch size is a power of 2):
     `64, 128, 256, 512, 1024, ...`

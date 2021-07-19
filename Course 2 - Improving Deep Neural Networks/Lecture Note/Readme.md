@@ -393,7 +393,7 @@ Implications of L2-regularization on:
 - We similarly split `X` & `Y`.
 - So the definition of mini batches ==> `t: X{t}, Y{t}`
 - In **Batch gradient descent** we run the gradient descent on the whole dataset.
-- While in **Mini-Batch gradient descent** we run the gradient descent on the mini datasets.
+- While in **Mini-Batch gradient descent** we run the gradient descent on the mini datasets. (Batch gradient descent)
 - Mini-Batch algorithm pseudo code:
   ```
   for t = 1:No_of_batches                         # this whole loop is also called 1 epocch
@@ -402,7 +402,7 @@ Implications of L2-regularization on:
   	grads = backward_prop(AL, caches)
   	update_parameters(grads)
   ```
-- Epoch is a single pass through the training set
+- Epoch is a single pass through the training set (going through all the batch gradient descent)
 - The code inside an epoch should be vectorized.
 - Mini-batch gradient descent works much faster in the large datasets.
 

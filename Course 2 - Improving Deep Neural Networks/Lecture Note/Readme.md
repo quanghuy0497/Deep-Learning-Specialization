@@ -496,6 +496,7 @@ Implications of L2-regularization on:
 
 - The momentum algorithm almost always works faster than standard gradient descent.
 - The simple idea is to calculate the exponentially weighted averages for your gradients and then update your weights with the new values.
+![](Images/08-_Momentum.png)  
 - Pseudo code:
   ```
   vdW = 0, vdb = 0

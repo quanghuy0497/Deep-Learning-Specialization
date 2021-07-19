@@ -427,7 +427,7 @@ Implications of L2-regularization on:
   2. doesn't always exactly converge (oscelates in a very small region, but you can reduce learning rate)
 - **Guidelines for choosing mini-batch size**:
   1. If small training set (< 2000 examples) - use batch gradient descent.
-  2. It has to be a power of 2 (because of the way computer memory is layed out and accessed, sometimes your code runs faster if your mini-batch size is a power of 2):
+  2. It has to be a power of 2 (because of the way computer memory is layed out and accessed, sometimes your code runs faster if your mini-batch size is a power of 2):  
     `64, 128, 256, 512, 1024, ...`
   3. Make sure that mini-batch fits in CPU/GPU memory.
 - Mini-batch size is a `hyperparameter`.

@@ -543,7 +543,7 @@ Implications of L2-regularization on:
 - Adam optimization simply puts RMSprop and momentum together!
 - Pseudo code:
   ```
-  vdW = 0, vdW = 0
+  vdW = 0, vdb = 0
   sdW = 0, sdb = 0
   on iteration t:
   	# can be mini-batch or batch gradient descent

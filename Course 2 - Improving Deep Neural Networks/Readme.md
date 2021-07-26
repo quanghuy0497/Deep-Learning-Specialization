@@ -739,6 +739,7 @@ Implications of L2-regularization on:
   t = e^(Z[L])                      # shape(C, m)
   A[L] = e^(Z[L]) / sum(t)          # shape(C, m), sum(t) - sum of t's for each example (shape (1, m))
   ```
+  ![](Images/softmax_regression.png)
 
 ### Training a Softmax classifier
 

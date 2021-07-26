@@ -612,7 +612,8 @@ Implications of L2-regularization on:
 - Its hard to decide which hyperparameter is the most important in a problem. It depends a lot on your problem.
 - One of the ways to tune is to sample a grid with `N` hyperparameter settings and then try all settings combinations on your problem.
 - Try random values: don't use a grid.
-- You can use `Coarse to fine sampling scheme`:
+- You can use `Coarse to fine sampling scheme`:  
+  ![](Images/09-_Tuning.png)  
   - When you find some hyperparameters values that give you a better performance - zoom into a smaller region around these values and sample more densely within this space.
 - These methods can be automated.
 

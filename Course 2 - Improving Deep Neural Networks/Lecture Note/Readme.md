@@ -625,7 +625,7 @@ Implications of L2-regularization on:
   - Then:
     ```
     r = (a_log - b_log) * np.random.rand() + b_log
-    # In the example the range would be from [-4, 0] because rand range [0,1)
+    # In the example the range would be from [-4, 0] because rand range [0,1]
     result = 10^r
     ```
     It uniformly samples values in log scale from [a,b].

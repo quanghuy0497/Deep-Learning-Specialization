@@ -646,10 +646,11 @@ Implications of L2-regularization on:
   - Day 0 you might initialize your parameter as random and then start training.
   - Then you watch your learning curve gradually decrease over the day.
   - And each day you nudge your parameters a little during training.
-  - Called panda approach.
+  - Called **Panda** approach.
 - If you have enough computational resources, you can run some models in parallel and at the end of the day(s) you check the results.
-  - Called Caviar approach.
-
+  - Called **Caviar** approach.
+  ![](Images/10-_PandaCaviar.png)  
+  
 ### Normalizing activations in a network
 
 - In the rise of deep learning, one of the most important ideas has been an algorithm called **batch normalization**, created by two researchers, Sergey Ioffe and Christian Szegedy.

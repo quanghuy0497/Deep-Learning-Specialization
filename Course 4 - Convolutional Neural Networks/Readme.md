@@ -105,10 +105,11 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 - In an image we can detect vertical edges, horizontal edges, or full edge detector.
 - Vertical edge detection:
   - An example of convolution operation to detect vertical edges:
-    - ![](Images/01.png)
+      ![](Images/01.png)
   - In the last example a `6x6` matrix convolved with `3x3` filter/kernel gives us a `4x4` matrix.
   - If you make the convolution operation in TensorFlow you will find the function `tf.nn.conv2d`. In keras you will find `Conv2d` function.
   - The vertical edge detection filter will find a `3x3` place in an image where there are a bright region followed by a dark region.
+      ![](Images/vertical_kernel.pnng)
   - If we applied this filter to a white region followed by a dark region, it should find the edges in between the two colors as a positive value. But if we applied the same filter to a dark region followed by a white region it will give us negative values. To solve this we can use the abs function to make it positive.
 - Horizontal edge detection
   - Filter would be like this
@@ -265,7 +266,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 - Other than the conv layers, CNNs often uses pooling layers to reduce the size of the inputs, speed up computation, and to make some of the features it detects more robust.
 - Max pooling example:
-  - ![](Images/02.png)
+    ![](Images/02.png)
   - This example has `f = 2`, `s = 2`, and `p = 0` hyperparameters
 - The max pooling is saying, if the feature is detected anywhere in this filter then keep a high number. But the main reason why people are using pooling because its works well in practice and reduce computations.
 - Max pooling has no parameters to learn.
@@ -313,7 +314,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     - Number of neurons is 10 if we need to identify for example the 10 digits.
 - Hint a Conv1 and Pool1 is treated as one layer.
 - Some statistics about the last example:
-  - ![](Images/03.png)
+   ![](Images/03.png)
 - Hyperparameters are a lot. For choosing the value of each you should follow the guideline that we will discuss later or check the literature and takes some ideas and numbers from it.
 - Usually the input size decreases over layers while the number of filters increases.
 - A CNN usually consists of one or more convolution (Not just one as the shown examples) followed by a pooling.
@@ -328,7 +329,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   - sparsity of connections.
     - In each layer, each output value depends only on a small number of inputs which makes it translation invariance.
 - Putting it all together:
-  - ![](Images/04.png)
+   ![](Images/04.png)
 
 ## Deep convolutional models: case studies
 
@@ -354,7 +355,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 - **LeNet-5**
 
   - The goal for this model was to identify handwritten digits in a `32x32x1` gray image. Here are the drawing of it:
-  - ![](Images/05.png)
+    ![](Images/05.png)
   - This model was published in 1998. The last layer wasn't using softmax back then.
   - It has 60k parameters.
   - The dimensions of the image decreases as the number of channels increases.
@@ -368,7 +369,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
   - The goal for the model was the ImageNet challenge which classifies images into 1000 classes. Here are the drawing of the model:
 
-  - ![](Images/06.png)
+    ![](Images/06.png)
 
   - Summary:
 
@@ -399,7 +400,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     - CONV = 3 X 3 filter, s = 1, same  
     - MAX-POOL = 2 X 2 , s = 2
   - Here are the architecture:
-    - ![](Images/07.png)
+      ![](Images/07.png)
   - This network is large even by modern standards. It has around 138 million parameters.
     - Most of the parameters are in the fully connected layers.
   - It has a total memory of 96MB per image for only forward propagation!
@@ -416,15 +417,15 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 - In this section we will learn about skip connection which makes you take the activation from one layer and suddenly feed it to another layer even much deeper in NN which allows you to train large NNs even with layers greater than 100.
 - **Residual block**
   - ResNets are built out of some Residual blocks.
-  - ![](Images/08.png)
+    ![](Images/08.png)
   - They add a shortcut/skip connection before the second activation.
   - The authors of this block find that you can train a deeper NNs using stacking this block.
   - [[He et al., 2015. Deep residual networks for image recognition]](https://arxiv.org/abs/1512.03385)
 - **Residual Network**
   - Are a NN that consists of some Residual blocks.
-  - ![](Images/09.png)
+    ![](Images/09.png)
   - These networks can go deeper without hurting the performance. In the normal NN - Plain networks - the theory tell us that if we go deeper we will get a better solution to our problem, but because of the vanishing and exploding gradients problems the performance of the network suffers as it goes deeper. Thanks to Residual Network we can go deeper as we want now.
-  - ![](Images/10.png)
+    ![](Images/10.png)
   - On the left is the normal NN and on the right are the ResNet. As you can see the performance of ResNet increases as the network goes deeper.
   - In some cases going deeper won't effect the performance and that depends on the problem on your hand.
   - Some people are trying to train 1000 layer now which isn't used in practice. 
@@ -470,7 +471,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 - Lets take a look at ResNet on images.
 
   - Here are the architecture of **ResNet-34**:
-  - ![](Images/resNet.jpg)
+    ![](Images/resNet.jpg)
   - All the 3x3 Conv are same Convs.
   - Keep it simple in design of the network.
   - spatial size /2 => # filters x2
@@ -480,18 +481,18 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 - Useful concept (**Spectrum of Depth**):
 
-  - ![](Images/12.png)
+    ![](Images/12.png)
   - Taken from [icml.cc/2016/tutorials/icml2016_tutorial_deep_residual_networks_kaiminghe.pdf](icml.cc/2016/tutorials/icml2016_tutorial_deep_residual_networks_kaiminghe.pdf)
 
 - Residual blocks types:
 
   - Identity block:
-    - ![](Images/16.png)
+      ![](Images/16.png)
     - Hint the conv is followed by a batch norm `BN` before `RELU`. Dimensions here are same.
     - This skip is over 2 layers. The skip connection can jump n connections where n>2
     - This drawing represents [Keras](https://keras.io/) layers.
   - The convolutional block:
-    - ![](Images/17.png)
+      ![](Images/17.png)
     - The conv can be bottleneck 1 x 1 conv
 
 ### Network in Network and 1 X 1 convolutions
@@ -531,7 +532,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 - When you design a CNN you have to decide all the layers yourself. Will you pick a 3 x 3 Conv or 5 x 5 Conv or maybe a max pooling layer. You have so many choices.
 - What **inception** tells us is, Why not use all of them at once?
 - **Inception module**, naive version:
-  - ![](Images/13.png)
+    ![](Images/13.png)
   - Hint that max-pool are same here.
   - Input to the inception module are 28 x 28 x 192 and the output are 28 x 28 x 256
   - We have done all the Convs and pools we might want and will let the NN learn and decide which it want to use most.
@@ -560,16 +561,16 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 - A 1 x 1 Conv here is called Bottleneck `BN`.
 - It turns out that the 1 x 1 Conv won't hurt the performance.
 - **Inception module**, dimensions reduction version:
-  - ![](Images/14.png)
+    ![](Images/14.png)
 - Example of inception model in Keras:
-  - ![](Images/inception_block1a.png)
+    ![](Images/inception_block1a.png)
 
 ### Inception network (GoogleNet)
 
 - The inception network consist of concatenated blocks of the Inception module.
 - The name inception was taken from a *meme* image which was taken from **Inception movie**
 - Here are the full model:
-  - ![](Images/15.png)
+    ![](Images/15.png)
 - Some times a Max-Pool block is used before the inception module to reduce the dimensions of the inputs.
 - There are a 3 Sofmax branches at different positions to push the network toward its goal. and helps to ensure that the intermediate features are good enough to the network to learn and it turns out that softmax0 and sofmax1 gives regularization effect.
 - Since the development of the Inception module, the authors and the others have built another versions of this network. Like inception v2, v3, and v4. Also there is a network that has used the inception module and the ResNet together.
@@ -663,20 +664,20 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
   - **Image Classification**: 
     - Classify an image to a specific class. The whole image represents one class. We don't want to know exactly where are the object. Usually only one object is presented.
-    - ![](Images/Classification.jpg)
+      ![](Images/Classification.jpg)
   - **Classification with localization**:
     - Given an image we want to learn the class of the image and where are the class location in the image. We need to detect a class and a rectangle of where that object is. Usually only one object is presented.
-    - ![](Images/ClassificationLoc.jpg)
+      ![](Images/ClassificationLoc.jpg)
   - **Object detection**:
     - Given an image we want to detect all the object in the image that belong to a specific classes and give their location. An image can contain more than one object with different classes.
-    - ![](Images/ObjectDetection.png)
+      ![](Images/ObjectDetection.png)
   - **Semantic Segmentation**:
     - We want to Label each pixel in the image with a category label. Semantic Segmentation Don't differentiate instances, only care about pixels. It detects no objects just pixels.
     - If there are two objects of the same class is intersected, we won't be able to separate them.
-    - ![](Images/SemanticSegmentation.png)
+      ![](Images/SemanticSegmentation.png)
   - **Instance Segmentation**
     - This is like the full problem. Rather than we want to predict the bounding box, we want to know which pixel label but also distinguish them.
-    - ![](Images/InstanceSegmentation.png)
+      ![](Images/InstanceSegmentation.png)
 
 - To make image classification we use a Conv Net with a Softmax attached to the end of it.
 
@@ -766,7 +767,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 - We will use a Conv net to solve the object detection problem using a technique called the sliding windows detection algorithm.
 - For example lets say we are working on Car object detection.
 - The first thing, we will train a Conv net on cropped car images and non car images.
-  - ![](Images/18.png)
+    ![](Images/18.png)
 - After we finish training of this Conv net we will then use it with the sliding windows technique.
 - Sliding windows detection algorithm:
   1. Decide a rectangle size.
@@ -783,23 +784,23 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 ### Convolutional Implementation of Sliding Windows
 
 - Turning FC layer into convolutional layers (predict image class from four classes):
-  - ![](Images/19.png)
+    ![](Images/19.png)
   - As you can see in the above image, we turned the FC layer into a Conv layer using a convolution with the width and height of the filter is the same as the width and height of the input.
 - **Convolution implementation of sliding windows**:
   - First lets consider that the Conv net you trained is like this (No FC all is conv layers):
-    - ![](Images/20.png)
+      ![](Images/20.png)
   - Say now we have a 16 x 16 x 3 image that we need to apply the sliding windows in. By the normal implementation that have been mentioned in the section before this, we would run this Conv net four times each rectangle size will be 16 x 16.
   - The convolution implementation will be as follows:
-    - ![](Images/21.png)
+      ![](Images/21.png)
   - Simply we have feed the image into the same Conv net we have trained.
   - The left cell of the result "The blue one" will represent the the first sliding window of the normal implementation. The other cells will represent the others.
   - Its more efficient because it now shares the computations of the four times needed.
   - Another example would be:
-    - ![](Images/22.png)
+      ![](Images/22.png)
   - This example has a total of 16 sliding windows that shares the computation together.
   - [[Sermanet et al., 2014, OverFeat: Integrated recognition, localization and detection using convolutional networks]](https://arxiv.org/abs/1312.6229)
 - The weakness of the algorithm is that the position of the rectangle wont be so accurate. Maybe none of the rectangles is exactly on the object you want to recognize.
-  - ![](Images/23.png)
+    ![](Images/23.png)
   - In red, the rectangle we want and in blue is the required car rectangle.
 
 ### Bounding Box Predictions
@@ -810,7 +811,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 - Yolo Algorithm:
 
-  - ![](Images/24.png)
+    ![](Images/24.png)
 
   1. Lets say we have an image of 100 X 100
   2. Place a  3 x 3 grid on the image. For more smother results you should use 19 x 19 for the 100 x 100
@@ -832,7 +833,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 - Intersection Over Union is a function used to evaluate the object detection algorithm.
 - It computes size of intersection and divide it by the union. More generally, *IoU* *is a measure of the overlap between two bounding boxes*.
 - For example:
-  - ![](Images/25.png)
+    ![](Images/25.png)
   - The red is the labeled output and the purple is the predicted output.
   - To compute Intersection Over Union we first compute the union area of the two rectangles which is "the first rectangle + second rectangle" Then compute the intersection area between these two rectangles.
   - Finally `IOU = intersection area / Union area`
@@ -844,7 +845,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 - One of the problems we have addressed in YOLO is that it can detect an object multiple times.
 - Non-max Suppression is a way to make sure that YOLO detects the object just once.
 - For example:
-  - ![](Images/26.png)
+    ![](Images/26.png)
   - Each car has two or more detections with different probabilities. This came from some of the grids that thinks that this is the center point of the object.
 - Non-max suppression algorithm:
   1. Lets assume that we are targeting one class as an output class.
@@ -858,18 +859,18 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 ### Anchor Boxes
 
 - In YOLO, a grid only detects one object. What if a grid cell wants to detect multiple object?
-  - ![](Images/27.png)
+    ![](Images/27.png)
   - Car and person grid is same here.
   - In practice this happens rarely.
 - The idea of Anchor boxes helps us solving this issue.
 - If Y = `[Pc, bx, by, bh, bw, c1, c2, c3]` Then to use two anchor boxes like this:
   - Y = `[Pc, bx, by, bh, bw, c1, c2, c3, Pc, bx, by, bh, bw, c1, c2, c3]`  We simply have repeated  the one anchor Y.
   - The two anchor boxes you choose should be known as a shape:
-    - ![](Images/28.png)
+      ![](Images/28.png)
 - So Previously, each object in training image is assigned to grid cell that contains that object's midpoint.
 - With two anchor boxes, Each object in training image is assigned to grid cell that contains object's midpoint and anchor box for the grid cell with <u>highest IoU</u>. You have to check where your object should be based on its rectangle closest to which anchor box.
 - Example of data:
-  - ![](Images/29.png)
+    ![](Images/29.png)
   - Where the car was near the anchor 2 than anchor 1.
 - You may have two or more anchor boxes but you should know their shapes.
   - how do you choose the anchor boxes and people used to just choose them by hand. Maybe five or ten anchor box shapes that spans a variety  of shapes that cover the types of objects you seem to detect frequently.
@@ -899,7 +900,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 - Your dataset could be an image with a multiple labels and a rectangle for each label, we should go to your dataset and make the shape and values of Y like we agreed.
 
   - An example:
-    - ![](Images/30.png)
+      ![](Images/30.png)
   - We first initialize all of them to zeros and ?, then for each label and rectangle choose its closest grid point then the shape to fill it and then the best anchor point based on the IOU. so that the shape of Y for one image should be `[HeightOfGrid, WidthOfGrid,16]`
 
 - Train the labeled images on a Conv net. you should receive an output of `[HeightOfGrid, WidthOfGrid,16]` for our case.
@@ -907,12 +908,12 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 - To make predictions, run the Conv net on an image and run Non-max suppression algorithm for each class you have in our case there are 3 classes.
 
   - You could get something like that:
-    - ![](Images/31.png)
+      ![](Images/31.png)
     - Total number of generated boxes are grid_width * grid_height * no_of_anchors = 3 x 3 x 2
   - By removing the low probability predictions you should have:
-    - ![](Images/32.png)
+      ![](Images/32.png)
   - Then get the best probability followed by the IOU filtering:
-    - ![](Images/33.png)
+      ![](Images/33.png)
 
 - YOLO are not good at detecting smaller object.
 
@@ -1103,7 +1104,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 - The algorithm R-CNN uses to pick windows is called a segmentation algorithm. Outputs something like this:
 
-  - ![](Images/34.png)
+    ![](Images/34.png)
 
 - If for example the segmentation algorithm produces 2000 blob then we should run our classifier/CNN on top of these blobs.
 
@@ -1172,7 +1173,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 - We will implement the similarity function using a type of NNs called Siamease Network in which we can pass multiple inputs to the two or more networks with the same architecture and parameters.
 - Siamese network architecture are as the following:
-  - ![](Images/35.png)
+    ![](Images/35.png)
   - We make 2 identical conv nets which encodes an input image into a vector. In the above image the vector shape is (128, )
   - The loss function will be `d(x1, x2) = || f(x1) - f(x2) ||^2`
   - If `X1`, `X2` are the same person, we want d to be low. If they are different persons, we want d to be high.
@@ -1216,7 +1217,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 - Triplet loss is one way to learn the parameters of a conv net for face recognition there's another way to learn these parameters as a straight binary classification problem.
 - Learning the similarity function another way:
-  - ![](Images/36.png)
+    ![](Images/36.png)
   - The final layer is a sigmoid layer.
   - `Y' = wi * Sigmoid ( f(x(i)) - f(x(j)) ) + b` where the subtraction is the Manhattan distance between f(x(i)) and f(x(j))
   - Some other similarities can be Euclidean and Ki square similarity.
@@ -1237,7 +1238,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 - Neural style transfer is one of the application of Conv nets.
 - Neural style transfer takes a content image `C` and a style image `S` and generates the content image `G` with the style of style image.
-- ![](Images/37.png)
+  ![](Images/37.png)
 - In order to implement this you need to look at the features extracted by the Conv net at the shallower and deeper layers.
 - It uses a previously trained convolutional network like VGG, and builds on top of that. The idea of using a network trained on a different task and applying it to a new task is called transfer learning.
 
@@ -1245,17 +1246,17 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 - Visualizing what a deep network is learning:
   - Given this AlexNet like Conv net:
-    - ![](Images/38.png)
+      ![](Images/38.png)
   - Pick a unit in layer l. Find the nine image patches that maximize the unit's activation. 
     - Notice that a hidden unit in layer one will see relatively small portion of NN, so if you plotted it it will match a small image in the shallower layers while it will get larger image in deeper layers.
   - Repeat for other units and layers.
   - It turns out that layer 1 are learning the low level representations like colors and edges.
 - You will find out that each layer are learning more complex representations.
-  - ![](Images/39.png)
+    ![](Images/39.png)
 - The first layer was created using the weights of the first layer. Other images are generated using the receptive field in the image that triggered the neuron to be max.
 - [[Zeiler and Fergus., 2013, Visualizing and understanding convolutional networks]](https://arxiv.org/abs/1311.2901)
 - A good explanation on how to get **receptive field** given a layer:
-  - ![](Images/receptiveField.png)
+    ![](Images/receptiveField.png)
   - From [A guide to receptive field arithmetic for Convolutional Neural Networks](https://medium.com/@nikasa1889/a-guide-to-receptive-field-arithmetic-for-convolutional-neural-networks-e0f514068807)
 
 #### Cost Function
@@ -1273,9 +1274,9 @@ Here is the course summary as given on the course [link](https://www.coursera.or
      - `G = G - dG`  We compute the gradient image and use gradient decent to minimize the cost function.
 - The iterations might be as following image:
   - To Generate this:
-    - ![](Images/40.png)
+      ![](Images/40.png)
   - You will go through this:
-    - ![](Images/41.png)
+      ![](Images/41.png)
 
 #### Content Cost Function
 
@@ -1294,7 +1295,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   - Say you are using layer l's activation to measure ***style***.
   - Define style as correlation between **activations** across **channels**. 
     - That means given an activation like this:
-      - ![](Images/42.png)
+        ![](Images/42.png)
     - How correlate is the orange channel with the yellow channel?
     - Correlated means if a value appeared in a specific channel a specific value will appear too (Depends on each other).
     - Uncorrelated means if a value appeared in a specific channel doesn't mean that another value will appear (Not depend on each other)
@@ -1306,7 +1307,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     - We call this matrix style matrix or Gram matrix.
     - In this matrix each cell will tell us how correlated is a channel to another channel.
   - To populate the matrix we use these equations to compute style matrix of the style image and the generated image.
-    - ![](Images/43.png)
+      ![](Images/43.png)
     - As it appears its the sum of the multiplication of each member in the matrix.
 - To compute gram matrix efficiently:
   - Reshape activation from H X W X C to HW X C
@@ -1343,7 +1344,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 - 1D data comes from a lot of resources such as waves, sounds, heartbeat signals. 
 - In most of the applications that uses 1D data we use Recurrent Neural Network RNN.
 - 3D data also are available in some applications like CT scan:
-  - ![](Images/44.png)
+    ![](Images/44.png)
 - Example of 3D convolution:
   - Input shape (14, 14,14, 1)
   - Applying 16 filters with F = 5 , S = 1

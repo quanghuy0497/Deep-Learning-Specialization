@@ -27,6 +27,11 @@ The Lecture Notes were created by [Mahmoud Badry](https://github.com/mbadry1/Dee
 - Week 1: ML Strategy 1
 - Week 2: ML Strategy 2
 ### [Course 4: Convolutional Neural Networks](https://github.com/quanghuy0497/Deep-Learning-Specialization/tree/main/Course%204%20-%20Convolutional%20Neural%20Networks)
-- To be updated soon...
+[[Lecture Slide]](https://github.com/quanghuy0497/Deep-Learning-Specialization/tree/main/Course%204%20-%20Convolutional%20Neural%20Networks/Lecture%20Slide)
+[[Assignment]](https://github.com/quanghuy0497/Deep-Learning-Specialization/tree/main/Course%204%20-%20Convolutional%20Neural%20Networks/Assignment) 
+- Week 1: Foundations of Convolutional Neural Networks
+- Week 2: Deep Convolutional Models: Case Studies
+- Week 3: Object Detection
+- Week 4: Special Applications: Face recognition & Neural Style Transfer
 ### [Course 5: Sequence Models](https://github.com/quanghuy0497/Deep-Learning-Specialization/tree/main/Course%205%20-%20Sequence%20Models)
 - To be updated soon...

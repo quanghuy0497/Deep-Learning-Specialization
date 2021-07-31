@@ -316,6 +316,12 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 - Hint a Conv1 and Pool1 is treated as one layer.
 - Some statistics about the last example:
    ![](Images/03.png)
+   - Some typos for this table:
+      - CONV1: 208 should be 608 = (5*5*3 + 1) * 8
+      - CONV2: 416 should be 3216 = (5*5*8 + 1) * 16
+      - FC3: 48,001 should be 48120 = 400*120 + 120 (the bias should have 120 parameters, not 1)
+      - FC4: 10,081 should be 10164 = 120*84 + 84
+      - Sofmax: 841 should be 850 = 84*10 + 10
 - Hyperparameters are a lot. For choosing the value of each you should follow the guideline that we will discuss later or check the literature and takes some ideas and numbers from it.
 - Usually the input size decreases over layers while the number of filters increases.
 - A CNN usually consists of one or more convolution (Not just one as the shown examples) followed by a pooling.

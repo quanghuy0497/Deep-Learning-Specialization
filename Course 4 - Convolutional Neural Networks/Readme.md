@@ -222,15 +222,15 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
   Input:  n[l-1] x n[l-1] x nc[l-1]   	Or	 nH[l-1] x nW[l-1] x nc[l-1]
   Output: n[l] x n[l] x nc[l]	        Or  	 nH[l] x nW[l] x nc[l]
-  Where n[l] = (n[l-1] + 2p[l] - f[l] / s[l]) + 1
+    where n[l] = (n[l-1] + 2p[l] - f[l] / s[l]) + 1
 
   Each filter is: f[l] x f[l] x nc[l-1]
 
   Activations: a[l] is nH[l] x nW[l] x nc[l]
-  		     A[l] is m x nH[l] x nW[l] x nc[l]   # In batch or minbatch training
+       	     A[l] is m x nH[l] x nW[l] x nc[l]   # In batch or minbatch training
   		     
   Weights: f[l] * f[l] * nc[l-1] * nc[l]
-  bias:  (1, 1, 1, nc[l])
+  bias:   (1, 1, 1, nc[l])
   ```
 
 ### A simple convolution network example

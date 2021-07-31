@@ -203,10 +203,10 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 - First we convolve some filters to a given input and then add a bias to each filter output and then get RELU of the result. Example:
   - Input image: `6x6x3`         `# a0`
-  - 10 Filters: `3x3x3`         `#W1`
-  - Result image: `4x4x10`     `#W1a0`
-  - Add b (bias) with `10x1` will get us : `4x4x10` image      `#W1a0 + b`
-  - Apply RELU will get us: `4x4x10` image                `#A1 = RELU(W1a0 + b)`
+  - 10 Filters: `3x3x3`          `# W1`
+  - Result image: `4x4x10`       `# W1a0`
+  - Add b (bias) with `10x1` will get us : `4x4x10` image      `# W1a0 + b`
+  - Apply RELU will get us: `4x4x10` image                     `# A1 = RELU(W1a0 + b)`
   - In the last result p=0, s=1
   - Hint number of parameters here are: `(3x3x3x10) + 10 = 280`
 - The last example forms a layer in the CNN.
@@ -220,8 +220,8 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   s[l] = stride
   nc[l] = number of filters
 
-  Input:  n[l-1] x n[l-1] x nc[l-1]	Or	 nH[l-1] x nW[l-1] x nc[l-1]
-  Output: n[l] x n[l] x nc[l]	Or	 nH[l] x nW[l] x nc[l]
+  Input:  n[l-1] x n[l-1] x nc[l-1]   	Or	 nH[l-1] x nW[l-1] x nc[l-1]
+  Output: n[l] x n[l] x nc[l]	        Or  	 nH[l] x nW[l] x nc[l]
   Where n[l] = (n[l-1] + 2p[l] - f[l] / s[l]) + 1
 
   Each filter is: f[l] x f[l] x nc[l-1]

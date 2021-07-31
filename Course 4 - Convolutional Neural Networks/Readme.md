@@ -270,10 +270,11 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   - This example has `f = 2`, `s = 2`, and `p = 0` hyperparameters
 - The max pooling is saying, if the feature is detected anywhere in this filter then keep a high number. But the main reason why people are using pooling because its works well in practice and reduce computations.
 - Max pooling has no parameters to learn.
-- Example of Max pooling on 3D input:
-  - Input: `4x4x10`
-  - `Max pooling size = 2` and `stride = 2`
-  - Output: `2x2x10`
+- Max pooling on 3D input: computating max pooling independently on each channels
+  - Example of Max pooling on 3D input:
+    - Input: `4x4x10`
+    - `Max pooling size = 2` and `stride = 2`
+    - Output: `2x2x10`
 - Average pooling is taking the averages of the values instead of taking the max values.
 - Max pooling is used more often than average pooling in practice.
 - If stride of pooling equals the size, it will then apply the effect of shrinking.

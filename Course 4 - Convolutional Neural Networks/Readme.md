@@ -335,6 +335,10 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     - A feature detector (such as a vertical edge detector) that's useful in one part of the image is probably useful in another part of the image.
   - Sparsity of connections.
     - In each layer, each output value depends only on a small number of inputs which makes it translation invariance.
+  - These advantages help ConvNet
+    - Has a lot fewer parameters => smaller training cless => less prone to be overfitting
+    - Good at capturing translation invariance
+      - Like cat picture shifted a couple of pixels to the right is still recognized clearly a cat picture
 - Putting it all together:
    ![](Images/04.png)
 

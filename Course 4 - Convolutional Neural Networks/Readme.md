@@ -487,10 +487,10 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   - Keep it simple in design of the network.
   - spatial size /2 => # filters x2
   - No FC layers, No dropout is used.
-  - Two main types of blocks are used in a ResNet, depending mainly on whether the input/output dimensions are same or different. You are going to implement both of them.
+  - Two main types of blocks are used in a ResNet, depending mainly on whether the input/output dimensions are same or different.
   - The dotted lines is the case when the dimensions are different. To solve then they down-sample the input by 2 and then pad zeros to match the two dimensions. There's another trick which is called bottleneck which we will explore later.
 
-- Useful concept (**Spectrum of Depth**):
+- Bonus: Useful concept (**Spectrum of Depth**):
 
     ![](Images/12.png)
   - Taken from [icml.cc/2016/tutorials/icml2016_tutorial_deep_residual_networks_kaiminghe.pdf](icml.cc/2016/tutorials/icml2016_tutorial_deep_residual_networks_kaiminghe.pdf)

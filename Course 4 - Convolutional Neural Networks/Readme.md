@@ -435,12 +435,13 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 - **Residual Network**
   - Are a NN that consists of some Residual blocks.
     ![](Images/09.png)
-  - These networks can go deeper without hurting the performance. In the normal NN - Plain networks - the theory tell us that if we go deeper we will get a better solution to our problem, but because of the vanishing and exploding gradients problems the performance of the network suffers as it goes deeper. Thanks to Residual Network we can go deeper as we want now.
+  - These networks can go deeper without hurting the performance. In the normal NN - Plain networks - the theory tell us that if we go deeper we will get a better solution to our problem, but because of the vanishing and exploding gradients problems the performance of the network suffers as it goes deeper.
+  - Thanks to Residual Network we can go deeper as we want now.
     ![](Images/10.png)
   - On the left is the normal NN and on the right are the ResNet. As you can see the performance of ResNet increases as the network goes deeper.
   - In some cases going deeper won't effect the performance and that depends on the problem on your hand.
   - Some people are trying to train 1000 layer now which isn't used in practice. 
-  - [He et al., 2015. Deep residual networks for image recognition]
+  - [[He et al., 2015. Deep residual networks for image recognition]](https://arxiv.org/abs/1512.03385)
 
 ### Why ResNets work
 

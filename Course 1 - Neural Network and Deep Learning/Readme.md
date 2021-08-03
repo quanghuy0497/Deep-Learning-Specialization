@@ -701,4 +701,4 @@ Here are the course summary as its given on the course [link](https://www.course
 
 <br><br>
 <br><br>
-These Notes were made by [Mahmoud Badry](https://github.com/mbadry1/DeepLearning.ai-Summary) @2017
+These Notes were made by [Mahmoud Badry](https://github.com/mbadry1/DeepLearning.ai-Summary)@2017

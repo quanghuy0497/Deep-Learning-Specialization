@@ -440,8 +440,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     ![](Images/10.png)
   - On the left is the normal NN and on the right are the ResNet. As you can see the performance of ResNet increases as the network goes deeper.
   - In some cases going deeper won't effect the performance and that depends on the problem on your hand.
-  - Some people are trying to train 1000 layer now which isn't used in practice. 
-  - [[He et al., 2015. Deep residual networks for image recognition]](https://arxiv.org/abs/1512.03385)
+  - Some people are trying to train 1000 layer now which isn't used in practice.
 
 ### Why ResNets work
 

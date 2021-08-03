@@ -576,21 +576,21 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     - So the total number are 12.5 Mil approx. which is so good compared to 120 Mil
 - A 1 x 1 Conv here is called **Bottleneck** `BN`.
 - It turns out that the 1 x 1 Conv won't hurt the performance.
-- **Inception module**, dimensions reduction version:
+
+### Inception network
+- **Inception module**, dimensions reduction version:  
     ![](Images/14.png)
-- Example of inception model in Keras:
+- Example of inception model in Keras:  
     ![](Images/inception_block1a.png)
-
-### Inception network (GoogleNet)
-
-- The inception network consist of concatenated blocks of the Inception module.
-- The name inception was taken from a *meme* image which was taken from **Inception movie**
-- Here are the full model:  
-    ![](Images/15.png)
-- Some times a Max-Pool block is used before the inception module to reduce the dimensions of the inputs.
-- There are a 3 Sofmax branches at different positions to push the network toward its goal. and helps to ensure that the intermediate features are good enough to the network to learn and it turns out that softmax0 and sofmax1 gives regularization effect.
-- Since the development of the Inception module, the authors and the others have built another versions of this network. Like inception v2, v3, and v4. Also there is a network that has used the inception module and the ResNet together.
-- [[Szegedy et al., 2014, Going Deeper with Convolutions]](https://arxiv.org/abs/1409.4842)
+- **Inception network (GoogleNet)**
+  - The Inception network consist of concatenated blocks of the Inception module.
+    - The name inception was taken from a *meme* image which was taken from **Inception movie**
+  - Here are the full model:  
+      ![](Images/15.png)
+  - Some times a Max-Pool block is used before the inception module to reduce the dimensions of the inputs.
+  - There are a 3 Sofmax branches at different positions to push the network toward its goal. and helps to ensure that the intermediate features are good enough to the network to learn and it turns out that softmax0 and sofmax1 gives regularization effect.
+  - Since the development of the Inception module, the authors and the others have built another versions of this network. Like inception v2, v3, and v4. Also there is a network that has used the inception module and the ResNet together.
+  - [[Szegedy et al., 2014, Going Deeper with Convolutions]](https://arxiv.org/abs/1409.4842)
 
 ### Using Open-Source Implementation
 

@@ -185,19 +185,25 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 ### Convolutions over volumes
 
 - We see how convolution works with 2D images, now lets see if we want to convolve 3D images (RGB image)
-- We will convolve an image of height, width, # of channels with a filter of a height, width, same # of channels. Hint that the image number channels and the filter number of channels are the same.
+- We will convolve an image of height, width, # of channels with a filter of a height, width, same # of channels.     - Hint that the image number channels and the filter number of channels are the same.
+    - We just do the convolutional on the 3D filter **similar** to the 2d filter
+      - Suppose the filter is 3x3x3, which are 27 blocks
+      - We just do a wise-multiply matrix between the filter and coressponding position, then add-up the multiplied 27 numbers together for the convoluted output
 - We can call this as stacked filters for each channel!
-- Example:
-  - Input image: `6x6x3`
-  - Filter: `3x3x3`
-  - Result image: `4x4x1`
-  - In the last result p=0, s=1
-- Hint the output here is only 2D.
-- We can use multiple filters to detect multiple features or edges. Example.
-  - Input image: `6x6x3`
-  - 10 Filters: `3x3x3`
-  - Result image: `4x4x10`
-  - In the last result p=0, s=1
+  - Example:
+      ![](Images/3D_conv.png)
+    - Input image: `6x6x3`
+    - Filter: `3x3x3`
+    - Result image: `4x4x1`
+    - In the last result p=0, s=1
+    - Hint the output here is only 2D.
+- We can use multiple filters to detect multiple features or edges.
+  - Example.
+      ![](Images/3D_conv_multiple.png)
+    - Input image: `6x6x3`
+    - 10 Filters: `3x3x3`
+    - Result image: `4x4x10`
+    - In the last result p=0, s=1
 
 ### One Layer of a Convolutional Network
 
@@ -513,30 +519,27 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 - What does a 1 X 1 convolution do? Isn't it just multiplying by a number?
 
   - Lets first consider an example:
-    - Input: `6x6x1`
-    - Conv: `1x1x1` one filter.        `# The 1 x 1 Conv`
-    - Output: `6x6x1`
+    - Input: `6x6x10`
+    - Conv: `1x1x10` one filter.        `# The 1 x 1 Conv`
+    - Output: `6x6x10`
   - Another example:
     - Input: `6x6x32`
     - Conv: `1x1x32` 5 filters.     `# The 1 x 1 Conv`
     - Output: `6x6x5`
 
-- The Network in Network is proposed in [Lin et al., 2013. Network in network]
-
-- It has been used in a lot of modern CNN implementations like ResNet and Inception models.
+- The Network in Network is proposed in [[Lin et al., 2013. Network in network]](https://arxiv.org/abs/1312.4400)
+  - It has been used in a lot of modern CNN implementations like ResNet and Inception models.
 
 - A 1 x 1 convolution is useful when:
 
-  - We want to shrink the number of channels. We also call this feature transformation.
+  - We want to shrink _the number of channels_. We also call this feature transformation.
     - In the second discussed example above we have shrinked the input from 32 to 5 channels.
   - We will later see that by shrinking it we can save a lot of computations.
-  - If we have specified the number of 1 x 1 Conv filters to be the same as the input number of channels then the output will contain the same number of channels. Then the 1 x 1 Conv will act like a non linearity and will learn non linearity operator. 
+  - If we have specified the number of 1 x 1 Conv filters to be the same as the input number of channels (like the first example) then the output will maintain the same number of channels. Then the 1 x 1 Conv will act like a non linearity and will learn non linearity operator. 
 
 - Replace fully connected layers with 1 x 1 convolutions as Yann LeCun believes they are the same.
 
   - > In Convolutional Nets, there is no such thing as "fully-connected layers". There are only convolution layers with 1x1 convolution kernels and a full connection table. [Yann LeCun](https://www.facebook.com/yann.lecun/posts/10152820758292143) 
-
-- [[Lin et al., 2013. Network in network]](https://arxiv.org/abs/1312.4400)
 
 ### Inception network motivation
 

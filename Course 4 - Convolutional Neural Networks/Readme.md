@@ -18,7 +18,7 @@ This is the fourth course of the deep learning specialization at [Coursera](http
       * [Pooling layers](#pooling-layers)
       * [Convolutional neural network example](#convolutional-neural-network-example)
       * [Why convolutions?](#why-convolutions)
-   * [Deep convolutional models: case studies](#deep-convolutional-models-case-studies)
+   * [Deep CNN Models](#deep-CNN-models)
       * [Why look at case studies?](#why-look-at-case-studies)
       * [Classic networks](#classic-networks)
       * [Residual Networks (ResNets)](#residual-networks-resnets)
@@ -26,6 +26,9 @@ This is the fourth course of the deep learning specialization at [Coursera](http
       * [Network in Network and 1×1 convolutions](#network-in-network-and-1-X-1-convolutions)
       * [Inception network motivation](#inception-network-motivation)
       * [Inception network (GoogleNet)](#inception-network-googlenet)
+      * [Depthwise Separable Convolution (MobileNet)](#depthwise-separable-convolution-mobilenet)
+      * [MobileNet Architecture](#mobilenet-architecture)
+      * [EfficientNet](#efficientnet)
       * [Using Open-Source Implementation](#using-open-source-implementation)
       * [Transfer Learning](#transfer-learning)
       * [Data Augmentation](#data-augmentation)
@@ -349,7 +352,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 - Putting it all together:
    ![](Images/04.png)
 
-## Deep convolutional models: case studies
+## Deep CNN Models
 
 > Learn about the practical tricks and methods used in deep CNNs straight from the research papers.
 

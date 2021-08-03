@@ -537,6 +537,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     - In the second discussed example above we have shrinked the input from 32 to 5 channels.
   - We will later see that by shrinking it we can save a lot of computations.
   - If we have specified the number of 1 x 1 Conv filters to be the same as the input number of channels (like the first example) then the output will maintain the same number of channels. Then the 1 x 1 Conv will act like a non linearity and will learn non linearity operator. 
+  - Thus, a 1 x 1 Conv is also called a **Bottleneck**
 
 - Replace fully connected layers with 1 x 1 convolutions as Yann LeCun believes they are the same.
 
@@ -573,7 +574,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     - For the first Conv: `28 * 28 * 16 * 1 * 1 * 192 = 2.5 Mil`
     - For the second Conv: `28 * 28 * 32 * 5 * 5 * 16 = 10 Mil`
     - So the total number are 12.5 Mil approx. which is so good compared to 120 Mil
-- A 1 x 1 Conv here is called Bottleneck `BN`.
+- A 1 x 1 Conv here is called **Bottleneck** `BN`.
 - It turns out that the 1 x 1 Conv won't hurt the performance.
 - **Inception module**, dimensions reduction version:
     ![](Images/14.png)
@@ -584,7 +585,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 - The inception network consist of concatenated blocks of the Inception module.
 - The name inception was taken from a *meme* image which was taken from **Inception movie**
-- Here are the full model:
+- Here are the full model:  
     ![](Images/15.png)
 - Some times a Max-Pool block is used before the inception module to reduce the dimensions of the inputs.
 - There are a 3 Sofmax branches at different positions to push the network toward its goal. and helps to ensure that the intermediate features are good enough to the network to learn and it turns out that softmax0 and sofmax1 gives regularization effect.

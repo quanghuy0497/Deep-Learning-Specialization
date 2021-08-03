@@ -152,7 +152,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 - In almost all the cases the padding values are zeros.
 - The general rule now,  if a matrix `nxn` is convolved with `fxf` filter/kernel and padding `p` give us `n+2p-f+1,n+2p-f+1` matrix. 
 - If n = 6, f = 3, and p = 1 Then the output image will have `n+2p-f+1 = 6+2-3+1 = 6`. We maintain the size of the image.
-- Same convolutions is a convolution with a pad so that output size is the same as the input size. Its given by the equation:
+- "_Same convolution_" is a convolution with a pad so that output size is the same as the input size. Its given by the equation:
 
   ```
   P = (f-1) / 2
@@ -175,7 +175,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 - In math textbooks the conv operation is filpping the filter before using it. What we were doing is called cross-correlation operation but the state of art of deep learning is using this as conv operation.
 
-- Same convolutions is a convolution with a padding so that output size is the same as the input size. Its given by the equation:
+- "_Same Convolution_" is a convolution with a padding so that output size is the same as the input size. Its given by the equation:
 
   ```
   p = (n*s - n + f - s) / 2
@@ -408,7 +408,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   - A modification for AlexNet.
   - Instead of having a lot of hyperparameters lets have some simpler network.
   - Focus on having only these blocks:
-    - CONV = 3 X 3 filter, s = 1, same  
+    - CONV = 3 X 3 filter, s = 1, "same"  
     - MAX-POOL = 2 X 2 , s = 2
   - Here are the architecture:
       ![](Images/07.png)
@@ -483,12 +483,12 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
   - Here are the architecture of **ResNet-34**:
     ![](Images/resNet.jpg)
-  - All the 3x3 Conv are same Convs.
+  - All the 3x3 Conv are "Same Conv."
   - Keep it simple in design of the network.
   - spatial size /2 => # filters x2
-  - No FC layers, No dropout is used.
   - Two main types of blocks are used in a ResNet, depending mainly on whether the input/output dimensions are same or different.
-  - The dotted lines is the case when the dimensions are different. To solve then they down-sample the input by 2 and then pad zeros to match the two dimensions. There's another trick which is called bottleneck which we will explore later.
+    - The solid line is the case when the dimensions are same
+    - The dotted lines is the case when the dimensions are different. To solve then they down-sample the input by 2 and then pad zeros to match the two dimensions. There's another trick which is called bottleneck which we will explore later.
 
 - **Useful concept (Spectrum of Depth)**:
 

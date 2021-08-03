@@ -490,19 +490,19 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   - Two main types of blocks are used in a ResNet, depending mainly on whether the input/output dimensions are same or different.
   - The dotted lines is the case when the dimensions are different. To solve then they down-sample the input by 2 and then pad zeros to match the two dimensions. There's another trick which is called bottleneck which we will explore later.
 
-- Bonus: Useful concept (**Spectrum of Depth**):
+- **Useful concept (Spectrum of Depth)**:
 
     ![](Images/12.png)
   - Taken from [icml.cc/2016/tutorials/icml2016_tutorial_deep_residual_networks_kaiminghe.pdf](icml.cc/2016/tutorials/icml2016_tutorial_deep_residual_networks_kaiminghe.pdf)
 
-- Residual blocks types:
+- **Residual blocks types**:
 
-  - Identity block:
+  - _Identity block_:
       ![](Images/16.png)
     - Hint the conv is followed by a batch norm `BN` before `RELU`. Dimensions here are same.
     - This skip is over 2 layers. The skip connection can jump n connections where n>2
     - This drawing represents [Keras](https://keras.io/) layers.
-  - The convolutional block:
+  - _The convolutional block_:
       ![](Images/17.png)
     - The conv can be bottleneck 1 x 1 conv
 

@@ -600,8 +600,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 + Motivation for MobileNet
   + Low computation cost at deployment
   + Useful for mobile and embedded vision applications
-  + Key idea: Normal vs. Depthwise Separate convolutions
-  + [Howard et al. 2017, MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications](https://arxiv.org/abs/1704.04861)
+  + Key idea: Normal vs. Depthwise Separate convolutions 
 + **Normal Convolution:**   
   + Normaly, we just do a volume Conv operation on a `f x f x n_c` block of filter, which is make a wise-multiplication with input postitions and sum the values together for output
     ![](Images/normal_conv.png) 
@@ -616,8 +615,8 @@ Here is the course summary as given on the course [link](https://www.coursera.or
       ![](Images/depth_conv.png)  
       - Input: `n x n x n_c`
       - Filter: `f x f x n_c`
-      - Output: `n_out x n_out x n_c = 432`
-      + `Computational cost = #filter params * #filter positions * #no. of filter`
+      - Output: `n_out x n_out x n_c`
+      + `Computational cost = #filter params * #filter positions * #no. of filter = 432`
     + **_Pointwise Conv_**: works similar to the normal convolution operation but with **_1x1_** size filter
       ![](Images/point_conv.png)  
       - Input: `n_out x n_out x n_c`
@@ -625,27 +624,26 @@ Here is the course summary as given on the course [link](https://www.coursera.or
       - Output: `n_out x n_out x n_c'`
       + `Computational cost = n_c * #filter positions * n_c' = 240`
 + Cost summary (with `6x6x3` input, 5 `3x3x3` filters and `4x4x5` output)
-  + Normal Conv: 2160
+  + Normal Conv: `2160`
   + Depthwise Separable Conv
-    + Depthwise: 432
-    + Pointwise: 240
-    + Total: 672
-      + 672 / 2160 = 0.31 => ~2/3 time cheaper than the normal cost
+    + Depthwise: `432`
+    + Pointwise: `240`
+    + Total: `672`
+      + `672 / 2160 = 0.31` => ~2/3 time cheaper than the normal cost
   + In the general case: `Cost_normal / Cost_depth = 1/n_c' * 1/(f^2)`
     + Example: if the output have 512 channel and the filter size is 3: then using depth separable conv may reduce `1/512 + 1/9 ~= 1/9 ~= 10 times` cheaper than using the normal one
-+ To make it easier for the follow images, these icons are denoted as Depth Conv (3 stacked filters) and Point Conv (1x1x3 pink block)
-  ![](Images/DSC_icons.png)
 
 ### MobileNet Architecture
 + The idea of MobileNet: rather than use the previous expensive conv operation, we use the Depthwise Separable Conv (DS Conv) with the depthwise and pointwise  
 ![](Images/MobileNet.png)  
   + MobileNet v1:  
     `Input => 13 x DS Conv => Pool => FC => Softmax => Output`
+      + [Howard et al. 2017, MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications](https://arxiv.org/abs/1704.04861)
   + MobileNet v2:  
     `Input => Residual Connection[Expansion => Depthwise => Projection (Pointwise)] x 17 => Pool => FC => Softmax => Output`
     + The Residual Connection block is also called the Bottleneck
     + [Sandler et al. 2019, MobileNetV2: Inverted Residuals and Linear Bottlenecks](https://arxiv.org/abs/1801.04381)
-+ MobileNet v2 BottleNeck:
++ **MobileNet v2 BottleNeck**:
   ![](Images/MobileNet_v2_bn.png)  
   + Architecture
     + Input: `n x n x 3 (a)`  => make a Skip connection to the output
@@ -662,8 +660,9 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     + MobileNet v2 has better performance than v2 while keep using a small amount of compute & memory resources
 
 ### EfficientNet
-+ EfficientNet: helps scale up or down neural network (MobileNet) for a specific device (different brand of mobile phone with different amounts of computer resources)
-+ [Tan and Le, 2019, EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](https://arxiv.org/abs/1905.11946)
++ EfficientNet:
+  + Helps scale up or down neural network (MobileNet) for a specific device (different brand of mobile phone with different amounts of computer resources)
+  + [Tan and Le, 2019, EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](https://arxiv.org/abs/1905.11946)
 + Architecture:
   + Baseline NN architecture with image resolution `r`, depth `d`, weight `w`
   + We can modify `r`, `d`, and `w` to scaling the neural network model for fitting the particular device

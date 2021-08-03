@@ -936,4 +936,4 @@ Here are the course summary as its given on the course [link](https://www.course
 
 <br><br>
 <br><br>
-These Notes were made by [Mahmoud Badry](https://github.com/mbadry1/DeepLearning.ai-Summary) @2017
+These Notes were created by [Mahmoud Badry](https://github.com/mbadry1/DeepLearning.ai-Summary)@2017. Updated by [quanghuy0497](https://github.com/quanghuy0497/Deep-Learning-Specialization/)@2021

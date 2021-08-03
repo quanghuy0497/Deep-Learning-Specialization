@@ -191,7 +191,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
       - Suppose the filter is 3x3x3, which are 27 blocks
       - Do a wise-multiply matrix between the filter and corresponded position of input, then add-up the 27 results numbers together
 - We can call this as stacked filters for each channel!
-  - Example:
+  - Example:  
       ![](Images/3D_conv.png)
     - Input image: `6x6x3`
     - Filter: `3x3x3`
@@ -199,7 +199,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     - In the last result p=0, s=1
     - Hint the output here is only 2D.
 - We can use multiple filters to detect multiple features or edges.
-  - Example.
+  - Example:  
       ![](Images/3D_conv_multiple.png)
     - Input image: `6x6x3`
     - 10 Filters: `3x3x3`
@@ -271,8 +271,8 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 ### Pooling layers
 
-- Other than the conv layers, CNNs often uses pooling layers to reduce the size of the inputs, speed up computation, and to make some of the features it detects more robust.
-- Max pooling example:
+- Other than the conv layers, CNNs often uses pooling layers to reduce the size of the inputs, speed up computation, and to make some of the features it detects more robust.  
+- Max pooling example:  
     ![](Images/02.png)
   - This example has `f = 2`, `s = 2`, and `p = 0` hyperparameters
 - The max pooling is saying, if the feature is detected anywhere in this filter then keep a high number. But the main reason why people are using pooling because its works well in practice and reduce computations.
@@ -1358,7 +1358,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 - The general equation `(N - F)/S + 1` can be applied here but here it gives a vector rather than a 2D matrix.
 - 1D data comes from a lot of resources such as waves, sounds, heartbeat signals. 
 - In most of the applications that uses 1D data we use Recurrent Neural Network RNN.
-- 3D data also are available in some applications like CT scan:
+- 3D data also are available in some applications like CT scan:  
     ![](Images/44.png)
 - Example of 3D convolution:
   - Input shape (14, 14,14, 1)

@@ -185,10 +185,11 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 ### Convolutions over volumes
 
 - We see how convolution works with 2D images, now lets see if we want to convolve 3D images (RGB image)
-- We will convolve an image of height, width, # of channels with a filter of a height, width, same # of channels.     - Hint that the image number channels and the filter number of channels are the same.
-    - We just do the convolutional on the 3D filter **similar** to the 2d filter
+- We will convolve an image of height, width, # of channels with a filter of a height, width, same # of channels.
+    - Hint that the image number channels and the filter number of channels are the same.
+    - We just do the convolutional on the 3D filter **similar** to the 2D filter
       - Suppose the filter is 3x3x3, which are 27 blocks
-      - We just do a wise-multiply matrix between the filter and coressponding position, then add-up the multiplied 27 numbers together for the convoluted output
+      - Do a wise-multiply matrix between the filter and corresponded position of input, then add-up the 27 results numbers together
 - We can call this as stacked filters for each channel!
   - Example:
       ![](Images/3D_conv.png)

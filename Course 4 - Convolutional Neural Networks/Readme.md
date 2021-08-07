@@ -44,6 +44,10 @@ This is the fourth course of the deep learning specialization at [Coursera](http
       * [Anchor Boxes](#anchor-boxes)
       * [YOLO Algorithm](#yolo-algorithm)
       * [Region Proposals (R-CNN)](#region-proposals-r-cnn)
+      * [Semantic Segmentation with U-Net](#semantic-segmentation-with-u-net)
+      * [Transpose Convolutions](#transpose-convolutions)
+      * [U-Net Architecture Intuition](#u-net-architecture-intuition)
+      * [U-Net Architecture](#u-net-architecture)
    * [Special applications: Face recognition &amp; Neural style transfer](#special-applications-face-recognition--neural-style-transfer)
       * [Face Recognition](#face-recognition)
          * [What is face recognition?](#what-is-face-recognition)
@@ -916,7 +920,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     - Then get the best probability followed by the IOU filtering:  
         ![](Images/33.png)
 - YOLO are not good at detecting smaller object.
-  - Summary:
+- Summary:
   ```
     ________________________________________________________________________________________
     Layer (type)                     Output Shape          Param #     Connected to                

@@ -841,7 +841,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
              }
     ```
 
-  - In practice we use logistic regression for `pc`, log likely hood loss for classes, and squared error for the bounding box.
+  - In practice we use logistic regression for `Pc`, log likely hood loss for classes, and squared error for the bounding box.
 
 ### Landmark Detection
 
@@ -913,7 +913,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 - YOLO stands for *you only look once* and was developed back in 2015.
 
-- YOLO basic idea:  
+- **YOLO basic idea**:  
     ![](Images/24.png)
 
   1. Lets say we have an image of 100 X 100
@@ -950,13 +950,13 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 - For example:  
     ![](Images/26.png)
   - Each car has two or more detections with different probabilities. This came from some of the grids that thinks that this is the center point of the object.
-- Non-max suppression algorithm:
+- **Non-max suppression algorithm**:
   1. Lets assume that we are targeting one class as an output class.
-  2. Y shape should be `[Pc, bx, by, bh, hw]` Where Pc is the probability if that object occurs.
+  2. Y shape should be `[Pc, bx, by, bh, hw]` where Pc is the probability if that object occurs.
   3. Discard all boxes with `Pc < 0.6`  
   4. While there are any remaining boxes:
      1. Pick the box with the largest Pc Output that as a prediction.
-     2. Discard any remaining box with `IoU > 0.5` with that box output in the previous step i.e any box with high overlap(greater than overlap threshold of 0.5).
+     2. Discard any remaining box with `IoU > 0.5` with that box output in the previous step i.e any box with high overlap (greater than overlap threshold of 0.5).
 - If there are multiple classes/object types `c` you want to detect, you should run the Non-max suppression `c` times, once for every output class.
 
 ### Anchor Boxes
@@ -966,12 +966,12 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   - Car and person grid is same here.
   - In practice this happens rarely.
 - The idea of Anchor boxes helps us solving this issue.
-- If Y = `[Pc, bx, by, bh, bw, c1, c2, c3]` Then to use two anchor boxes like this:
-  - Y = `[Pc, bx, by, bh, bw, c1, c2, c3, Pc, bx, by, bh, bw, c1, c2, c3]`  We simply have repeated  the one anchor Y.
-  - The two anchor boxes you choose should be known as a shape:  
-      ![](Images/28.png)
-- So Previously, each object in training image is assigned to grid cell that contains that object's midpoint.
-- With two anchor boxes, Each object in training image is assigned to grid cell that contains object's midpoint and anchor box for the grid cell with <u>highest IoU</u>. You have to check where your object should be based on its rectangle closest to which anchor box.
+  - If Y = `[Pc, bx, by, bh, bw, c1, c2, c3]` Then to use two anchor boxes like this:
+    - Y = `[Pc, bx, by, bh, bw, c1, c2, c3, Pc, bx, by, bh, bw, c1, c2, c3]`  We simply have repeated the one anchor Y.
+    - The two anchor boxes you choose should be known as a shape:  
+        ![](Images/28.png)
+  - So Previously, each object in training image is assigned to grid cell that contains that object's midpoint.
+  - With two anchor boxes, Each object in training image is assigned to grid cell that contains object's midpoint and anchor box for the grid cell with <u>highest IoU</u>. You have to check where your object should be based on its rectangle closest to which anchor box.
 - Example of data:  
     ![](Images/29.png)
   - Where the car was near the anchor 2 than anchor 1.

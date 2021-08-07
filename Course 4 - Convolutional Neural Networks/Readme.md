@@ -828,7 +828,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 ### Bounding Box Predictions
 - A better algorithm than the one described in the last section is the YOLO algorithm
-  - [Redmon et al., 2015, You Only Look Once: Unified, Real-Time Object Detection](https://arxiv.org/abs/1506.02640)
+  - [[Redmon et al., 2015, You Only Look Once: Unified, Real-Time Object Detection]](https://arxiv.org/abs/1506.02640)
 - YOLO stands for *you only look once* and was developed back in 2015.
 - **YOLO basic idea**:  
     ![](Images/24.png)
@@ -875,7 +875,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   - Car and person grid is same here.
   - In practice this happens rarely.
 - The idea of Anchor boxes helps us solving this issue.
-  - [Redmon et al., 2015, You Only Look Once: Unified real-time object detection](https://arxiv.org/abs/1506.02640)
+  - [[Redmon et al., 2015, You Only Look Once: Unified real-time object detection]](https://arxiv.org/abs/1506.02640)
   - If Y = `[Pc, bx, by, bh, bw, c1, c2, c3]` Then to use two anchor boxes like this:
     - Y = `[Pc, bx, by, bh, bw, c1, c2, c3, Pc, bx, by, bh, bw, c1, c2, c3]`  We simply have repeated the one anchor Y.
     - The two anchor boxes you choose should be known as a shape:  
@@ -895,7 +895,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 ### YOLO Algorithm
 - YOLO is a state-of-the-art object detection model that is fast and accurate
-  - [Redmon et al., 2016, YOLO9000 Better, faster, stronger](https://arxiv.org/abs/1612.08242)
+  - [[Redmon et al., 2016, YOLO9000 Better, faster, stronger]](https://arxiv.org/abs/1612.08242)
 - Lets sum up and introduce the whole YOLO algorithm given an example.
   - Construct the training set:
     - Suppose we need to do object detection for our autonomous driver system. It needs to identify three classes:
@@ -903,7 +903,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
       2. Car.
       3. Motorcycle.
     - We decided to choose two anchor boxes, a taller one and a wide one.
-      - Like we said in practice they use five or more anchor boxes hand made or generated using k-means.
+      - Like we said in practice they use five or more anchor boxes hand maet alde or generated using k-means.
     - Our labeled Y shape will be `[Ny, HeightOfGrid, WidthOfGrid, 16]`, where Ny is number of instances and each row (of size 16) is as follows:
       - `[Pc, bx, by, bh, bw, c1, c2, c3, Pc, bx, by, bh, bw, c1, c2, c3]`
     - Your dataset could be an image with a multiple labels and a rectangle for each label, we should go to your dataset and make the shape and values of Y like we agreed.
@@ -1100,21 +1100,21 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   - R-CNN:
     - Propose regions. Classify proposed regions one at a time. Output label + bounding box.
     - Downside is that its slow.
-    - [[Girshik et. al, 2013. Rich feature hierarchies for accurate object detection and semantic segmentation]](https://arxiv.org/abs/1311.2524)
+    - [[Girshik et al., 2013. Rich feature hierarchies for accurate object detection and semantic segmentation]](https://arxiv.org/abs/1311.2524)
   - Fast R-CNN:
     - Propose regions. Use convolution implementation of sliding windows to classify all the proposed regions.
     - [[Girshik, 2015. Fast R-CNN]](https://arxiv.org/abs/1504.08083)
   - Faster R-CNN:
     - Use convolutional network to propose regions.
-    - [[Ren et. al, 2016. Faster R-CNN: Towards real-time object detection with region proposal networks]](https://arxiv.org/abs/1506.01497)
+    - [[Ren et al., 2016. Faster R-CNN: Towards real-time object detection with region proposal networks]](https://arxiv.org/abs/1506.01497)
   - Mask R-CNN:
-    - https://arxiv.org/abs/1703.06870
+    - [[He et al., 2017, Mask R-CNN]](https://arxiv.org/abs/1703.06870)
 - Most of the implementation of faster R-CNN are still slower than YOLO.
 - Andrew Ng thinks that the idea behind YOLO is better than R-CNN because you are able to do all the things in just one time instead of two times.
 - Other algorithms that uses one shot to get the output includes **SSD** and **MultiBox**.
-  - [[Wei Liu, et. al 2015 SSD: Single Shot MultiBox Detector]](https://arxiv.org/abs/1512.02325)
+  - [[Wei Liu, et al., 2015, SSD: Single Shot MultiBox Detector]](https://arxiv.org/abs/1512.02325)
 - **R-FCN** is similar to Faster R-CNN but more efficient.
-  - [[Jifeng Dai, et. al 2016 R-FCN: Object Detection via Region-based Fully Convolutional Networks ]](https://arxiv.org/abs/1605.06409)
+  - [[Jifeng Dai, et al., 2016, R-FCN: Object Detection via Region-based Fully Convolutional Networks ]](https://arxiv.org/abs/1605.06409)
 
 ## Special applications: Face recognition & Neural style transfer
 > Discover how CNNs can be applied to multiple fields, including art generation and face recognition. Implement your own algorithm to generate art and recognize faces!
@@ -1154,7 +1154,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   - We make 2 identical conv nets which encodes an input image into a vector. In the above image the vector shape is (128, )
   - The loss function will be `d(x1, x2) = || f(x1) - f(x2) ||^2`
   - If `X1`, `X2` are the same person, we want d to be low. If they are different persons, we want d to be high.
-  - [[Taigman et. al., 2014. DeepFace closing the gap to human level performance]](https://www.cv-foundation.org/openaccess/content_cvpr_2014/html/Taigman_DeepFace_Closing_the_2014_CVPR_paper.html)
+  - [[Taigman et al., 2014. DeepFace closing the gap to human level performance]](https://www.cv-foundation.org/openaccess/content_cvpr_2014/html/Taigman_DeepFace_Closing_the_2014_CVPR_paper.html)
 
 #### Triplet Loss
 - Triplet Loss is one of the loss functions we can use to solve the similarity distance in a Siamese network.
@@ -1197,7 +1197,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   - `Y' = wi * Sigmoid ( f(x(i)) - f(x(j)) ) + b` where the subtraction is the Manhattan distance between f(x(i)) and f(x(j))
   - Some other similarities can be Euclidean and Ki square similarity.
   - The NN here is Siamese means the top and bottom convs has the same parameters.
-- The paper for this work: [[Taigman et. al., 2014. DeepFace closing the gap to human level performance]](https://www.cv-foundation.org/openaccess/content_cvpr_2014/html/Taigman_DeepFace_Closing_the_2014_CVPR_paper.html)
+- The paper for this work: [[Taigman et al., 2014. DeepFace closing the gap to human level performance]](https://www.cv-foundation.org/openaccess/content_cvpr_2014/html/Taigman_DeepFace_Closing_the_2014_CVPR_paper.html)
 - A good performance/deployment trick:
   - Pre-compute all the images that you are using as a comparison to the vector f(x(j))
   - When a new image that needs to be compared, get its vector f(x(i)) then put it with all the pre computed vectors and pass it to the sigmoid function.

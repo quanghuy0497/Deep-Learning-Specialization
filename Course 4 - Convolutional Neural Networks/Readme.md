@@ -973,7 +973,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     - The two anchor boxes you choose should be known as a shape:  
         ![](Images/28.png)
   - So Previously, each object in training image is assigned to grid cell that contains that object's midpoint.
-  - With two anchor boxes, Each object in training image is **_assigned to grid cell that contains object's midpoint_** and **_anchor box for the grid cell with highest IoU_**. You have to check where your object should be based on its rectangle closest to which anchor box.
+  - With two anchor boxes, Each object in training image is _assigned to grid cell that contains object's midpoint_ and _anchor box for the grid cell with **highest IoU**_. You have to check where your object should be based on its rectangle closest to which anchor box.
 - Example of data:  
     ![](Images/29.png)
   - Where the car was near the anchor 2 than anchor 1.

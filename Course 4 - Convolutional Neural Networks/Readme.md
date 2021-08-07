@@ -973,12 +973,12 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     - The two anchor boxes you choose should be known as a shape:  
         ![](Images/28.png)
   - So Previously, each object in training image is assigned to grid cell that contains that object's midpoint.
-  - With two anchor boxes, Each object in training image is assigned to grid cell that contains object's midpoint and anchor box for the grid cell with <u>highest IoU</u>. You have to check where your object should be based on its rectangle closest to which anchor box.
+  - With two anchor boxes, Each object in training image is **_assigned to grid cell that contains object's midpoint_** and **_anchor box for the grid cell with highest IoU_**. You have to check where your object should be based on its rectangle closest to which anchor box.
 - Example of data:  
     ![](Images/29.png)
   - Where the car was near the anchor 2 than anchor 1.
 - You may have two or more anchor boxes but you should know their shapes.
-  - how do you choose the anchor boxes and people used to just choose them by hand. Maybe five or ten anchor box shapes that spans a variety  of shapes that cover the types of objects you seem to detect frequently.
+  - how do you choose the anchor boxes and people used to just choose them by hand. Maybe five or ten anchor box shapes that spans a variety of shapes that cover the types of objects you seem to detect frequently.
   - You may also use a k-means algorithm on your dataset to specify that.
 - Anchor boxes allows your algorithm to specialize, means in our case to easily detect wider images or taller ones.
 

@@ -767,20 +767,20 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 - What are localization and detection?
 
   - **Image Classification**: 
-    - Classify an image to a specific class. The whole image represents one class. We don't want to know exactly where are the object. Usually only one object is presented.
+    - Classify an image to a specific class. The whole image represents one class. We don't want to know exactly where are the object. Usually only one object is presented.  
       ![](Images/Classification.jpg)
   - **Classification with localization**:
-    - Given an image we want to learn the class of the image and where are the class location in the image. We need to detect a class and a rectangle of where that object is. Usually only one object is presented.
+    - Given an image we want to learn the class of the image and where are the class location in the image. We need to detect a class and a rectangle of where that object is. Usually only one object is presented.  
       ![](Images/ClassificationLoc.jpg)
   - **Object detection**:
-    - Given an image we want to detect all the object in the image that belong to a specific classes and give their location. An image can contain more than one object with different classes.
+    - Given an image we want to detect all the object in the image that belong to a specific classes and give their location. An image can contain more than one object with different classes.  
       ![](Images/ObjectDetection.png)
   - **Semantic Segmentation**:
     - We want to Label each pixel in the image with a category label. Semantic Segmentation Don't differentiate instances, only care about pixels. It detects no objects just pixels.
-    - If there are two objects of the same class is intersected, we won't be able to separate them.
+    - If there are two objects of the same class is intersected, we won't be able to separate them.  
       ![](Images/SemanticSegmentation.png)
   - **Instance Segmentation**
-    - This is like the full problem. Rather than we want to predict the bounding box, we want to know which pixel label but also distinguish them.
+    - This is like the full problem. Rather than we want to predict the bounding box, we want to know which pixel label but also distinguish them.  
       ![](Images/InstanceSegmentation.png)
 
 - To make image classification we use a Conv Net with a Softmax attached to the end of it.
@@ -870,7 +870,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 - We will use a Conv net to solve the object detection problem using a technique called the sliding windows detection algorithm.
 - For example lets say we are working on Car object detection.
-- The first thing, we will train a Conv net on cropped car images and non car images.
+- The first thing, we will train a Conv net on cropped car images and non car images.  
     ![](Images/18.png)
 - After we finish training of this Conv net we will then use it with the sliding windows technique.
 - Sliding windows detection algorithm:
@@ -887,23 +887,23 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 ### Convolutional Implementation of Sliding Windows
 
-- Turning FC layer into convolutional layers (predict image class from four classes):
+- Turning FC layer into convolutional layers (predict image class from four classes):  
     ![](Images/19.png)
   - As you can see in the above image, we turned the FC layer into a Conv layer using a convolution with the width and height of the filter is the same as the width and height of the input.
 - **Convolution implementation of sliding windows**:
-  - First lets consider that the Conv net you trained is like this (No FC all is conv layers):
+  - First lets consider that the Conv net you trained is like this (No FC all is conv layers):  
       ![](Images/20.png)
   - Say now we have a 16 x 16 x 3 image that we need to apply the sliding windows in. By the normal implementation that have been mentioned in the section before this, we would run this Conv net four times each rectangle size will be 16 x 16.
-  - The convolution implementation will be as follows:
+  - The convolution implementation will be as follows:  
       ![](Images/21.png)
   - Simply we have feed the image into the same Conv net we have trained.
   - The left cell of the result "The blue one" will represent the the first sliding window of the normal implementation. The other cells will represent the others.
   - Its more efficient because it now shares the computations of the four times needed.
-  - Another example would be:
+  - Another example would be:  
       ![](Images/22.png)
   - This example has a total of 16 sliding windows that shares the computation together.
   - [[Sermanet et al., 2014, OverFeat: Integrated recognition, localization and detection using convolutional networks]](https://arxiv.org/abs/1312.6229)
-- The weakness of the algorithm is that the position of the rectangle wont be so accurate. Maybe none of the rectangles is exactly on the object you want to recognize.
+- The weakness of the algorithm is that the position of the rectangle wont be so accurate. Maybe none of the rectangles is exactly on the object you want to recognize.  
     ![](Images/23.png)
   - In red, the rectangle we want and in blue is the required car rectangle.
 
@@ -913,8 +913,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 - YOLO stands for *you only look once* and was developed back in 2015.
 
-- Yolo Algorithm:
-
+- Yolo Algorithm:  
     ![](Images/24.png)
 
   1. Lets say we have an image of 100 X 100
@@ -936,7 +935,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 - Intersection Over Union is a function used to evaluate the object detection algorithm.
 - It computes size of intersection and divide it by the union. More generally, *IoU* *is a measure of the overlap between two bounding boxes*.
-- For example:
+- For example:  
     ![](Images/25.png)
   - The red is the labeled output and the purple is the predicted output.
   - To compute Intersection Over Union we first compute the union area of the two rectangles which is "the first rectangle + second rectangle" Then compute the intersection area between these two rectangles.
@@ -948,7 +947,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 - One of the problems we have addressed in YOLO is that it can detect an object multiple times.
 - Non-max Suppression is a way to make sure that YOLO detects the object just once.
-- For example:
+- For example:  
     ![](Images/26.png)
   - Each car has two or more detections with different probabilities. This came from some of the grids that thinks that this is the center point of the object.
 - Non-max suppression algorithm:
@@ -962,18 +961,18 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 ### Anchor Boxes
 
-- In YOLO, a grid only detects one object. What if a grid cell wants to detect multiple object?
+- In YOLO, a grid only detects one object. What if a grid cell wants to detect multiple object?  
     ![](Images/27.png)
   - Car and person grid is same here.
   - In practice this happens rarely.
 - The idea of Anchor boxes helps us solving this issue.
 - If Y = `[Pc, bx, by, bh, bw, c1, c2, c3]` Then to use two anchor boxes like this:
   - Y = `[Pc, bx, by, bh, bw, c1, c2, c3, Pc, bx, by, bh, bw, c1, c2, c3]`  We simply have repeated  the one anchor Y.
-  - The two anchor boxes you choose should be known as a shape:
+  - The two anchor boxes you choose should be known as a shape:  
       ![](Images/28.png)
 - So Previously, each object in training image is assigned to grid cell that contains that object's midpoint.
 - With two anchor boxes, Each object in training image is assigned to grid cell that contains object's midpoint and anchor box for the grid cell with <u>highest IoU</u>. You have to check where your object should be based on its rectangle closest to which anchor box.
-- Example of data:
+- Example of data:  
     ![](Images/29.png)
   - Where the car was near the anchor 2 than anchor 1.
 - You may have two or more anchor boxes but you should know their shapes.
@@ -1003,7 +1002,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 - Your dataset could be an image with a multiple labels and a rectangle for each label, we should go to your dataset and make the shape and values of Y like we agreed.
 
-  - An example:
+  - An example:  
       ![](Images/30.png)
   - We first initialize all of them to zeros and ?, then for each label and rectangle choose its closest grid point then the shape to fill it and then the best anchor point based on the IOU. so that the shape of Y for one image should be `[HeightOfGrid, WidthOfGrid,16]`
 
@@ -1011,12 +1010,12 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 - To make predictions, run the Conv net on an image and run Non-max suppression algorithm for each class you have in our case there are 3 classes.
 
-  - You could get something like that:
+  - You could get something like that:  
       ![](Images/31.png)
     - Total number of generated boxes are grid_width * grid_height * no_of_anchors = 3 x 3 x 2
-  - By removing the low probability predictions you should have:
+  - By removing the low probability predictions you should have:  
       ![](Images/32.png)
-  - Then get the best probability followed by the IOU filtering:
+  - Then get the best probability followed by the IOU filtering:  
       ![](Images/33.png)
 
 - YOLO are not good at detecting smaller object.
@@ -1206,8 +1205,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 - R-CNN tries to pick a few windows and run a Conv net (your confident classifier) on top of them.
 
-- The algorithm R-CNN uses to pick windows is called a segmentation algorithm. Outputs something like this:
-
+- The algorithm R-CNN uses to pick windows is called a segmentation algorithm. Outputs something like this:  
     ![](Images/34.png)
 
 - If for example the segmentation algorithm produces 2000 blob then we should run our classifier/CNN on top of these blobs.

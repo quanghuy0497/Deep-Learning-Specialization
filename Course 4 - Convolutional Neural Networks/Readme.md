@@ -1088,7 +1088,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 ### Region Proposals (R-CNN)
 - R-CNN is an algorithm that also makes an object detection.
-- Yolo tells that its faster:
+- YOLO tells that its faster:
   - > Our model has several advantages over classifier-based systems. It looks at the whole image at test time so its predictions are informed by global context in the image. It also makes predictions with a single network evaluation unlike systems like R-CNN which require thousands for a single image. This makes it extremely fast, more than 1000x faster than R-CNN and 100x faster than Fast R-CNN. See our paper for more details on the full system.
 - But one of the downsides of YOLO that it process a lot of areas where no objects are present.
 - **R-CNN** stands for regions with Conv Nets.
@@ -1103,11 +1103,12 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     - [[Girshik et al., 2013. Rich feature hierarchies for accurate object detection and semantic segmentation]](https://arxiv.org/abs/1311.2524)
   - Fast R-CNN:
     - Propose regions. Use convolution implementation of sliding windows to classify all the proposed regions.
-    - [[Girshik, 2015. Fast R-CNN]](https://arxiv.org/abs/1504.08083)
+    - [[Girshik, 2015, Fast R-CNN]](https://arxiv.org/abs/1504.08083)
   - Faster R-CNN:
     - Use convolutional network to propose regions.
-    - [[Ren et al., 2016. Faster R-CNN: Towards real-time object detection with region proposal networks]](https://arxiv.org/abs/1506.01497)
+    - [[Ren et al., 2016, Faster R-CNN: Towards real-time object detection with region proposal networks]](https://arxiv.org/abs/1506.01497)
   - Mask R-CNN:
+    - Combine Faster R-CNN with Fully Convolution Network for object detection and instance segmentation 
     - [[He et al., 2017, Mask R-CNN]](https://arxiv.org/abs/1703.06870)
 - Most of the implementation of faster R-CNN are still slower than YOLO.
 - Andrew Ng thinks that the idea behind YOLO is better than R-CNN because you are able to do all the things in just one time instead of two times.

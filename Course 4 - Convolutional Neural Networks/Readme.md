@@ -978,9 +978,12 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     ![](Images/29.png)
   - Where the car was near the anchor 2 than anchor 1.
 - You may have two or more anchor boxes but you should know their shapes.
-  - how do you choose the anchor boxes and people used to just choose them by hand. Maybe five or ten anchor box shapes that spans a variety of shapes that cover the types of objects you seem to detect frequently.
+  - How do you choose the anchor boxes and people used to just choose them by hand. Maybe five or ten anchor box shapes that spans a variety of shapes that cover the types of objects you seem to detect frequently.
   - You may also use a k-means algorithm on your dataset to specify that.
 - Anchor boxes allows your algorithm to specialize, means in our case to easily detect wider images or taller ones.
+- However, the algorithms doesn't handle well when
+  - There are 3 objects associted in the same grid cell with only 2 anchor boxes
+  - There are 2 objects associated with the same grid cell, and both of them have the same anchor box shape
 
 ### YOLO Algorithm
 

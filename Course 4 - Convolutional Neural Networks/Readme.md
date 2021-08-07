@@ -802,7 +802,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
         ]
     ```
 
-  - Example (Object is present):
+  - When object is presented:
 
     ```
       Y = [
@@ -817,7 +817,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
           ]
       ```
 
-  - Example (When object isn't presented):
+  - When object isn't presented:
 
    ```
       Y = [
@@ -851,7 +851,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 - Y shape for the face recognition problem that needs to output 64 landmarks:
 
-  - ```
+  ```
     Y = [
           THere_Is_A_face  # Probability of face is presented 0 or 1
           l1x,

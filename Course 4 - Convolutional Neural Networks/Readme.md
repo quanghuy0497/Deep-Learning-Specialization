@@ -1157,7 +1157,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 			![](Images/Transpose_Conv_1.png)  
 		+ Shift the filter and keep multiply with the corresponded input's entry  
 			+ In the overlaped output entries, we add the value together
-				![](Images/Transpose_Conv_2.png)
+			![](Images/Transpose_Conv_2.png)
 		+ Keep do it for the rest  
 			![](Images/Transpose_Conv_3.png)
 		+ Finally, we have the output

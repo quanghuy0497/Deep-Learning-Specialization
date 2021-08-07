@@ -789,56 +789,56 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 - Defining the target label Y in classification with localization problem: 
 
-  - ```
+  ```
     Y = [
-      		Pc				# Probability of an object is presented
-      		bx				# Bounding box
-      		by				# Bounding box
-      		bh				# Bounding box
-      		bw				# Bounding box
-      		c1				# The classes
-      		c2
-      		...
-    ]
+          Pc	# Probability of an object is presented
+          bx	# Bounding box
+          by	# Bounding box
+          bh	# Bounding box
+          bw	# Bounding box
+          c1	# The classes
+          c2
+          ...
+        ]
     ```
 
   - Example (Object is present):
 
-    - ```
+    ```
       Y = [
-        		1		# Object is present
-        		0
-        		0
-        		100
-        		100
-        		0
-        		1
-        		0
-      ]
+            1     # Object is present
+            0
+            0
+            100
+            100
+            0
+            1
+            0
+          ]
       ```
 
   - Example (When object isn't presented):
 
-    - ```
+   ```
       Y = [
-        		0		# Object isn't presented
-        		?		# ? means we dont care with other values
-        		?
-        		?
-        		?
-        		?
-        		?
-        		?
-      ]
-      ```
+            0   # Object isn't presented
+            ?   # ? means we dont care with other values
+            ?
+            ?
+            ?
+            ?
+            ?
+            ?
+          ]
+   ```
 
 - The loss function for the Y we have created (Example of the square error):
 
-  - ```
-    L(y',y) = {
-      			(y1'-y1)^2 + (y2'-y2)^2 + ...           if y1 = 1
-      			(y1'-y1)^2						if y1 = 0
-    		}
+  ```
+   L(y',y) = {
+                (y1'-y1)^2 + (y2'-y2)^2 + ...     #if y1 = 1
+                (y1'-y1)^2			#if y1 = 0
+             }
     ```
 
   - In practice we use logistic regression for `pc`, log likely hood loss for classes, and squared error for the bounding box.
@@ -853,13 +853,13 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
   - ```
     Y = [
-      		THereIsAface				# Probability of face is presented 0 or 1
-      		l1x,
-      		l1y,
-      		....,
-      		l64x,
-      		l64y
-    ]
+          THere_Is_A_face  # Probability of face is presented 0 or 1
+          l1x,
+          l1y,
+          ...
+          l64x,
+          l64y
+        ]
     ```
 
 - Another application is when you need to get the skeleton of the person using different landmarks/points in the person which helps in some applications.

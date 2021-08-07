@@ -909,7 +909,8 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 ### Bounding Box Predictions
 
-- A better algorithm than the one described in the last section is the [YOLO algorithm](https://arxiv.org/abs/1506.02640).
+- A better algorithm than the one described in the last section is the YOLO algorithm
+  - [Redmon et al., 2015, You Only Look Once: Unified, Real-Time Object Detection](https://arxiv.org/abs/1506.02640)
 
 - YOLO stands for *you only look once* and was developed back in 2015.
 
@@ -966,6 +967,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   - Car and person grid is same here.
   - In practice this happens rarely.
 - The idea of Anchor boxes helps us solving this issue.
+  - [Redmon et al., 2015, You Only Look Once: Unified real-time object detection](https://arxiv.org/abs/1506.02640)
   - If Y = `[Pc, bx, by, bh, bw, c1, c2, c3]` Then to use two anchor boxes like this:
     - Y = `[Pc, bx, by, bh, bw, c1, c2, c3, Pc, bx, by, bh, bw, c1, c2, c3]`  We simply have repeated the one anchor Y.
     - The two anchor boxes you choose should be known as a shape:  
@@ -983,48 +985,35 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 ### YOLO Algorithm
 
 - YOLO is a state-of-the-art object detection model that is fast and accurate
+  - [Redmon et al., 2016, YOLO9000 Better, faster, stronger](https://arxiv.org/abs/1612.08242)
 
 - Lets sum up and introduce the whole YOLO algorithm given an example.
-
-- Suppose we need to do object detection for our autonomous driver system.It needs to identify three classes:
-
-  1. Pedestrian (Walks on ground).
-  2. Car.
-  3. Motorcycle.
-
-- We decided to choose two anchor boxes, a taller one and a wide one.
-
-  - Like we said in practice they use five or more anchor boxes hand made or generated using k-means.
-
-- Our labeled Y shape will be `[Ny, HeightOfGrid, WidthOfGrid, 16]`, where Ny is number of instances and each row (of size 16) is as follows:
-
-  - `[Pc, bx, by, bh, bw, c1, c2, c3, Pc, bx, by, bh, bw, c1, c2, c3]`
-
-- Your dataset could be an image with a multiple labels and a rectangle for each label, we should go to your dataset and make the shape and values of Y like we agreed.
-
-  - An example:  
-      ![](Images/30.png)
-  - We first initialize all of them to zeros and ?, then for each label and rectangle choose its closest grid point then the shape to fill it and then the best anchor point based on the IOU. so that the shape of Y for one image should be `[HeightOfGrid, WidthOfGrid,16]`
-
-- Train the labeled images on a Conv net. you should receive an output of `[HeightOfGrid, WidthOfGrid,16]` for our case.
-
-- To make predictions, run the Conv net on an image and run Non-max suppression algorithm for each class you have in our case there are 3 classes.
-
-  - You could get something like that:  
-      ![](Images/31.png)
-    - Total number of generated boxes are grid_width * grid_height * no_of_anchors = 3 x 3 x 2
-  - By removing the low probability predictions you should have:  
-      ![](Images/32.png)
-  - Then get the best probability followed by the IOU filtering:  
-      ![](Images/33.png)
+  - Suppose we need to do object detection for our autonomous driver system.It needs to identify three classes:
+    1. Pedestrian (Walks on ground).
+    2. Car.
+    3. Motorcycle.
+  - We decided to choose two anchor boxes, a taller one and a wide one.
+    - Like we said in practice they use five or more anchor boxes hand made or generated using k-means.
+  - Our labeled Y shape will be `[Ny, HeightOfGrid, WidthOfGrid, 16]`, where Ny is number of instances and each row (of size 16) is as follows:
+    - `[Pc, bx, by, bh, bw, c1, c2, c3, Pc, bx, by, bh, bw, c1, c2, c3]`
+  - Your dataset could be an image with a multiple labels and a rectangle for each label, we should go to your dataset and make the shape and values of Y like we agreed.
+    - An example:  
+        ![](Images/30.png)
+    - We first initialize all of them to zeros and ?, then for each label and rectangle choose its closest grid point then the shape to fill it and then the best anchor point based on the IOU. so that the shape of Y for one image should be `[HeightOfGrid, WidthOfGrid,16]`
+  - Train the labeled images on a Conv net. you should receive an output of `[HeightOfGrid, WidthOfGrid,16]` for our case.
+  - To make predictions, run the Conv net on an image and run Non-max suppression algorithm for each class you have in our case there are 3 classes.
+    - You could get something like that:  
+        ![](Images/31.png)
+      - Total number of generated boxes are grid_width * grid_height * no_of_anchors = 3 x 3 x 2
+    - By removing the low probability predictions you should have:  
+        ![](Images/32.png)
+    - Then get the best probability followed by the IOU filtering:  
+        ![](Images/33.png)
 
 - YOLO are not good at detecting smaller object.
-
-- [YOLO9000 Better, faster, stronger](https://arxiv.org/abs/1612.08242)
-
   - Summary:
 
-  - ```
+  ```
     ________________________________________________________________________________________
     Layer (type)                     Output Shape          Param #     Connected to                
     ========================================================================================

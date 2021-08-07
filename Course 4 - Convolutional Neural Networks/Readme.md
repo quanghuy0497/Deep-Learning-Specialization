@@ -913,7 +913,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 - YOLO stands for *you only look once* and was developed back in 2015.
 
-- Yolo Algorithm:  
+- YOLO Algorithm:  
     ![](Images/24.png)
 
   1. Lets say we have an image of 100 X 100

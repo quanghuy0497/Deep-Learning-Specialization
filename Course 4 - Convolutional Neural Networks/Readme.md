@@ -1180,17 +1180,20 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 	+ [[Ronneberger et al., 2015, U-Net: Convolutional Networks for Biomedical Image Segmentation]](https://arxiv.org/abs/1505.04597)  
 	![](Images/U-Net_Architecture.png)  
 	+ Image input: `[h x w x 3]`
-	+ The first-half:
-		+ 3 Normal Conv + ReLU
+	+ The first-half (Encoder):  
+		![](Images/encoder.png)   
+		+ 2 Normal Conv + ReLU
 		+ Max-pooling to decrease dimensions
 		+ Repeat 4 times => Decrease dimension, increase channel
-	+ The second-half:
+	+ The second-half (Decoder):  
+		![](Images/decoder.png)  
 		+ Trans Conv to increase dimensions
 		+ Skip-connection: Copy the last layer of each step from the first-half and concat with corresponded layer of the second-half
 		+ 2 Normal Conv + ReLu
 		+ Repeat 4 times => increase dimension, decrease channel
 	+ Finally, use a 1x1 ConV => Segmentation Map Output
 		+ The final output have the size of `[h x w x n_class]`
+	![](Images/unet.png)
 
 ## Special applications: Face recognition & Neural style transfer
 > Discover how CNNs can be applied to multiple fields, including art generation and face recognition. Implement your own algorithm to generate art and recognize faces!

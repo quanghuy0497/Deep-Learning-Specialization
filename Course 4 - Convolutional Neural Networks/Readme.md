@@ -1193,7 +1193,8 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 		+ Repeat 4 times => increase dimension, decrease channel
 	+ Finally, use a 1x1 ConV => Segmentation Map Output
 		+ The final output have the size of `[h x w x n_class]`
-	![](Images/unet.png)
+	+ Detailed architecture:
+		![](Images/unet.png)
 
 ## Special applications: Face recognition & Neural style transfer
 > Discover how CNNs can be applied to multiple fields, including art generation and face recognition. Implement your own algorithm to generate art and recognize faces!

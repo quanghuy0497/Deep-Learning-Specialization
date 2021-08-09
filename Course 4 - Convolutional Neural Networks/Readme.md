@@ -1271,7 +1271,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
       + `d(A, P) + alpha <= d(A, N)`
       + `d(A, P) ~= d(A, N)`  
       => increase the computational efficiency of the learning algorithm  
-    + This can be achieved by i.e. chosing people with high similar appearance for P and N
+    + This can be achieved by i.e. choosing people with high similar appearance for P and N
     + Details of choosing triplets are in this paper [[Schroff et al.,2015, FaceNet: A unified embedding for face recognition and clustering]](https://arxiv.org/abs/1503.03832)
 + Commercial recognition systems are trained on a large datasets like 10/100 million images.
 + There are a lot of pretrained models and parameters online for face recognition.
@@ -1281,14 +1281,18 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 + Learning the similarity function another way:  
     ![](Images/36.png)
   + The final layer is a sigmoid layer.
-  + `Y' = wi * Sigmoid ( f(x(i)) - f(x(j)) ) + b` where the subtraction is the Manhattan distance between f(x(i)) and f(x(j))
-  + Some other similarities can be Euclidean and Ki square similarity.
+  + Then `Y' = wi * Sigmoid(|f(x_i) - f(x_j)|) + b` 
+  	+ Where the subtraction is the Manhattan distance (L1 distance) between `f(x_i)` and `f(x_j)`
+  	+ Some other similarities can be Euclidean or Chi-square similarity (Chi — X in Greek)
   + The NN here is Siamese means the top and bottom convs has the same parameters.
 + The paper for this work: [[Taigman et al., 2014, DeepFace closing the gap to human level performance]](https://www.cv-foundation.org/openaccess/content_cvpr_2014/html/Taigman_DeepFace_Closing_the_2014_CVPR_paper.html)
 + A good performance/deployment trick:
-  + Pre-compute all the images that you are using as a comparison to the vector f(x(j))
-  + When a new image that needs to be compared, get its vector f(x(i)) then put it with all the pre computed vectors and pass it to the sigmoid function.
+  + Pre-compute all the images that you are using as a comparison to the vector f(x_j)
+  + When a new image that needs to be compared, get its vector f(x_i) then put it with all the pre computed vectors and pass it to the sigmoid function.
 + This version works quite as well as the triplet loss function.
++ Face verification supervised learning"
+  + Create a training set of pair of images where y = 1 when 2 pictures come from the same person and y = 0 otherwise
+  + Then, training the Siamese neural network like normal with back progagation
 + Available implementations for face recognition using deep learning includes:
   + [Openface](https://cmusatyalab.github.io/openface/)
   + [FaceNet](https://github.com/davidsandberg/facenet)

@@ -1227,7 +1227,8 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   + We use `T` (tau) as a threshold for `d`:
     + If `d(img1, img2) <= T`, then the faces are the same.
     + If `d(img1, img2) >  T`, then the faces are different.
-+ Similarity function helps us solving the one shot learning. Also its still work fine with new inputs.
++ Similarity function helps us solving the one shot learning.
+  + Also it still work fine with new inputs added to the database.
 
 #### Siamese Network
 + We will implement the similarity function using a type of NNs called Siamease Network in which we can pass multiple inputs to the two or more networks with the same architecture and parameters.
@@ -1235,8 +1236,9 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     ![](Images/35.png)
   + We make 2 identical conv nets which encodes an input image into a vector. In the above image the vector shape is (128, )
   + The loss function will be `d(x1, x2) = || f(x1) - f(x2) ||^2`
-  + If `X1`, `X2` are the same person, we want d to be low. If they are different persons, we want d to be high.
-  + [[Taigman et al., 2014. DeepFace closing the gap to human level performance]](https://www.cv-foundation.org/openaccess/content_cvpr_2014/html/Taigman_DeepFace_Closing_the_2014_CVPR_paper.html)
+    + If `X1`, `X2` are the same person, we want `d` to be low
+    + If `X1`, `X2` are different persons, we want `d` to be high.
+  + [[Taigman et al., 2014, DeepFace closing the gap to human level performance]](https://www.cv-foundation.org/openaccess/content_cvpr_2014/html/Taigman_DeepFace_Closing_the_2014_CVPR_paper.html)
 
 #### Triplet Loss
 + Triplet Loss is one of the loss functions we can use to solve the similarity distance in a Siamese network.
@@ -1244,30 +1246,33 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   + Positive means same person, while negative means different person.
 + The triplet name came from that we are comparing an anchor A with a positive P and a negative N image.
 + Formally we want:
-  + Positive distance to be less than negative distance
-  + `||f(A) - f(P)||^2  <= ||f(A) - f(N)||^2`
-  + Then
-  + `||f(A) - f(P)||^2  - ||f(A) - f(N)||^2 <= 0`
-  + To make sure the NN won't get an output of zeros easily:
-  + `||f(A) - f(P)||^2  - ||f(A) - f(N)||^2 <= -alpha`
-    + Alpha is a small number. Sometimes its called the margin.
-  + Then
-  + `||f(A) - f(P)||^2  - ||f(A) - f(N)||^2 + alpha <= 0`
-+ Final Loss function:
-  + Given 3 images (A, P, N)
-  + `L(A, P, N) = max (||f(A) - f(P)||^2  - ||f(A) - f(N)||^2 + alpha , 0)`
-  + `J = Sum(L(A[i], P[i], N[i]) , i)` for all triplets of images.
-+ You need multiple images of the same person in your dataset. Then get some triplets out of your dataset. Dataset should be big enough.
+  + Positive distance to be less than negative distance  
+    	  `||f(A) - f(P)||^2  <= ||f(A) - f(N)||^2` or `d(A,P) <= d(A,N)`  
+  + Then  
+   	 `||f(A) - f(P)||^2  - ||f(A) - f(N)||^2 <= 0`  
+  + To make sure the NN won't get an output of zeros easily:  
+	    `||f(A) - f(P)||^2  - ||f(A) - f(N)||^2 <= -alpha`  
+    + `alpha` is a small number. Sometimes its called _**the margin**_.
+  + Then  
+    	`||f(A) - f(P)||^2  - ||f(A) - f(N)||^2 + alpha <= 0`  
++ **Final Loss function**:
+  + Given 3 images (A, P, N):
+    + `L(A, P, N) = max(||f(A) - f(P)||^2  - ||f(A) - f(N)||^2 + alpha , 0) 
+    + `J = Sum[L(A[i], P[i], N[i]) , i]` for all triplets of images.
++ You need multiple images of the same person in your dataset. Then get some triplets out of your dataset. So the dataset should be big enough.
+	+ i.e. 10k pictures of 1k person for the training set
+	+ After training, you can use 1 picture per person for one-shot learning
 + Choosing the triplets A, P, N:
   + During training if A, P, N are chosen randomly (Subjet to A and P are the same and A and N aren't the same) then one of the problems this constrain is easily satisfied 
-    + `d(A, P) + alpha <= d (A, N)` 
+    + `d(A, P) + alpha <= d(A, N)` 
     + So the NN wont learn much
   + What we want to do is choose triplets that are **hard** to train on.
     + So for all the triplets we want this to be satisfied:
-    + `d(A, P) + alpha <= d (A, N)`
-    + This can be achieved by for example same poses!
-    + Find more at the paper.
-+ Details are in this paper [[Schroff et al.,2015, FaceNet: A unified embedding for face recognition and clustering]](https://arxiv.org/abs/1503.03832)
+      + `d(A, P) + alpha <= d(A, N)`
+      + `d(A, P) ~= d(A, N)`  
+      => increase the computational efficiency of the learning algorithm  
+    + This can be achieved by i.e. chosing people with high similar appearance for P and N
+    + Details of choosing triplets are in this paper [[Schroff et al.,2015, FaceNet: A unified embedding for face recognition and clustering]](https://arxiv.org/abs/1503.03832)
 + Commercial recognition systems are trained on a large datasets like 10/100 million images.
 + There are a lot of pretrained models and parameters online for face recognition.
 
@@ -1279,7 +1284,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   + `Y' = wi * Sigmoid ( f(x(i)) - f(x(j)) ) + b` where the subtraction is the Manhattan distance between f(x(i)) and f(x(j))
   + Some other similarities can be Euclidean and Ki square similarity.
   + The NN here is Siamese means the top and bottom convs has the same parameters.
-+ The paper for this work: [[Taigman et al., 2014. DeepFace closing the gap to human level performance]](https://www.cv-foundation.org/openaccess/content_cvpr_2014/html/Taigman_DeepFace_Closing_the_2014_CVPR_paper.html)
++ The paper for this work: [[Taigman et al., 2014, DeepFace closing the gap to human level performance]](https://www.cv-foundation.org/openaccess/content_cvpr_2014/html/Taigman_DeepFace_Closing_the_2014_CVPR_paper.html)
 + A good performance/deployment trick:
   + Pre-compute all the images that you are using as a comparison to the vector f(x(j))
   + When a new image that needs to be compared, get its vector f(x(i)) then put it with all the pre computed vectors and pass it to the sigmoid function.

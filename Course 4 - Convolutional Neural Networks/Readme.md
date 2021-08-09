@@ -1204,16 +1204,16 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 #### What is face recognition?
 + Face recognition system identifies a person's face. It can work on both images or videos.
 + **<u>Liveness detection</u>** within a video face recognition system prevents the network from identifying a face in an image. It can be learned by supervised deep learning using a dataset for live human and in-live human and sequence learning.
-+ Face verification vs. face recognition:
++ **Face verification vs. face recognition**:
   + Verification:
-    + Input: image, name/ID. (1 : 1)
-    + Output: whether the input image is that of the claimed person.
-    + "is this the claimed person?"
+    + Input: image, name/ID. 
+    + Output: whether the input image is that of the claimed person. (1:1 problem)
+    + "Is this the claimed person?"
   + Recognition:
-    + Has a database of K persons
+    + Has a database of K persons 
     + Get an input image
-    + Output ID if the image is any of the K persons (or not recognized)
-    + "who is this person?"
+    + Output ID if the image is any of the K persons (or not recognized) (1:k problem)
+    + "Who is this person?" 
 + We can use a face verification system to make a face recognition system. The accuracy of the verification system has to be high (around 99.9% or more) to be use accurately within a recognition system because the recognition system accuracy will be less than the verification system given K persons. 
 
 #### One Shot Learning

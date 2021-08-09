@@ -1220,12 +1220,14 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 + One of the face recognition challenges is to solve one shot learning problem.
 + One Shot Learning: A recognition system is able to recognize a person, learning from one image.
 + Historically deep learning doesn't work well with a small number of data.
+  + Also, when adding new sample (new face), we have to train the model all over again => not a good approach
 + Instead to make this work, we will learn a **similarity function**:
-  + d( **img1**, **img2** ) = degree of difference between images.
-  + We want d result to be low in case of the same faces.
-  + We use tau T as a threshold for d:
-    + If d( **img1**, **img2** ) <= T    Then the faces are the same.
-+ Similarity function helps us solving the one shot learning. Also its robust to new inputs.
+  + `d(img1, img2)` = degree of difference between images.
+  + We want `d` result to be low in case of the same faces.
+  + We use `T` (tau) as a threshold for `d`:
+    + If `d(img1, img2) <= T`, then the faces are the same.
+    + If `d(img1, img2) >  T`, then the faces are different.
++ Similarity function helps us solving the one shot learning. Also its still work fine with new inputs.
 
 #### Siamese Network
 + We will implement the similarity function using a type of NNs called Siamease Network in which we can pass multiple inputs to the two or more networks with the same architecture and parameters.

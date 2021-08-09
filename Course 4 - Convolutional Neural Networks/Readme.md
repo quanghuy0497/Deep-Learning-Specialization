@@ -1281,9 +1281,9 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 + Learning the similarity function another way:  
     ![](Images/36.png)
   + The final layer is a sigmoid layer.
-  + Then `Y' = wi * Sigmoid(|f(x_i) - f(x_j)|) + b` 
-  	+ Where the subtraction is the Manhattan distance (L1 distance) between `f(x_i)` and `f(x_j)`
-  	+ Some other similarities can be Euclidean or Chi-square similarity (Chi — X in Greek)
+  + Then `Y' = Sigmoid(w * |f(x_i) - f(x_j)| + b)` 
+  	+ Where the `|f(x_i) - f(x_j)|` is the Manhattan distance (L1 distance) between `f(x_i)` and `f(x_j)`
+  	+ Some other similarities can used Euclidean distance or Chi-square similarity instead (Chi — X in Greek)
   + The NN here is Siamese means the top and bottom convs has the same parameters.
 + The paper for this work: [[Taigman et al., 2014, DeepFace closing the gap to human level performance]](https://www.cv-foundation.org/openaccess/content_cvpr_2014/html/Taigman_DeepFace_Closing_the_2014_CVPR_paper.html)
 + A good performance/deployment trick:

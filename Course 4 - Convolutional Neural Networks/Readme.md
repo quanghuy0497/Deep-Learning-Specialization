@@ -1401,9 +1401,9 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 + Conv nets can work with 1D and 3D data as well.
 + 1D data comes from a lot of resources such as waves, sounds, heartbeat signals. 
   + In most of the applications that uses 1D data we use Recurrent Neural Network RNN.
-    ![](Images/45.png)
+    ![](Images/44.png)
 + 3D data also are available in some applications like CT scan, video processing...  
-    ![](Images/44.png)   
+    ![](Images/45.gif)   
 + An example of **_1D convolution_**:
   + Input shape: `(14 x 1)`
   + Applying 16 filters with `F = 5` , `S = 1`

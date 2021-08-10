@@ -48,8 +48,8 @@ This is the fourth course of the deep learning specialization at [Coursera](http
       * [Transpose Convolutions](#transpose-convolutions)
       * [U-Net Architecture Intuition](#u-net-architecture-intuition)
       * [U-Net Architecture](#u-net-architecture)
-   * [Special applications: Face recognition &amp; Neural style transfer](#special-applications-face-recognition--neural-style-transfer)
-      * [Face Recognition](#face-recognition)
+   * [Special applications: One-shot learning &amp; Neural style transfer](#special-applications-one-shot-learning--neural-style-transfer)
+      * [One-shot learning](#few-shot-learning)
          * [What is face recognition?](#what-is-face-recognition)
          * [One Shot Learning](#one-shot-learning)
          * [Siamese Network](#siamese-network)
@@ -1196,10 +1196,10 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 	+ Detailed architecture:
 		![](Images/unet.png)
 
-## Special applications: Face recognition & Neural style transfer
+## Special applications: One-shot learning & Neural style transfer
 > Discover how CNNs can be applied to multiple fields, including art generation and face recognition. Implement your own algorithm to generate art and recognize faces!
 
-### Face Recognition
+### One-shot learning
 
 #### What is face recognition?
 + Face recognition system identifies a person's face. It can work on both images or videos.

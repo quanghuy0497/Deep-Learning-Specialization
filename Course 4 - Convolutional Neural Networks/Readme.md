@@ -1287,8 +1287,8 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   + The NN here is Siamese means the top and bottom convs has the same parameters.
 + The paper for this work: [[Taigman et al., 2014, DeepFace closing the gap to human level performance]](https://www.cv-foundation.org/openaccess/content_cvpr_2014/html/Taigman_DeepFace_Closing_the_2014_CVPR_paper.html)
 + A good performance/deployment trick:
-  + Pre-compute all the images that you are using as a comparison to the vector f(x_j)
-  + When a new image that needs to be compared, get its vector f(x_i) then put it with all the pre computed vectors and pass it to the sigmoid function.
+  + Pre-compute all the images that you are using as a comparison to the vector `f(x_j)`
+  + When a new image that needs to be compared, get its vector `f(x_i)` then put it with all the pre computed vectors and pass it to the sigmoid function.
 + This version works quite as well as the triplet loss function.
 + Face verification supervised learning"
   + Create a training set of pair of images where y = 1 when 2 pictures come from the same person and y = 0 otherwise
@@ -1340,7 +1340,8 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   + To Generate this:  
       ![](Images/40.png)
   + You will go through this:  
-      ![](Images/41.png)
+      ![](Images/41.png)  
+  + Note that the pixel values of G are updated after each iteration of the optimization algorithm
 
 #### Content Cost Function
 + In the previous section we showed that we need a cost function for the content image and the style image to measure how similar is them to each other.

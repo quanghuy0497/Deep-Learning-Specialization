@@ -1374,8 +1374,10 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     + As it appears its the sum of the multiplication of each member in the matrix.  
       ![](Images/43.png)  
       + **_Note_**: The second factor of second fomular should be `a[l](i,j,k')` on the above image  
-+ **_Bonus_**: To compute gram matrix efficiently:
++ **_Bonus_**: To compute gram matrix efficiently:  
+	![](Images/gram1.png)  
   + Reshape activation from `H x W x C` to `HW x C`
+  	![](Images/gram2.png)  
   + Name the reshaped activation F.
   + `G[l] = F * F.T`
 + Then, the cost function `J_style(S, G)` at layer `l` will be:  

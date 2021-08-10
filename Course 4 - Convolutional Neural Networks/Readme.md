@@ -49,7 +49,7 @@ This is the fourth course of the deep learning specialization at [Coursera](http
       * [U-Net Architecture Intuition](#u-net-architecture-intuition)
       * [U-Net Architecture](#u-net-architecture)
    * [Special applications: One-shot learning &amp; Neural style transfer](#special-applications-one-shot-learning--neural-style-transfer)
-      * [One-shot learning](#few-shot-learning)
+      * [One-shot learning](#one-shot-learning)
          * [What is face recognition?](#what-is-face-recognition)
          * [One Shot Learning](#one-shot-learning)
          * [Siamese Network](#siamese-network)

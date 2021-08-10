@@ -1326,16 +1326,17 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 #### Cost Function
 + We will define a cost function for the generated image that measures how good it is.
 + Give a content image C, a style image S, and a generated image G:
-  + `J(G) = alpha * J(C,G) + beta * J(S,G)`
-  + `J(C, G)` measures how similar is the generated image to the Content image.
-  + `J(S, G)` measures how similar is the generated image to the Style image.
-  + alpha and beta are relative weighting to the similarity and these are hyperparameters.
+  + `J(G) = alpha * J_content(C,G) + beta * J_style(S,G)`
+  + `J_content(C, G)` measures how similar is the generated image to the Content image.
+  + `J_style(S, G)` measures how similar is the generated image to the Style image.
+  + `alpha` and `beta` are relative weighting to the similarity and these are hyperparameters.
++ [[Gatys et al., 2015, A neural algorithm of artistic style]](https://arxiv.org/abs/1508.06576) 
 + Find the generated image G:
   1. Initiate G randomly
      + For example G: 100 X 100 X 3
   2. Use gradient descent to minimize `J(G)`
      + `G = G - dG`  We compute the gradient image and use gradient decent to minimize the cost function.
-+ The iterations might be as following image:
++ The iterations might be as following image by minimizing the cost function:
   + To Generate this:  
       ![](Images/40.png)
   + You will go through this:  
@@ -1347,9 +1348,9 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   + If we choose `l` to be small (like layer 1), we will force the network to get similar output to the original content image.
   + In practice `l` is not too shallow and not too deep but in the middle.
 + Use pre-trained ConvNet. (E.g., VGG network)
-+ Let `a(c)[l]` and `a(G)[l]` be the activation of layer `l` on the images.
-+ If `a(c)[l]` and `a(G)[l]` are similar then they will have the same content
-  + `J(C, G) at a layer l = 1/2 || a(c)[l] + a(G)[l] ||^2`
++ Let `a[l](C)` and `a[l](G)` be the activation of layer `l` on the images.
++ If `a[l](C)` and `a[l](G)` are similar then both images have the similar content
+  + `J_content(C, G) at layer l = 1/2 ||a[l](C) - a[l](G)||^2`
 
 #### Style Cost Function
 + Meaning of the ***style*** of an image:
@@ -1358,27 +1359,31 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     + That means given an activation like this:  
         ![](Images/42.png)
     + How correlate is the orange channel with the yellow channel?
-    + Correlated means if a value appeared in a specific channel a specific value will appear too (Depends on each other).
-    + Uncorrelated means if a value appeared in a specific channel doesn't mean that another value will appear (Not depend on each other)
+      + Correlated means if a value appeared in a specific channel a specific value will appear too (Depends on each other).
+      + Uncorrelated means if a value appeared in a specific channel doesn't mean that another value will appear (Not depend on each other)
   + The correlation tells you how a components might occur or not occur together in the same image.
 + The correlation of style image channels should appear in the generated image channels.
 + Style matrix (Gram matrix):
-  + Let `a(l)[i, j, k]` be the activation at l with `(i=H, j=W, k=C)`
-  + Also `G(l)(s)` is matrix of shape `nc(l) x nc(l)`
+  + Let `a[l](i,j,k)` be the activation at (i,j,k) with `(i=H, j=W, k=C)`
+  + Also `G[l]` is matrix of shape `n_c[l] x n_c[l]`
     + We call this matrix style matrix or Gram matrix.
     + In this matrix each cell will tell us how correlated is a channel to another channel.
+      + `G[l](k,k')` will measure how correlated is between channel `k` and channel `k'` at layer `l` where `k,k' = 1..n_c`
   + To populate the matrix we use these equations to compute style matrix of the style image and the generated image.  
-      ![](Images/43.png)
-    + As it appears its the sum of the multiplication of each member in the matrix.
-+ To compute gram matrix efficiently:
-  + Reshape activation from H X W X C to HW X C
+    + As it appears its the sum of the multiplication of each member in the matrix.  
+      ![](Images/43.png)  
+      + **_Note_**: The second factor of second fomular should be `a[l](i,j,k')` on the above image  
++ **_Bonus_**: To compute gram matrix efficiently:
+  + Reshape activation from `H x W x C` to `HW x C`
   + Name the reshaped activation F.
   + `G[l] = F * F.T`
-+ Finally the cost function will be as following:
-  + `J(S, G) at layer l = (1/ 2 * H * W * C) || G(l)(s) - G(l)(G) ||`
-+ And if you have used it from some layers
-  + `J(S, G) = Sum (lamda[l]*J(S, G)[l], for all layers)`
-+ Steps to be made if you want to create a tensorflow model for neural style transfer:
++ Then, the cost function `J_style(S, G)` at layer `l` will be:  
+  + `J_style(S, G)[l] = 1/(...) * ||G[l](S) - G[l](G)||^2_F`
+  + Or:  
+  	![](Images/J_style_l.png)  
++ Finally, the overall `J_style(S, G)` will be:  
+   + `J_style(S, G) = Sum(lamda[l]*J_style(S, G)[l], for all layers)`  
++ **_Bonus_**: Steps to be made if you want to create a tensorflow model for neural style transfer:
   1. Create an Interactive Session.
   2. Load the content image.
   3. Load the style image
@@ -1394,23 +1399,30 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 #### 1D and 3D Generalizations
 + So far we have used the Conv nets for images which are 2D.
 + Conv nets can work with 1D and 3D data as well.
-+ An example of 1D convolution:
-  + Input shape (14, 1)
-  + Applying 16 filters with F = 5 , S = 1
-  + Output shape will be 10 X 16
-  + Applying 32 filters with F = 5, S = 1
-  + Output shape will be 6 X 32
-+ The general equation `(N - F)/S + 1` can be applied here but here it gives a vector rather than a 2D matrix.
 + 1D data comes from a lot of resources such as waves, sounds, heartbeat signals. 
-+ In most of the applications that uses 1D data we use Recurrent Neural Network RNN.
-+ 3D data also are available in some applications like CT scan:  
-    ![](Images/44.png)
-+ Example of 3D convolution:
-  + Input shape (14, 14,14, 1)
-  + Applying 16 filters with F = 5 , S = 1
-  + Output shape (10, 10, 10, 16)
-  + Applying 32 filters with F = 5, S = 1
-  + Output shape will be (6, 6, 6, 32)
+  + In most of the applications that uses 1D data we use Recurrent Neural Network RNN.
+    ![](Images/45.png)
++ 3D data also are available in some applications like CT scan, video processing...  
+    ![](Images/44.png)   
++ An example of **_1D convolution_**:
+  + Input shape: `(14 x 1)`
+  + Applying 16 filters with `F = 5` , `S = 1`
+  + Output shape will be `(10 x 16)`
+  + Applying 32 filters with `F = 5`, `S = 1`
+  + Output shape will be `(6 x 32)`
+  + The general equation `(N - F)/S + 1` can be applied here but here it gives a vector rather than a 2D matrix.
++ An example of **_2D convolution_**:
+  + Input shape: `(14 x 14 x 1)`
+  + Applying 16 filters with `F = 5` , `S = 1`
+  + Output shape will be `(10 x 10 x 16)`
+  + Applying 32 filters with `F = 5`, `S = 1`
+  + Output shape will be `(6 x 6 x 32)`
++ Example of **_3D convolution_**:
+  + Input shape: `(14 x 14 x 14 x 1)`
+  + Applying 16 filters with `F = 5` , `S = 1`
+  + Output shape will be `(10 x 10 x 10 x 16)`
+  + Applying 32 filters with `F = 5`, `S = 1`
+  + Output shape will be `(6 x 6 x 6 x 32)`
 
 ## Extras
 

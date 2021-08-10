@@ -1257,7 +1257,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     	`||f(A) - f(P)||^2  - ||f(A) - f(N)||^2 + alpha <= 0`  
 + **Final Loss function**:
   + Given 3 images (A, P, N):
-    + `L(A, P, N) = max(||f(A) - f(P)||^2  - ||f(A) - f(N)||^2 + alpha , 0) 
+    + `L(A, P, N) = max(||f(A) - f(P)||^2  - ||f(A) - f(N)||^2 + alpha , 0)` 
     + `J = Sum[L(A[i], P[i], N[i]) , i]` for all triplets of images.
 + You need multiple images of the same person in your dataset. Then get some triplets out of your dataset. So the dataset should be big enough.
 	+ i.e. 10k pictures of 1k person for the training set
@@ -1333,7 +1333,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 + [[Gatys et al., 2015, A neural algorithm of artistic style]](https://arxiv.org/abs/1508.06576) 
 + Find the generated image G:
   1. Initiate G randomly
-     + For example G: 100 X 100 X 3
+     + For example G: `100 x 100 x 3`
   2. Use gradient descent to minimize `J(G)`
      + `G = G - dG`  We compute the gradient image and use gradient decent to minimize the cost function.
 + The iterations might be as following image by minimizing the cost function:

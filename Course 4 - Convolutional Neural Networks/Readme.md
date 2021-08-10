@@ -1368,7 +1368,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   + Also `G[l]` is matrix of shape `n_c[l] x n_c[l]`
     + We call this matrix style matrix or Gram matrix.
     + In this matrix each cell will tell us how correlated is a channel to another channel.
-      + `G[l](k,k')` will measure how correlated is between channel `k` and channel `k'` at layer `l` where `k,k' = 1..n_c`
+      + `G[l](k,k')` will measure how correlated are the activations between channel `k` and channel `k'` at layer `l` where `k,k' = 1..n_c`
   + To populate the matrix we use these equations to compute style matrix of the style image and the generated image.  
     + As it appears its the sum of the multiplication of each member in the matrix.  
       ![](Images/43.png)  

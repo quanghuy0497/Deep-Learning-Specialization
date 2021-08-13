@@ -102,35 +102,31 @@ Here are the course summary as its given on the course [link](https://www.course
   - Named entity recognition example:
     - X: "Harry Potter and Hermoine Granger invented a new spell."
     - Y:   1   1   0   1   1   0   0   0   0
-    - Both elements has a shape of 9. 1 means its a name, while 0 means its not a name.
+    - Both elements has a shape of 9, while `1` means its a name, while `0` means its not a name.
 - We will index the first element of x by x<sup><1></sup>, the second x<sup><2></sup> and so on.
   - x<sup><1></sup> = Harry
   - x<sup><2></sup> = Potter
 - Similarly, we will index the first element of y by y<sup><1></sup>, the second y<sup><2></sup> and so on.
   - y<sup><1></sup> = 1
   - y<sup><2></sup> = 1
-
 - T<sub>x</sub> is the size of the input sequence and T<sub>y</sub> is the size of the output sequence.
   - T<sub>x</sub> = T<sub>y</sub> = 9 in the last example although they can be different in other problems.
-- x<sup>(i)\<t></sup> is the element t of the sequence of input vector i. Similarly y<sup>(i)\<t></sup> means the t-th element in the output sequence of the i training example.
-- T<sub>x</sub><sup>(i)</sup> the input sequence length for training example i. It can be different across the examples. Similarly for T<sub>y</sub><sup>(i)</sup> will be the length of the output sequence in the i-th training example.
-
+- x<sup>(i)\<t></sup> is the element `t` of the sequence of input vector `i`. Similarly y<sup>(i)\<t></sup> means the `t-th` element in the output sequence of the `i` training example.
+- T<sub>x</sub><sup>(i)</sup> the input sequence length for training example `i`. It can be different across the examples. Similarly for T<sub>y</sub><sup>(i)</sup> will be the length of the output sequence in the `i-th` training example.
 - **Representing words**:
     - We will now work in this course with **NLP** which stands for natural language processing. One of the challenges of NLP is how can we represent a word?
-
     1. We need a **vocabulary** list that contains all the words in our target sets.
         - Example:
             - [a ... And   ... Harry ... Potter ... Zulu]
             - Each word will have a unique index that it can be represented with.
             - The sorting here is in alphabetical order.
         - Vocabulary sizes in modern applications are from 30,000 to 50,000. 100,000 is not uncommon. Some of the bigger companies use even a million.
-        - To build vocabulary list, you can read all the texts you have and get m words with the most occurrence, or search online for m most occurrent words.
+        - To build vocabulary list, you can read all the texts you have and get `m` words with the most occurrence, or search online for `m` most occurrent words.
     2. Create a **one-hot encoding** sequence for each word in your dataset given the vocabulary you have created.
         - While converting, what if we meet a word thats not in your dictionary?
         - We can add a token in the vocabulary with name `<UNK>` which stands for unknown text and use its index for your one-hot vector.
     - Full example:   
         ![](Images/01.png)
-
 - The goal is given this representation for x to learn a mapping using a sequence model to then target output y as a supervised learning problem.
 
 ### Recurrent Neural Network Model
@@ -152,9 +148,11 @@ Here are the course summary as its given on the course [link](https://www.course
 - A lot of papers and books write the same architecture this way:  
   ![](Images/03.png)
   - It's harder to interpreter. It's easier to roll this drawings to the unrolled version.
-- In the discussed RNN architecture,  the current output y&#770;<sup>\<t></sup> depends on the previous inputs and activations.
-- Let's have this example 'He Said, "Teddy Roosevelt was a great president"'. In this example Teddy is a person name but we know that from the word **president** that came after Teddy not from **He** and **said** that were before it.
-- So limitation of the discussed architecture is that it can not learn from elements later in the sequence. To address this problem we will later discuss **Bidirectional RNN**  (BRNN).
+- In the discussed RNN architecture,  the current output y&#770;<sup>\<t></sup> depends only on the previous inputs and activations.
+  - i.e. prediction on y&#770;<sup><3></sup> can be made with the information from x<sup><3></sup>, x<sup><2></sup> and x<sup><1></sup>, but not from x<sup><4></sup> and so on...  
+    ![](Images/03_learning.png)
+  - Let's have this example 'He Said, "Teddy Roosevelt was a great president"'. In this example Teddy is a person name but we know that from the word **president** that came after Teddy not from **He** and **said** that were before it.
+  - So limitation of the discussed architecture is that it can not learn from elements later in the sequence. To address this problem we will later discuss **Bidirectional RNN**  (BRNN).
 - Now let's discuss the forward propagation equations on the discussed architecture:   
     ![](Images/04.png)
   - The activation function of a is usually tanh or ReLU and for y depends on your task choosing some activation functions like sigmoid and softmax. In name entity recognition task we will use sigmoid because we only have two classes.
@@ -177,7 +175,7 @@ Here are the course summary as its given on the course [link](https://www.course
   - Where the first equation is the loss for one example and the loss for the whole sequence is given by the summation over all the calculated single example losses.
 - Graph with losses:   
   ![](Images/08.png)
-- The backpropagation here is called **backpropagation through time** because we pass activation `a` from one sequence element to another like backwards in time.
+- The backpropagation here is called **backpropagation through time** because we pass activation `a` from one sequence element to another like backwards in time (red line).
 
 ### Different types of RNNs
 - So far we have seen only one RNN architecture in which T<sub>x</sub> equals T<sub>Y</sub>. In some other problems, they may not equal so we need different architectures.

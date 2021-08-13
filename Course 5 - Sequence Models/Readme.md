@@ -150,7 +150,7 @@ Here are the course summary as its given on the course [link](https://www.course
   - It's harder to interpreter. It's easier to roll this drawings to the unrolled version.
 - In the discussed RNN architecture,  the current output y&#770;<sup>\<t></sup> depends only on the previous inputs and activations.
   - i.e. prediction on y&#770;<sup><3></sup> can be made with the information from x<sup><3></sup>, x<sup><2></sup> and x<sup><1></sup>, but not from x<sup><4></sup> and so on...  
-    ![](Images/03_learning.png)
+    ![](Images/03_learning.png)  
   - Let's have this example 'He Said, "Teddy Roosevelt was a great president"'. In this example Teddy is a person name but we know that from the word **president** that came after Teddy not from **He** and **said** that were before it.
   - So limitation of the discussed architecture is that it can not learn from elements later in the sequence. To address this problem we will later discuss **Bidirectional RNN**  (BRNN).
 - Now let's discuss the forward propagation equations on the discussed architecture:   
@@ -174,7 +174,7 @@ Here are the course summary as its given on the course [link](https://www.course
   ![](Images/07.png)
   - Where the first equation is the loss for one example and the loss for the whole sequence is given by the summation over all the calculated single example losses.
 - Graph with losses:   
-  ![](Images/08.png)
+  ![](Images/08.png)  
 - The backpropagation here is called **backpropagation through time** because we pass activation `a` from one sequence element to another like backwards in time (red line).
 
 ### Different types of RNNs
@@ -228,11 +228,12 @@ Here are the course summary as its given on the course [link](https://www.course
   3. Then we choose a prediction randomly from distribution obtained by y&#770;<sup><1></sup>. For example it could be "The".
      - In numpy this can be implemented using: `numpy.random.choice(...)`
      - This is the line where you get a random beginning of the sentence each time you sample run a novel sequence.
-  4. We pass the last predicted word with the calculated  a<sup><1></sup>
-  5. We keep doing 3 & 4 steps for a fixed length or until we get the `<EOS>` token.
+  4. We pass the last predicted word y&#770;<sup><1></sup> to the next block a<sup><2></sup> to calculate y&#770;<sup><2></sup> 
+  5. We keep doing 3 & 4 steps for a fixed length or until we get the `<EOS>` token.  
+    ![](Images/15_sampling.png)  
   6. You can reject any `<UNK>` token if you mind finding it in your output.
 - So far we have to build a word-level language model. It's also possible to implement a **character-level** language model.
-- In the character-level language model, the vocabulary will contain `[a-zA-Z0-9]`, punctuation, special characters and possibly <EOS> token.
+- In the character-level language model, the vocabulary will contain `[a,..,z,A,..Z,<special chars>,0..9]`, punctuation, special characters and possibly <EOS> token.
 - Character-level language model has some pros and cons compared to the word-level language model
   - Pros:
     1. There will be no `<UNK>` token - it can create any word.
@@ -244,41 +245,29 @@ Here are the course summary as its given on the course [link](https://www.course
 
 ### Vanishing gradients with RNNs
 - One of the problems with naive RNNs that they run into **vanishing gradient** problem.
-
 - An RNN that process a sequence data with the size of 10,000 time steps, has 10,000 deep layers which is very hard to optimize.
-
 - Let's take an example. Suppose we are working with language modeling problem and there are two sequences that model tries to learn:
-
   - "The **cat**, which already ate ..., **was** full"
   - "The **cats**, which already ate ..., **were** full"
   - Dots represent many words in between.
-
-- What we need to learn here that "was" came with "cat" and that "were" came with "cats". The naive RNN is not very good at capturing very long-term dependencies like this.
-
+- What we need to learn here that `"was"` came with `"cat"` and that `"were"` came with `"cats"`. The naive RNN is not very good at capturing very long-term dependencies like this.
 - As we have discussed in Deep neural networks, deeper networks are getting into the vanishing gradient problem. That also happens with RNNs with a long sequence size.   
-  ![](Images/16.png)   
-  - For computing the word "was", we need to compute the gradient for everything behind. Multiplying fractions tends to vanish the gradient, while multiplication of large number tends to explode it.
+    ![](Images/16.png)   
+  - For computing the word `"was"`, we need to compute the gradient for everything behind. Multiplying fractions tends to vanish the gradient, while multiplication of large number tends to explode it.
   - Therefore some of your weights may not be updated properly.
-
-- In the problem we descried it means that its hard for the network to memorize "was" word all over back to "cat". So in this case, the network won't identify the singular/plural words so that it gives it the right grammar form of verb was/were.
-
-- The conclusion is that RNNs aren't good in **long-term dependencies**.
-
-- > In theory, RNNs are absolutely capable of handling such “long-term dependencies.” A human could carefully pick parameters for them to solve toy problems of this form. Sadly, in practice, RNNs don’t seem to be able to learn them. http://colah.github.io/posts/2015-08-Understanding-LSTMs/
-
-- _Vanishing gradients_ problem tends to be the bigger problem with RNNs than the _exploding gradients_ problem. We will discuss how to solve it in next sections.
-
-- Exploding gradients can be easily seen when your weight values become `NaN`. So one of the ways solve exploding gradient is to apply **gradient clipping** means if your gradient is more than some threshold - re-scale some of your gradient vector so that is not too big. So there are cliped according to some maximum value.
-
+- In the problem we descried it means that its hard for the network to memorize `"was"` word all over back to `"cat"`. So in this case, the network won't identify the singular/plural words so that it gives it the right grammar form of verb `"was/were"`.
+- The conclusion is that basic RNNs aren't good in **long-term dependencies**.
+  > In theory, RNNs are absolutely capable of handling such “long-term dependencies.” A human could carefully pick parameters for them to solve toy problems of this form. Sadly, in practice, RNNs don’t seem to be able to learn them. http://colah.github.io/posts/2015-08-Understanding-LSTMs/
+- **_Vanishing gradients_** problem tends to be the bigger problem with RNNs than the _exploding gradients_ problem. We will discuss how to solve it in next sections.
+- **_Exploding gradients_** can be easily seen when your weight values become `NaN`. So one of the ways solve exploding gradient is to apply _gradient clipping_ means if your gradient is more than some threshold - re-scale some of your gradient vector so that is not too big. So there are cliped according to some maximum value.
   ![](Images/26.png)
-
 - **Extra**:
-  - Solutions for the Exploding gradient problem:
+  - Solutions for the **_Exploding gradient_** problem:
     - Truncated backpropagation.
       - Not to update all the weights in the way back.
       - Not optimal. You won't update all the weights.
     - Gradient clipping.
-  - Solution for the Vanishing gradient problem:
+  - Solution for the **_Vanishing gradient_** problem:
     - Weight initialization.
       - Like He initialization.
     - Echo state networks.

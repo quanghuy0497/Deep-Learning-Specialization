@@ -389,7 +389,7 @@ Implications of L2-regularization on:
   - `X{1} = 0    ...  1000`
   - `X{2} = 1001 ...  2000`
   - `...`
-  - `X{5000} = ....
+  - `X{5000} = ....`
 - We similarly split `X` & `Y`.
 - So the definition of mini batches ==> `t: X{t}, Y{t}`
 - In **Batch gradient descent** we run the gradient descent on the whole dataset.

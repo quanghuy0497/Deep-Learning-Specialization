@@ -160,7 +160,12 @@ Here are the course summary as its given on the course [link](https://www.course
   - [a<sup>\<t-1></sup>, x<sup>\<t></sup>] is a<sup>\<t-1></sup> and x<sup>\<t></sup> stacked vertically.
   - w<sub>a</sub> shape: (NoOfHiddenNeurons, NoOfHiddenNeurons + n<sub>x</sub>)
   - [a<sup>\<t-1></sup>, x<sup>\<t></sup>] shape: (NoOfHiddenNeurons + n<sub>x</sub>, 1)
-
+- **Bonus**:
+  - Detailed RNN single cell:  
+      ![](Images/05_cell.png)  
+  - Detailed of RNN: 
+      ![](Images/05_multi_cell.png)
+    
 ### Backpropagation through time
 - In modern deep learning frameworks, you only have to implement the forward pass, and the framework takes care of the backward pass, so most deep learning engineers do not need to bother with the details of the backward pass. If however you are an expert in calculus and want to see the details of backprop in RNNs, you can work through this.
 - Let's see how backpropagation works with the RNN architecture.

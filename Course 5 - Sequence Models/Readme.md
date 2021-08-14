@@ -355,7 +355,7 @@ Here are the course summary as its given on the course [link](https://www.course
 - In a lot of cases the standard one layer RNNs will solve your problem. But in some problems its useful to stack some RNN layers to make a deeper network.
 - For example, a deep RNN with 3 layers would look like this:  
   ![](Images/25.png)
-  - With the activation i.e. a<sup>[2]<3></sup> = g(W<sub>a</sub><sup>[2]</sup>[a<sup>[2]<2></sup>,a<sup>[1]<3></sup>] + b<sub>a</sub><sup>[2]</sup>)
+  - With the activation i.e. a<sup>[2]<3></sup> = g(W<sub>a</sub><sup>[2]</sup>.[a<sup>[2]<2></sup>,a<sup>[1]<3></sup>] + b<sub>a</sub><sup>[2]</sup>)
 - In feed-forward deep nets, there could be 100 or even 200 layers. In deep RNNs stacking 3 layers is already considered deep and expensive to train.
 - In some cases you might see some feed-forward network layers connected after recurrent cell.
 

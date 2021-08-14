@@ -343,7 +343,7 @@ Here are the course summary as its given on the course [link](https://www.course
 - The name **Teddy** cannot be learned from **He** and **said**, but can be learned from **bears**.
 - BiRNNs fixes this issue.
 - Here is BRNNs architecture:   
-  ![](Images/24.png)
+  ![](Images/24_fix.png)
 - Note, that BiRNN is an **acyclic graph**.
 - Part of the forward propagation goes from left to right, and part - from right to left. It learns from both sides.
 - To make predictions we use y&#770;<sup>\<t></sup> by using the two activations that come from left and right.

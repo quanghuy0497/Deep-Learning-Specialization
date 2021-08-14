@@ -173,13 +173,15 @@ Here are the course summary as its given on the course [link](https://www.course
 - Here is the graph:   
   ![](Images/06.png)
   - Where w<sub>a</sub>, b<sub>a</sub>, w<sub>y</sub>, and b<sub>y</sub> are shared across each element in a sequence.
+- RNN cell back propagation in detail:  
+  ![](Images/06_detail.png)  
 - We will use the cross-entropy loss function:   
   ![](Images/07.png)
   - Where the first equation is the loss for one example and the loss for the whole sequence is given by the summation over all the calculated single example losses.
 - Graph with losses:   
   ![](Images/08.png)  
-- The backpropagation here is called **backpropagation through time** because we pass activation `a` from one sequence element to another like backwards in time (red line).
-
+  - The backpropagation here is called **backpropagation through time** because we pass activation `a` from one sequence element to another like backwards in time (red line).
+  
 ### Different types of RNNs
 - So far we have seen only one RNN architecture in which T<sub>x</sub> equals T<sub>Y</sub>. In some other problems, they may not equal so we need different architectures.
 - The ideas in this section was inspired by Andrej Karpathy [blog](http://karpathy.github.io/2015/05/21/rnn-effectiveness/). Mainly this image has all types:   
@@ -340,6 +342,8 @@ Here are the course summary as its given on the course [link](https://www.course
   - LSTM with **peephole connections**.
     - The normal LSTM with C<sup>\<t-1></sup> included with every gate.
 - There isn't a universal superior between LSTM and it's variants. One of the advantages of GRU is that it's simpler and can be used to build much bigger network but the LSTM is more powerful and general.
+- **Bonus**: LSTM cell back propagation  
+    ![](Images/22_backprop.png)
 
 ### Bidirectional RNN
 - There are still some ideas to let you build much more powerful sequence models. One of them is bidirectional RNNs and another is Deep RNNs.

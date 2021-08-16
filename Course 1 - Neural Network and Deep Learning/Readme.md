@@ -170,7 +170,7 @@ Here are the course summary as its given on the course [link](https://www.course
 - Looks like greedy algorithms. the derivative give us the direction to improve our parameters.
 - The actual equations we will implement:
   - `w = w - alpha * d(J(w,b) / dw)`        (how much the function slopes in the w direction)
-  - `b = b - alpha * d(J(w,b) / db)`        (how much the function slopes in the d direction)
+  - `b = b - alpha * d(J(w,b) / db)`        (how much the function slopes in the b direction)
 
 ### Derivatives
 - We will talk about some of required calculus.
@@ -234,7 +234,7 @@ Here are the course summary as its given on the course [link](https://www.course
   		# Forward pass
   		z(i) = W1*x1(i) + W2*x2(i) + b
   		a(i) = Sigmoid(z(i))
-  		J += (Y(i)*log(a(i)) + (1-Y(i))*log(1-a(i)))
+  		J += -(Y(i)*log(a(i)) + (1-Y(i))*log(1-a(i)))
 
   		# Backward pass
   		dz(i) = a(i) - Y(i)
@@ -525,12 +525,12 @@ Here are the course summary as its given on the course [link](https://www.course
 - Forward propagation general rule for one input:
   ```
   z[l] = W[l]a[l-1] + b[l]
-  a[l] = g[l](a[l])
+  a[l] = g[l](z[l])
   ```
 - Forward propagation general rule for `m` inputs:
   ```
   Z[l] = W[l]A[l-1] + B[l]
-  A[l] = g[l](A[l])
+  A[l] = g[l](Z[l])
   ```
 - We can't compute the whole layers forward propagation without a for loop so its OK to have a for loop here.
 - The dimensions of the matrices are so important you need to figure it out.

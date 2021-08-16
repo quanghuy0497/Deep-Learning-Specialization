@@ -470,37 +470,39 @@ Here are the course summary as its given on the course [link](https://www.course
 - Let's start learning some algorithms that can learn word embeddings.
 - At the start, word embeddings algorithms were complex but then they got simpler and simpler.
 - We will start by learning the complex examples to make more intuition.
-- **<u>Neural language model</u>**:
+- **<u>Neural language model</u>**:  
+  - [[Bengio et al., 2003, A Neural Probabilistic Language Model]](https://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf)  
   - Let's start with an example:   
     ![](Images/37.png)
   - We want to build a language model so that we can predict the next word.
   - So we use this neural network to learn the language model   
     ![](Images/38.png)
-    - We get e<sub>j</sub> by `np.dot(`E`,o<sub>j</sub>)`
+    - We get _e<sub>j</sub>_ by _np.dot(`E`,o<sub>j</sub>)_
     - NN layer has parameters `W1` and `b1` while softmax layer has parameters `W2` and `b2`
-    - Input dimension is (300*6, 1) if the window size is 6 (six previous words).
+    - Input dimension is `(300*6, 1)` if the window size is 6 (six previous words).
     - Here we are optimizing `E` matrix and layers parameters. We need to maximize the likelihood to predict the next word given the context (previous words).
   - This model was build in 2003 and tends to work pretty decent for learning word embeddings.
 - In the last example we took a window of 6 words that fall behind the word that we want to predict. There are other choices when we are trying to learn word embeddings.
-  - Suppose we have an example: "I want a glass of orange **juice** to go along with my cereal"
+  - Suppose we have an example: _"I want a glass of orange **juice** to go along with my cereal."_
   - To learn **juice**, choices of **context** are:
     1. Last 4 words.
        - We use a window of last 4 words (4 is a hyperparameter), "<u>a glass of orange</u>" and try to predict the next word from it.
     2. 4 words on the left and on the right.
-       - "<u>a glass of orange</u>" and "<u>to go along with</u>"
+       - _"<u>a glass of orange</u>"_ and _"<u>to go along with</u>"_
     3. Last 1 word.
-       - "<u>orange</u>"
+       - _"<u>orange</u>"_
     4. Nearby 1 word.
-       - "<u>glass</u>" word is near juice.
+       - _"<u>glass</u>"_ word is near juice.
        - This is the idea of **skip grams** model. 
-       - The idea is much simpler and works remarkably well.
-       - We will talk about this in the next section.
+          - The idea is much simpler and works remarkably well.
+          - We will talk about this in the next section.
 - Researchers found that if you really want to build a _language model_, it's natural to use the last few words as a context. But if your main goal is really to learn a _word embedding_, then you can use all of these other contexts and they will result in very meaningful work embeddings as well. 
 - To summarize, the language modeling problem poses a machines learning problem where you input the context (like the last four words) and predict some target words. And posing that problem allows you to learn good word embeddings.
 
 #### Word2Vec
+- [[Mikolov et al., 2013, Efficient Estimation of Word Representations in Vector Space]](https://arxiv.org/abs/1301.3781)
 - Before presenting Word2Vec, lets talk about **skip-grams**:
-  - For example, we have the sentence: "I want a glass of orange juice to go along with my cereal"
+  - For example, we have the sentence: _"I want a glass of orange juice to go along with my cereal."_
   - We will choose **context** and **target**.
   - The target is chosen randomly based on a window with a specific size.
     | Context | Target | How far |
@@ -508,34 +510,35 @@ Here are the course summary as its given on the course [link](https://www.course
     | orange  | juice  | +1      |
     | orange  | glass  | -2      |
     | orange  | my     | +6      |    
-    We have converted the problem into a supervised problem.
+    - We have converted the problem into a supervised problem.
   - This is not an easy learning problem because learning within -10/+10 words (10 - an example) is hard.
   - We want to learn this to get our word embeddings model.
 - Word2Vec model:
   - Vocabulary size = 10,000 words
-  - Let's say that the context word are `c` and the target word is `t`
-  - We want to learn `c` to `t`
-  - We get e<sub>c</sub> by `E`. o<sub>c</sub>
-  - We then use a softmax layer to get `P(t|c)` which is y&#770;
-  - Also we will use the cross-entropy loss function.
-  - This model is called skip-grams model.
+  - Let's say that the context word are `c` ("_orange_") and the target word is `t` ("_juice_")
+  - We want to learn to map from `c` to `t`
+    - We get e<sub>c</sub> by _np.dot(`E`, o<sub>c</sub>)_
+    - We then use a softmax layer to get `P(t|c)` which is y&#770;
+    - Also we will use the cross-entropy loss function.
+      - L(y&#770;,y) = -Sum<sub>i=1:n</sub>y<sub>i</sub>.log(y&#770;<sub>i</sub>) with _n = 10,000_
+  - This model is called **skip-grams** model.
 - The last model has a problem with the softmax layer:   
   ![](Images/39.png)  
   - Here we are summing 10,000 numbers which corresponds to the number of words in our vocabulary.
   - If this number is larger say 1 million, the computation will become very slow.
-- One of the solutions for the last problem is to use "**Hierarchical softmax classifier**" which works as a tree classifier.     
+- One of the solutions for the last problem is to use "**Hierarchical softmax classifier**" which works as a binary tree classifier.     
   ![](Images/40.png)  
-- In practice, the hierarchical softmax classifier doesn't use a balanced tree like the drawn one. Common words are at the top and less common are at the bottom.
+  - In practice, the hierarchical softmax classifier doesn't use a balanced tree like the drawn one. Common words are at the top and less common are at the bottom.
 - How to sample the context **c**?
   - One way is to choose the context by random from your corpus.
-  - If you have done it that way, there will be frequent words like "the, of, a, and, to, .." that can dominate other words like "orange, apple, durian,..."
+  - If you have done it that way, there will be frequent words like _"the, of, a, and, to,..."_ that can dominate other words like _"orange, apple, durian,..."_
   - In practice, we don't take the context uniformly random, instead there are some heuristics to balance the common words and the non-common words.
-- word2vec paper includes 2 ideas of learning word embeddings. One is skip-gram model and another is CBoW (continuous bag-of-words).
+- Word2Vec paper includes 2 ideas of learning word embeddings. One is skip-gram model and another is CBoW (continuous bag-of-words).
 
 #### Negative Sampling
 - Negative sampling allows you to do something similar to the skip-gram model, but with a much more efficient learning algorithm. We will create a different learning problem.
 - Given this example:
-  - "I want a glass of orange juice to go along with my cereal"
+  - _"I want a glass of orange juice to go along with my cereal."_ 
 - The sampling will look like this:
   | Context | Word  | target |
   | ------- | ----- | ------ |
@@ -544,7 +547,7 @@ Here are the course summary as its given on the course [link](https://www.course
   | orange  | book  | 0      |
   | orange  | the   | 0      |
   | orange  | of    | 0      |  
-  We get positive example by using the same skip-grams technique, with a fixed window that goes around.
+  - We get positive example by using the same skip-grams technique, with a fixed window that goes around.
 - To generate a negative example, we pick a word randomly from the vocabulary.
 - Notice, that we got word "of" as a negative example although it appeared in the same sentence.
 - So the steps to generate the samples are:

@@ -23,7 +23,7 @@ This is the fourth course of the deep learning specialization at [Coursera](http
       * [Classic networks](#classic-networks)
       	* [LeNet-5](#LeNet-5)
       	* [AlexNet](#AlexNet)
-      	* [VGG](#VGG)
+      	* [VGG-16](#VGG-16)
       * [Residual Networks (ResNets)](#residual-networks-resnets)
       * [Why ResNets work](#why-resnets-work)
       * [Network in Network and 1×1 convolutions](#network-in-network-and-1-X-1-convolutions)

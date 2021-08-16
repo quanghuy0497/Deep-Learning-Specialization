@@ -587,7 +587,7 @@ Here are the course summary as its given on the course [link](https://www.course
       - Giving not too much weight for stop words like "is", "the", and "this" which occur many times.
       - Giving not too little weight for infrequent words.
    - **Theta** and **e** are symmetric which helps getting the final word embedding by averaging, and these two parameters and can be optimized by Gradient Descent. 
-  - Given the word `w`, Theta(w)<sub>final</sub> = (Theta(w)<sub>trained</sub> + e(w)<sub>trained</sub>) /2
+    - Given the word `w`, Theta(w)<sub>final</sub> = (Theta(w)<sub>trained</sub> + e(w)<sub>trained</sub>) /2
 - _Conclusions on word embeddings:_
   - If this is your first try, you should try to download a pre-trained model that has been made and actually works best.
   - If you have enough data, you can try to implement one of the available algorithms.

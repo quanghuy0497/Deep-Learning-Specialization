@@ -537,6 +537,7 @@ Here are the course summary as its given on the course [link](https://www.course
 
 #### Negative Sampling
 - Negative sampling allows you to do something similar to the skip-gram model, but with a much more efficient learning algorithm. We will create a different learning problem.
+  - [[Mikolow et al., 2013, Distributed Representations of Words and Phrases and their Compositionality]](https://arxiv.org/abs/1310.4546)
 - Given this example:
   - _"I want a glass of orange juice to go along with my cereal."_ 
 - The sampling will look like this:
@@ -549,39 +550,44 @@ Here are the course summary as its given on the course [link](https://www.course
   | orange  | of    | 0      |  
   - We get positive example by using the same skip-grams technique, with a fixed window that goes around.
 - To generate a negative example, we pick a word randomly from the vocabulary.
-- Notice, that we got word "of" as a negative example although it appeared in the same sentence.
+  - Notice, that we got word _"of"_ as a negative example although it appeared in the same sentence.
 - So the steps to generate the samples are:
   1. Pick a positive context
-  2. Pick a k negative contexts from the dictionary.
-- k is recommended to be from 5 to 20 in small datasets. For larger ones - 2 to 5.
-- We will have a ratio of k negative examples to 1 positive ones in the data we are collecting.
+  2. Pick a **k** negative contexts from the dictionary.  
+      - **k** is recommended to be from 5 to 20 in small datasets. For larger ones - 2 to 5.
+      - We will have a ratio of **k** negative examples to 1 positive ones in the data we are collecting.
 - Now let's define the model that will learn this supervised learning problem:
   - Lets say that the context word are `c` and the word are `t` and `y` is the target.
   - We will apply the simple logistic regression model.   
-  ![](Images/41.png)
+  ![](Images/41_fix.png)
   - The logistic regression model can be drawn like this:   
   ![](Images/42.png)
-  - So we are like having 10,000 binary classification problems, and we only train k+1 classifier of them in each iteration.
+    - So we are like having 10,000 binary classification problems, and we only train _k+1_ classifier of them in each iteration.
 - How to select negative samples:
   - We can sample according to empirical frequencies in words corpus which means according to how often different words appears. But the problem with that is that we will have more frequent words like _the, of, and..._
   - The best is to sample with this equation (according to authors):   
-    ![](Images/43.png)
+    ![](Images/43.png)  
+      - With `f(a)` is the observed frequency of the word `a` in the training set corpus
 
 #### GloVe word vectors
 - GloVe is another algorithm for learning the word embedding. It's the simplest of them.
-- This is not used as much as word2vec or skip-gram models, but it has some enthusiasts because of its simplicity.
-- GloVe stands for Global vectors for word representation.
-- Let's use our previous example: "I want a glass of orange juice to go along with my cereal".
-- We will choose a context and a target from the choices we have mentioned in the previous sections.
-- Then we will calculate this for every pair: X<sub>ct</sub> = # times `t` appears in context of `c`
-- X<sub>ct</sub> = X<sub>tc</sub> if we choose a window pair, but they will not equal if we choose the previous words for example. In GloVe they use a window which means they are equal
+  - [[Pennington et al., 2014, GloVe: Global Vectors for Word Representation]](nlp.stanford.edu/pubs/glove.pdf)
+  - This is not used as much as Word2Vec or skip-gram models, but it has some enthusiasts because of its simplicity.
+  - GloVe stands for Global vectors for word representation.
+- Let's use our previous example: _"I want a glass of orange juice to go along with my cereal."_
+  - We will choose a context and a target from the choices we have mentioned in the previous sections.
+  - Then we will calculate this for every pair: X<sub>ct</sub> = # times `t` appears in context of `c`
+    - In other words, X<sub>ct</sub> captures how often do words `c` and `t` appear with each other, or close each other 
+  - X<sub>ct</sub> = X<sub>tc</sub> if we choose a window pair, but they will not equal if we choose the previous words for example. In GloVe they use a window which means they are equal.  
 - The model is defined like this:   
   ![](Images/44.png)
-- f(x) - the weighting term, used for many reasons which include:
-  - The `log(0)` problem, which might occur if there are no pairs for the given target and context values.
-  - Giving not too much weight for stop words like "is", "the", and "this" which occur many times.
-  - Giving not too little weight for infrequent words.
-- **Theta** and **e** are symmetric which helps getting the final word embedding. 
+  - `i, j` play the roles of `t, c`
+  - `f(x)` is the weighting term, used for many reasons which include:
+    - The `log(0)` problem, which might occur if there are no pairs for the given target and context values.
+      - Giving not too much weight for stop words like "is", "the", and "this" which occur many times.
+      - Giving not too little weight for infrequent words.
+   - **Theta** and **e** are symmetric which helps getting the final word embedding by averaging, and these two parameters and can be optimized by Gradient Descent. 
+  - Given the word `w`, Theta(w)<sub>final</sub> = (Theta(w)<sub>trained</sub> + e(w)<sub>trained</sub>) /2
 - _Conclusions on word embeddings:_
   - If this is your first try, you should try to download a pre-trained model that has been made and actually works best.
   - If you have enough data, you can try to implement one of the available algorithms.

@@ -582,7 +582,7 @@ Here are the course summary as its given on the course [link](https://www.course
 - The model is defined like this:   
   ![](Images/44.png)
   - `i, j` play the roles of `t, c`
-  - `f(x<sub>ij</sub>)` is the weighting term, used for many reasons which include:
+  - f(x<sub>ij</sub>) is the weighting term, used for many reasons which include:
     - `0` or `0 log(0) = 0` which might occur if there are no pairs for the given target and context values (x<sub>ij</sub> = 0)
     - Giving more but not too much weight for stop words i.e. "is", "the", and "this" which occur many times.
     - Giving less but not too little weight for infrequent or common words i.e. "durian".

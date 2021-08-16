@@ -586,6 +586,7 @@ Here are the course summary as its given on the course [link](https://www.course
     - The `log(0)` problem, which might occur if there are no pairs for the given target and context values.
       - Giving not too much weight for stop words like "is", "the", and "this" which occur many times.
       - Giving not too little weight for infrequent words.
+    - Details of `f(x)` can be read from the algorithm paper
    - **Theta** and **e** are symmetric which helps getting the final word embedding by averaging, and these two parameters and can be optimized by Gradient Descent. 
       - Given the word `w`, Theta(w)<sub>final</sub> = (Theta(w)<sub>trained</sub> + e(w)<sub>trained</sub>) /2
 - _Conclusions on word embeddings:_

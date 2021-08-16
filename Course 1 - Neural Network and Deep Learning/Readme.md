@@ -62,7 +62,6 @@ Here are the course summary as its given on the course [link](https://www.course
 > This course also teaches you how Deep Learning actually works, rather than presenting only a cursory or surface-level description. So after completing it, you will be able to apply deep learning to a your own applications. If you are looking for a job in AI, after this course you will also be able to answer basic interview questions.
 
 
-
 ## Introduction to deep learning
 
 > Be able to explain the major trends driving the rise of deep learning, and understand where and how it is applied today.
@@ -78,8 +77,7 @@ Here are the course summary as its given on the course [link](https://www.course
 - e.g. output in perceptron = 0, you slightly changed weight and bias, output becomes = 1 but actual output is 0.7. In case of sigmoid, output1 = 0, slight change in weight and bias, output = 0.7. 
 - If we apply sigmoid activation function then Single neuron will act as Logistic Regression.
 -  we can understand difference between perceptron and sigmoid function by looking at sigmoid function graph.
-
-- Simple NN graph:
+- Simple NN graph:  
   - ![](Images/Others/01.jpg)
   - Image taken from [tutorialspoint.com](http://www.tutorialspoint.com/)
 - RELU stands for rectified linear unit is the most popular activation function right now that makes deep NNs train faster now.
@@ -91,7 +89,6 @@ Here are the course summary as its given on the course [link](https://www.course
 - Supervised learning means we have the (X,Y) and we need to get the function that maps X to Y.
 
 ### Supervised learning with neural networks
-
 - Different types of neural networks for supervised learning which includes:
   - CNN or convolutional neural networks (Useful in computer vision)
   - RNN or Recurrent neural networks (Useful in Speech recognition or NLP)
@@ -102,7 +99,6 @@ Here are the course summary as its given on the course [link](https://www.course
 - Structured data gives more money because companies relies on prediction on its big data.
 
 ### Why is deep learning taking off?
-
 - Deep learning is taking off for 3 reasons:
   1. Data:
      - Using this image we can conclude:
@@ -122,14 +118,11 @@ Here are the course summary as its given on the course [link](https://www.course
      1. Creative algorithms has appeared that changed the way NN works.
         - For example using RELU function is so much better than using SIGMOID function in training a NN because it helps with the vanishing gradient problem.
 
-  ​
-
 ## Neural Networks Basics
 
 > Learn to set up a machine learning problem with a neural network mindset. Learn to use vectorization to speed up your models.
 
 ### Binary classification
-
 - Mainly he is talking about how to do a logistic regression to make a binary classifier.
   - ![log](Images/Others/03.png)
   - Image taken from [3.bp.blogspot.com](http://3.bp.blogspot.com)
@@ -146,7 +139,6 @@ Here are the course summary as its given on the course [link](https://www.course
 - In NumPy we can make matrices and make operations on them in a fast and reliable time.
 
 ### Logistic regression
-
 - Algorithm is used for classification algorithm of 2 classes.
 - Equations:
   - Simple equation:	`y = wx + b`
@@ -158,7 +150,6 @@ Here are the course summary as its given on the course [link](https://www.course
 - In the last equation `w` is a vector of `Nx` and `b` is a real number
 
 ### Logistic regression cost function
-
 - First loss function would be the square root error:  `L(y',y) = 1/2 (y' - y)^2`
   - But we won't use this notation because it leads us to optimization problem which is non convex, means it contains local optimum points.
 - This is the function that we will use: `L(y',y) = - (y*log(y') + (1-y)*log(1-y'))`
@@ -169,7 +160,6 @@ Here are the course summary as its given on the course [link](https://www.course
 - The loss function computes the error for a single training example; the cost function is the average of the loss functions of the entire training set.
 
 ### Gradient Descent
-
 - We want to predict `w` and `b` that minimize the cost function.
 - Our cost function is convex.
 - First we initialize `w` and `b` to 0,0 or initialize them to a random value in the convex function and then try to improve the values the reach minimum value.
@@ -178,14 +168,11 @@ Here are the course summary as its given on the course [link](https://www.course
   where alpha is the learning rate and `dw` is the derivative of `w` (Change to `w`)
   The derivative is also the slope of `w`
 - Looks like greedy algorithms. the derivative give us the direction to improve our parameters.
-
-
 - The actual equations we will implement:
   - `w = w - alpha * d(J(w,b) / dw)`        (how much the function slopes in the w direction)
   - `b = b - alpha * d(J(w,b) / db)`        (how much the function slopes in the d direction)
 
 ### Derivatives
-
 - We will talk about some of required calculus.
 - You don't need to be a calculus geek to master deep learning but you'll need some skills from it.
 - Derivative of a linear line is its slope.
@@ -194,7 +181,6 @@ Here are the course summary as its given on the course [link](https://www.course
   - if we move a a little bit `a = 2.001` then `f(a) = 6.003` means that we multiplied the derivative (Slope) to the moved area and added it to the last result.
 
 ### More Derivatives examples
-
 - `f(a) = a^2`  ==> `d(f(a))/d(a) = 2a`
   - `a = 2`  ==> `f(a) = 4`
   - `a = 2.0001` ==> `f(a) = 4.0004` approx.
@@ -203,12 +189,10 @@ Here are the course summary as its given on the course [link](https://www.course
 - To conclude, Derivative is the slope and slope is different in different points in the function thats why the derivative is a function.
 
 ### Computation graph
-
-- Its a graph that organizes the computation from left to right.
+- Its a graph that organizes the computation from left to right.  
   - ![](Images/02.png)
 
 ### Derivatives with a Computation Graph
-
 - Calculus chain rule says:
   If `x -> y -> z`          (x effect y and y effects z)
   Then `d(z)/d(x) = d(z)/d(y) * d(y)/d(x)`
@@ -218,14 +202,11 @@ Here are the course summary as its given on the course [link](https://www.course
 - `dvar` means the derivatives of a final output variable with respect to various intermediate quantities.
 
 ### Logistic Regression Gradient Descent
-
-- In the video he discussed the derivatives of gradient decent example for one sample with two features `x1` and `x2`.
+- In the video he discussed the derivatives of gradient decent example for one sample with two features `x1` and `x2`.  
   - ![](Images/04.png)
 
 ### Gradient Descent on m Examples
-
 - Lets say we have these variables:
-
   ```
   	X1                  Feature
   	X2                  Feature
@@ -235,12 +216,9 @@ Here are the course summary as its given on the course [link](https://www.course
   	M                   Number of training examples
   	Y(i)                Expected output of i
   ```
-
-- So we have:
-  ![](Images/09.png)
-
+- So we have:  
+  ![](Images/09.png)  
 - Then from right to left we will calculate derivations compared to the result:
-
   ```
   	d(a)  = d(l)/d(a) = -(y/a) + ((1-y)/(1-a))
   	d(z)  = d(l)/d(z) = a - y
@@ -248,9 +226,7 @@ Here are the course summary as its given on the course [link](https://www.course
   	d(W2) = X2 * d(z)
   	d(B)  = d(z)
   ```
-
 - From the above we can conclude the logistic regression pseudo code:
-
   ```
   	J = 0; dw1 = 0; dw2 =0; db = 0;                 # Devs.
   	w1 = 0; w2 = 0; b=0;							# Weights
@@ -277,13 +253,10 @@ Here are the course summary as its given on the course [link](https://www.course
   ```
 
 - The above code should run for some iterations to minimize error.
-
 - So there will be two inner loops to implement the logistic regression.
-
 - Vectorization is so important on deep learning to reduce loops. In the last code we can make the whole loop in one step using vectorization!
 
 ### Vectorization
-
 - Deep learning shines when the dataset are big. However for loops will make you wait a lot for a result. Thats why we need vectorization to get rid of some of our for loops.
 - NumPy library (dot) function is using vectorization by default.
 - The vectorization can be done on CPU or GPU thought the SIMD operation. But its faster on GPU.
@@ -291,22 +264,22 @@ Here are the course summary as its given on the course [link](https://www.course
 - Most of the NumPy library methods are vectorized version.
 
 ### Vectorizing Logistic Regression
-
 - We will implement Logistic Regression using one for loop then without any for loop.
 - As an input we have a matrix `X` and its `[Nx, m]` and a matrix `Y` and its `[Ny, m]`.
 - We will then compute at instance `[z1,z2...zm] = W' * X + [b,b,...b]`. This can be written in python as:
-
-    		Z = np.dot(W.T,X) + b    # Vectorization, then broadcasting, Z shape is (1, m)
+    		```
+        Z = np.dot(W.T,X) + b    # Vectorization, then broadcasting, Z shape is (1, m)
     		A = 1 / 1 + np.exp(-Z)   # Vectorization, A shape is (1, m)
+        ```
 
 - Vectorizing Logistic Regression's Gradient Output:
-
+        ```
    			dz = A - Y                  # Vectorization, dz shape is (1, m)
    			dw = np.dot(X, dz.T) / m    # Vectorization, dw shape is (Nx, 1)
    			db = dz.sum() / m           # Vectorization, dz shape is (1, 1)
+        ```
 
 ### Notes on Python and NumPy
-
 - In NumPy, `obj.sum(axis = 0)` sums the columns while `obj.sum(axis = 1)` sums the rows.
 - In NumPy, `obj.reshape(1,4)` changes the shape of the matrix by broadcasting the values.
 - Reshape is cheap in calculations so put it everywhere you're not sure about the calculations.
@@ -320,26 +293,21 @@ Here are the course summary as its given on the course [link](https://www.course
 - Jupyter / IPython notebooks are so useful library in python that makes it easy to integrate code and document at the same time. It runs in the browser and doesn't need an IDE to run.
   - To open Jupyter Notebook, open the command line and call: `jupyter-notebook` It should be installed to work.
 - To Compute the derivative of Sigmoid:
-
   ```
   	s = sigmoid(x)
   	ds = s * (1 - s)       # derivative  using calculus
   ```
-
 - To make an image of `(width,height,depth)` be a vector, use this:
-
   ```
   v = image.reshape(image.shape[0]*image.shape[1]*image.shape[2],1)  #reshapes the image.
   ```
-
 - Gradient descent converges faster after normalization of the input matrices.
 
 ### General Notes
-
 - The main steps for building a Neural Network are:
   - Define the model structure (such as number of input features and outputs)
   - Initialize the model's parameters.
-  - Loop.
+  - Loop:
     - Calculate current loss (forward propagation)
     - Calculate current gradient (backward propagation)
     - Update parameters (gradient descent)
@@ -348,35 +316,27 @@ Here are the course summary as its given on the course [link](https://www.course
 - [kaggle.com](kaggle.com) is a good place for datasets and competitions.
 - [Pieter Abbeel](https://www2.eecs.berkeley.edu/Faculty/Homepages/abbeel.html) is one of the best in deep reinforcement learning.
 
-
 ## Shallow neural networks
 
 > Learn to build a neural network with one hidden layer, using forward propagation and backpropagation.
 
 ### Neural Networks Overview
-
 - In logistic regression we had:
-
   ```
   X1  \  
   X2   ==>  z = XW + B ==> a = Sigmoid(z) ==> l(a,Y)
   X3  /
   ```
-
 - In neural networks with one layer we will have:
-
   ```
   X1  \  
   X2   =>  z1 = XW1 + B1 => a1 = Sigmoid(z1) => z2 = a1W2 + B2 => a2 = Sigmoid(z2) => l(a2,Y)
   X3  /
   ```
-
-
 - `X` is the input vector `(X1, X2, X3)`, and `Y` is the output variable `(1x1)`
 - NN is stack of logistic regression objects.
 
 ### Neural Network Representation
-
 - We will define the neural networks that has one hidden layer.
 - NN contains of input layers, hidden layers, output layers.
 - Hidden layer means we cant see that layers in the training set.
@@ -386,9 +346,8 @@ Here are the course summary as its given on the course [link](https://www.course
 - We are talking about 2 layers NN. The input layer isn't counted.
 
 ### Computing a Neural Network's Output
-
-- Equations of Hidden layers:
-  - ![](Images/05.png)
+- Equations of Hidden layers:  
+  - ![](Images/05.png)  
 - Here are some informations about the last image:
   - `noOfHiddenNeurons = 4`
   - `Nx = 3`
@@ -403,9 +362,7 @@ Here are the course summary as its given on the course [link](https://www.course
     - `a2` is the result of the equation `a2 = sigmoid(z2)`, it has a shape of `(1,1)`
 
 ### Vectorizing across multiple examples
-
 - Pseudo code for forward propagation for the 2 layers NN:
-
   ```
   for i = 1 to m
     z[1, i] = W1*x[i] + b1      # shape of z[1, i] is (noOfHiddenNeurons,1)
@@ -413,19 +370,15 @@ Here are the course summary as its given on the course [link](https://www.course
     z[2, i] = W2*a[1, i] + b2   # shape of z[2, i] is (1,1)
     a[2, i] = sigmoid(z[2, i])  # shape of a[2, i] is (1,1)
   ```
-
 - Lets say we have `X` on shape `(Nx,m)`. So the new pseudo code:
-
   ```
   Z1 = W1X + b1     # shape of Z1 (noOfHiddenNeurons,m)
   A1 = sigmoid(Z1)  # shape of A1 (noOfHiddenNeurons,m)
   Z2 = W2A1 + b2    # shape of Z2 is (1,m)
   A2 = sigmoid(Z2)  # shape of A2 is (1,m)
   ```
-
 - If you notice always m is the number of columns.
 - In the last example we can call `X` = `A0`. So the previous step can be rewritten as:
-
   ```
   Z1 = W1A0 + b1    # shape of Z1 (noOfHiddenNeurons,m)
   A1 = sigmoid(Z1)  # shape of A1 (noOfHiddenNeurons,m)
@@ -434,7 +387,6 @@ Here are the course summary as its given on the course [link](https://www.course
   ```
 
 ### Activation functions
-
 - So far we are using sigmoid, but in some cases other functions can be a lot better.
 - Sigmoid can lead us to gradient decent problem where the updates are so low.
 - Sigmoid activation function range is [0,1]
@@ -442,7 +394,6 @@ Here are the course summary as its given on the course [link](https://www.course
 - Tanh activation function range is [-1,1]   (Shifted version of sigmoid function)
   - In NumPy we can implement Tanh using one of these methods:
     `A = (np.exp(z) - np.exp(-z)) / (np.exp(z) + np.exp(-z)) # Where z is the input matrix`
-
     Or
     `A = np.tanh(z)   # Where z is the input matrix`
 - It turns out that the tanh activation usually works better than sigmoid activation function for hidden units because the mean of its output is closer to zero, and so it centers the data better for the next layer.
@@ -461,39 +412,33 @@ Here are the course summary as its given on the course [link](https://www.course
 - It turns out there are no guide lines for that. You should try all activation functions for example.
 
 ### Why do you need non-linear activation functions?
-
 - If we removed the activation function from our algorithm that can be called linear activation function.
 - Linear activation function will output linear activations
   - Whatever hidden layers you add, the activation will be always linear like logistic regression (So its useless in a lot of complex problems)
 - You might use linear activation function in one place - in the output layer if the output is real numbers (regression problem). But even in this case if the output value is non-negative you could use RELU instead.
 
 ### Derivatives of activation functions
-
-- Derivation of Sigmoid activation function:
-
+- Derivation of **Sigmoid** activation function:
   ```
   g(z)  = 1 / (1 + np.exp(-z))
   g'(z) = (1 / (1 + np.exp(-z))) * (1 - (1 / (1 + np.exp(-z))))
   g'(z) = g(z) * (1 - g(z))
   ```
 
-- Derivation of Tanh activation function:
-
+- Derivation of **Tanh** activation function:
   ```
   g(z)  = (e^z - e^-z) / (e^z + e^-z)
   g'(z) = 1 - np.tanh(z)^2 = 1 - g(z)^2
   ```
 
-- Derivation of RELU activation function:
-
+- Derivation of **RELU** activation function:
   ```
   g(z)  = np.maximum(0,z)
   g'(z) = { 0  if z < 0
             1  if z >= 0  }
   ```
 
-- Derivation of leaky RELU activation function:
-
+- Derivation of **leaky RELU** activation function:
   ```
   g(z)  = np.maximum(0.01 * z, z)
   g'(z) = { 0.01  if z < 0
@@ -513,7 +458,6 @@ Here are the course summary as its given on the course [link](https://www.course
     - `b2` shape is `(n[2],1)`
   - Cost function `I =  I(W1, b1, W2, b2) = (1/m) * Sum(L(Y,A2))`
   - Then Gradient descent:
-
     ```
     Repeat:
     		Compute predictions (y'[i], i = 0,...m)
@@ -523,16 +467,13 @@ Here are the course summary as its given on the course [link](https://www.course
     				W2 = W2 - LearningRate * dW2
     				b2 = b2 - LearningRate * db2
     ```
-
 - Forward propagation:
-
   ```
   Z1 = W1A0 + b1    # A0 is X
   A1 = g1(Z1)
   Z2 = W2A1 + b2
   A2 = Sigmoid(Z2)      # Sigmoid because the output is between 0 and 1
   ```
-
 - Backpropagation (derivations):   
   ```
   dZ2 = A2 - Y      # derivative of cost function we used * derivative of the sigmoid function
@@ -547,22 +488,16 @@ Here are the course summary as its given on the course [link](https://www.course
   ![](Images/06.png)
 
 ### Random Initialization
-
 - In logistic regression it wasn't important to initialize the weights randomly, while in NN we have to initialize them randomly.
-
 - If we initialize all the weights with zeros in NN it won't work (initializing bias with zero is OK):
   - all hidden units will be completely identical (symmetric) - compute exactly the same function
   - on each gradient descent iteration all the hidden units will always update the same
-
 - To solve this we initialize the W's with a small random numbers:
-
   ```
   W1 = np.random.randn((2,2)) * 0.01    # 0.01 to make it small enough
   b1 = np.zeros((2,1))                  # its ok to have b as zero, it won't get us to the symmetry breaking problem
   ```
-
 - We need small values because in sigmoid (or tanh), for example, if the weight is too large you are more likely to end up even at the very start of training with very large values of Z. Which causes your tanh or your sigmoid activation function to be saturated, thus slowing down learning. If you don't have any sigmoid or tanh activation functions throughout your neural network, this is less of an issue.
-
 - Constant 0.01 is alright for 1 hidden layer networks, but if the NN is deep this number can be changed but it will always be a small number.
 
 ## Deep Neural Networks
@@ -570,7 +505,6 @@ Here are the course summary as its given on the course [link](https://www.course
 > Understand the key computations underlying deep learning, use them to build and train deep neural networks, and apply it to computer vision.
 
 ### Deep L-layer neural network
-
 - Shallow NN is a NN with one or two layers.
 - Deep NN is a NN with three or more layers.
 - We will use the notation `L` to denote the number of layers in a NN.
@@ -588,26 +522,20 @@ Here are the course summary as its given on the course [link](https://www.course
   - A list of different shapes `b` based on the number of neurons on the current layer.
 
 ### Forward Propagation in a Deep Network
-
 - Forward propagation general rule for one input:
-
   ```
   z[l] = W[l]a[l-1] + b[l]
   a[l] = g[l](a[l])
   ```
-
 - Forward propagation general rule for `m` inputs:
-
   ```
   Z[l] = W[l]A[l-1] + B[l]
   A[l] = g[l](A[l])
   ```
-
 - We can't compute the whole layers forward propagation without a for loop so its OK to have a for loop here.
 - The dimensions of the matrices are so important you need to figure it out.
 
 ### Getting your matrix dimensions right
-
 - The best way to debug your matrices dimensions is by a pencil and paper.
 - Dimension of `W` is `(n[l],n[l-1])` . Can be thought by right to left.
 - Dimension of `b` is `(n[l],1)`
@@ -615,7 +543,6 @@ Here are the course summary as its given on the course [link](https://www.course
 - Dimension of `Z[l],` `A[l]`, `dZ[l]`, and `dA[l]`  is `(n[l],m)`
 
 ### Why deep representations?
-
 - Why deep NN works well, we will discuss this question in this section.
 - Deep NN makes relations with data from simpler to complex. In each layer it tries to make a relation with the previous layer. E.g.:
   - 1) Face recognition application:
@@ -628,25 +555,20 @@ Here are the course summary as its given on the course [link](https://www.course
 - When starting on an application don't start directly by dozens of hidden layers. Try the simplest solutions (e.g. Logistic Regression), then try the shallow neural network and so on.
 
 ### Building blocks of deep neural networks
-
-- Forward and back propagation for a layer l:
-  - ![Untitled](Images/10.png)
-- Deep NN blocks:
-  - ![](Images/08.png)
+- Forward and back propagation for a layer l:  
+  - ![Untitled](Images/10.png)  
+- Deep NN blocks:  
+  - ![](Images/08.png)  
 
 ### Forward and Backward Propagation
-
-- Pseudo code for forward propagation for layer l:
-
+- Pseudo code for forward propagation for layer `l`:
   ```
   Input  A[l-1]
   Z[l] = W[l]A[l-1] + b[l]
   A[l] = g[l](Z[l])
   Output A[l], cache(Z[l])
   ```
-
-- Pseudo  code for back propagation for layer l:
-
+- Pseudo code for back propagation for layer `l`:
   ```
   Input da[l], Caches
   dZ[l] = dA[l] * g'[l](Z[l])
@@ -655,15 +577,12 @@ Here are the course summary as its given on the course [link](https://www.course
   dA[l-1] = w[l].T * dZ[l]            # The multiplication here are a dot product.
   Output dA[l-1], dW[l], db[l]
   ```
-
 - If we have used our loss function then:
-
   ```
   dA[L] = (-(y/a) + ((1-y)/(1-a)))
   ```
 
 ### Parameters vs Hyperparameters
-
 - Main parameters of the NN is `W` and `b`
 - Hyper parameters (parameters that control the algorithm) are like:
   - Learning rate.
@@ -676,7 +595,6 @@ Here are the course summary as its given on the course [link](https://www.course
 - On the next course we will see how to optimize hyperparameters.
 
 ### What does this have to do with the brain
-
 - The analogy that "It is like the brain" has become really an oversimplified explanation.
 - There is a very simplistic analogy between a single logistic unit and a single neuron in the brain.
 - No human today understand how a human brain neuron works.
@@ -686,7 +604,6 @@ Here are the course summary as its given on the course [link](https://www.course
 - NN is a small representation of how brain work. The most near model of human brain is in the computer vision (CNN)
 
 ## Extra: Ian Goodfellow interview
-
 - Ian is one of the world's most visible deep learning researchers.
 - Ian is mainly working with generative models. He is the creator of GANs.
 - We need to stabilize GANs. Stabilized GANs can become the best generative models.
@@ -701,4 +618,4 @@ Here are the course summary as its given on the course [link](https://www.course
 
 <br><br>
 <br><br>
-These Notes were made by [Mahmoud Badry](https://github.com/mbadry1/DeepLearning.ai-Summary)@2017
+These Notes were created by [Mahmoud Badry](https://github.com/mbadry1/DeepLearning.ai-Summary)@2017. Updated by [quanghuy0497](https://github.com/quanghuy0497/Deep-Learning-Specialization/)@2021

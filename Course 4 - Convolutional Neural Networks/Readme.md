@@ -21,6 +21,9 @@ This is the fourth course of the deep learning specialization at [Coursera](http
    * [Deep CNN Models](#deep-CNN-models)
       * [Why look at case studies?](#why-look-at-case-studies)
       * [Classic networks](#classic-networks)
+      	* [LeNet-5](#LeNet-5)
+      	* [AlexNet](#AlexNet)
+      	* [VGG](#VGG)
       * [Residual Networks (ResNets)](#residual-networks-resnets)
       * [Why ResNets work](#why-resnets-work)
       * [Network in Network and 1×1 convolutions](#network-in-network-and-1-X-1-convolutions)
@@ -118,29 +121,23 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   + If we applied this filter to a white region followed by a dark region, it should find the edges in between the two colors as a positive value. But if we applied the same filter to a dark region followed by a white region it will give us negative values. To solve this we can use the abs function to make it positive.
 + Horizontal edge detection
   + Filter would be like this
-
     ```
-    1	1	1
-    0	0	0
-    -1	-1	-1
+     1  1  1
+     0  0  0
+    -1 -1 -1
     ```
-
 + There are a lot of ways we can put number inside the horizontal or vertical edge detections. For example here are the vertical **Sobel** filter (The idea is taking care of the middle row):
-
   ```
-  1	0	-1
-  2	0	-2
-  1	0	-1
+  1  0 -1
+  2  0 -2
+  1  0 -1
   ```
-
 + Also something called **Scharr** filter (The idea is taking great care of the middle row):
-
   ```
-  3	0	-3
-  10	0	-10
-  3	0	-3
+  3  0 -3
+  10 0 -10
+  3  0 -3
   ```
-
 + What we learned in the deep learning is that we don't need to hand craft these numbers, we can treat them as weights and then learn them. It can learn horizontal, vertical, angled, or any edge type automatically rather than getting them by hand.
 
 ### Padding
@@ -157,11 +154,9 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 + The general rule now,  if a matrix `nxn` is convolved with `fxf` filter/kernel and padding `p` give us `n+2p-f+1,n+2p-f+1` matrix. 
 + If n = 6, f = 3, and p = 1 Then the output image will have `n+2p-f+1 = 6+2-3+1 = 6`. We maintain the size of the image.
 + "_Same convolution_" is a convolution with a pad so that output size is the same as the input size. Its given by the equation:
-
   ```
   P = (f-1) / 2
   ```
-
 + In computer vision f is usually odd. Some of the reasons is that its have a center value.
 
 ### Strided convolution
@@ -173,7 +168,6 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 + In case `(n+2p-f)/s + 1` is fraction we can take **floor** of this value.
 + In math textbooks the conv operation is filpping the filter before using it. What we were doing is called cross-correlation operation but the state of art of deep learning is using this as conv operation.
 + "_Same Convolution_" is a convolution with a padding so that output size is the same as the input size. Its given by the equation:
-
   ```
   p = (n*s - n + f - s) / 2
   When s = 1 ==> P = (f-1) / 2
@@ -214,23 +208,22 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 + The last example forms a layer in the CNN.
 + Hint: no matter the size of the input, the number of the parameters is same if filter size is same. That makes it less prone to overfitting.
 + Here are some notations we will use. If layer l is a conv layer:
-
   ```
   Hyperparameters
   f[l] = filter size
-  p[l] = padding	# Default is zero
+  p[l] = padding  # Default is zero
   s[l] = stride
   nc[l] = number of filters
 
-  Input:  n[l-1] x n[l-1] x nc[l-1]   	Or	 nH[l-1] x nW[l-1] x nc[l-1]
-  Output: n[l] x n[l] x nc[l]	        Or  	 nH[l] x nW[l] x nc[l]
+  Input:  n[l-1] x n[l-1] x nc[l-1]     Or   nH[l-1] x nW[l-1] x nc[l-1]
+  Output: n[l] x n[l] x nc[l]         Or     nH[l] x nW[l] x nc[l]
     where n[l] = (n[l-1] + 2p[l] - f[l] / s[l]) + 1
 
   Each filter is: f[l] x f[l] x nc[l-1]
 
   Activations: a[l] is nH[l] x nW[l] x nc[l]
-       	     A[l] is m x nH[l] x nW[l] x nc[l]   # In batch or minbatch training
-  		     
+             A[l] is m x nH[l] x nW[l] x nc[l]   # In batch or minbatch training
+           
   Weights: f[l] * f[l] * nc[l-1] * nc[l]
   bias:   (1, 1, 1, nc[l])
   ```
@@ -259,7 +252,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     + `a3 = 7x7x40 = 1960`  as a vector..
 + In the last example you seen that the image are getting smaller after each layer and thats the trend now.
 + Types of layer in a convolutional network:
-  + Convolution. 		`#Conv`
+  + Convolution.    `#Conv`
   + Pooling      `#Pool`
   + Fully connected     `#FC`
 
@@ -357,8 +350,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 + Reading and trying the mentioned models can boost you and give you a lot of ideas to solve your task.
 
 ### Classic networks
-+ In this section we will talk about classic networks which are **LeNet-5**, **AlexNet**, and **VGG**.
-+ **LeNet-5**
+#### LeNet-5
   + The goal for this model was to identify handwritten digits in a `32x32x1` gray image. Here are the drawing of it:  
     ![](Images/05.png)
   + This model was published in 1998. The last layer wasn't using softmax back then.
@@ -367,18 +359,14 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   + `Conv ==> Pool ==> Conv ==> Pool ==> FC ==> FC ==> softmax` this type of arrangement is quite common.
   + The activation function used in the paper was Sigmoid and Tanh. Modern implementation uses ReLU in most of the cases.
   + [[LeCun et al., 1998. Gradient-based learning applied to document recognition]](http://ieeexplore.ieee.org/document/726791/?reload=true)
-
-+ **AlexNet**
+#### AlexNet
   + Named after Alex Krizhevsky who was the first author of this paper. The other authors includes Geoffrey Hinton.
   + The goal for the model was the ImageNet challenge which classifies images into 1000 classes. Here are the drawing of the model:  
-    ![](Images/06.png)
-
+    ![](Images/06.png)  
   + Summary:
-
-    + ```
+      ```
       Conv => Max-pool => Conv => Max-pool => Conv => Conv => Conv => Max-pool ==> Flatten ==> FC ==> FC ==> Softmax
       ```
-
   + Similar to LeNet-5 but bigger.
   + Has 60 Million parameter compared to 60k parameter of LeNet-5.
   + It used the ReLU activation function.
@@ -387,8 +375,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     + Researchers proved that Local Response normalization doesn't help much so for now don't bother yourself for understanding or implementing it. 
   + This paper convinced the computer vision researchers that deep learning is so important.
   + [[Krizhevsky et al., 2012. ImageNet classification with deep convolutional neural networks]](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf)
-
-+ **VGG-16**
+#### VGG-16
   + A modification for AlexNet.
   + Instead of having a lot of hyperparameters lets have some simpler network.
   + Focus on having only these blocks:
@@ -434,12 +421,10 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     + And a`[l]` has a direct connection to `a[l+2]`
   + Suppose we are using ReLU activations.
   + Then:
-
-    + ```
-      a[l+2] = g( z[l+2] + a[l] )
-      	   = g( W[l+2] a[l+1] + b[l+2] + a[l] )
       ```
-
+      a[l+2] = g( z[l+2] + a[l] )
+           = g( W[l+2] a[l+1] + b[l+2] + a[l] )
+      ```
   + Then if we are using L2 regularization for example, `W[l+2]` will be zero. Lets say that `b[l+2]` will be zero too.
   + Then `a[l+2] = g( a[l] ) = a[l]` with no negative values.
   + This show that identity function is easy for a residual block to learn. And that why it can train deeper NNs.
@@ -724,12 +709,12 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 + Defining the target label Y in classification with localization problem: 
   ```
     Y = [
-          Pc	# Probability of an object is presented
-          bx	# Bounding box
-          by	# Bounding box
-          bh	# Bounding box
-          bw	# Bounding box
-          c1	# The classes
+          Pc  # Probability of an object is presented
+          bx  # Bounding box
+          by  # Bounding box
+          bh  # Bounding box
+          bw  # Bounding box
+          c1  # The classes
           c2
           ...
         ]
@@ -761,11 +746,10 @@ Here is the course summary as given on the course [link](https://www.coursera.or
           ]
    ```
 + The loss function for the Y we have created (Example of the square error):
-
   ```
    L(y',y) = {
                 (y1'-y1)^2 + (y2'-y2)^2 + ...     #if y1 = 1
-                (y1'-y1)^2			#if y1 = 0
+                (y1'-y1)^2      #if y1 = 0
              }
     ```
   + In practice we use logistic regression for `Pc`, log likely hood loss for classes, and squared error for the bounding box.
@@ -1119,82 +1103,82 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 ### Semantic Segmentation with U-Net
 + Object Detection vs Semantic Segmentation  
-	![](Images/OD_SS.png)  
-	+ Object Detection: only bounding box
-	+ Semantic Segmentation: label every single pixel => more sophisticated
-		+ U-Net Application in Medical prediction
-			+ Chest X-Ray: [[Novikow et al., 2017, Fully Convolutional Architectures for Multi-Class Segmentation in Chest Radiographs]](https://arxiv.org/abs/1701.08816)
-			+ Brain MRI: [[Dong et al., 2017, Automatic Brain Tumor Detection and Segmentation Using U-Net Based Fully Convolutional Networks]](https://arxiv.org/abs/1705.03820)
+  ![](Images/OD_SS.png)  
+  + Object Detection: only bounding box
+  + Semantic Segmentation: label every single pixel => more sophisticated
+    + U-Net Application in Medical prediction
+      + Chest X-Ray: [[Novikow et al., 2017, Fully Convolutional Architectures for Multi-Class Segmentation in Chest Radiographs]](https://arxiv.org/abs/1701.08816)
+      + Brain MRI: [[Dong et al., 2017, Automatic Brain Tumor Detection and Segmentation Using U-Net Based Fully Convolutional Networks]](https://arxiv.org/abs/1705.03820)
 + Per-pixel class label:
-	+ 1 for car, 0 for not car  
-		![](Images/Labels_pixel_1.png)  
-	+ 1 for car, 2 for building, 3 for road  
-		![](Images/Labels_pixel_2.png)  
+  + 1 for car, 0 for not car  
+    ![](Images/Labels_pixel_1.png)  
+  + 1 for car, 2 for building, 3 for road  
+    ![](Images/Labels_pixel_2.png)  
 + Deep Learning for Semantic Segmentation:
-	+ Let start with object recognition NN architecture
-		+ First, we get rid of the last few layer (FC layer, Softmax)
-		+ The dimension of image is getting smaller throughout the NN => We need to make it bigger to blow it back up a full size image  
-		![](Images/Semantic_Segmentation_NN_1.png)  
-	+ We have to blow the height and width back to the original size, while the channel is reduced to normal, eventually, we will get the semantic segmentation map of image  
-		![](Images/Semantic_Segmentation_NN_2.png)  
-		+ To do such thing, we need the Tranpose Convolutional
+  + Let start with object recognition NN architecture
+    + First, we get rid of the last few layer (FC layer, Softmax)
+    + The dimension of image is getting smaller throughout the NN => We need to make it bigger to blow it back up a full size image  
+    ![](Images/Semantic_Segmentation_NN_1.png)  
+  + We have to blow the height and width back to the original size, while the channel is reduced to normal, eventually, we will get the semantic segmentation map of image  
+    ![](Images/Semantic_Segmentation_NN_2.png)  
+    + To do such thing, we need the Tranpose Convolutional
 
 ### Transpose Convolutions
 + Normal Convolution vs Transpose Convolution  
-	+ Normal Conv:
-		+ `6x6` * `3x3` = `4x4` 
-	+ Transpose Conv:
-		+ `2x2` * `3x3` = `4x4` 
+  + Normal Conv:
+    + `6x6` * `3x3` = `4x4` 
+  + Transpose Conv:
+    + `2x2` * `3x3` = `4x4` 
 + Tranpose Convolution:
-	+ Intuition
-		+ Input: `2x2`
-		+ Filter: `3x3`
-		+ Padding `1`, Stride `2` for output
-		+ Output: `4x4`
-	+ Mechanism:
-		+ Place the filter on the output map
-		+ Multiply the whole filter with corresponded input's entry (compared to the position of filter in output), except the padding positions   
-			![](Images/Transpose_Conv_1.png)  
-		+ Shift the filter and keep multiply with the corresponded input's entry  
-			+ In the overlaped output entries, we add the value together  
-			![](Images/Transpose_Conv_2.png)
-		+ Keep do it for the rest  
-			![](Images/Transpose_Conv_3.png)
-		+ Finally, we have the output
-			![](Images/Transpose_Conv_4.png)
+  + Intuition
+    + Input: `2x2`
+    + Filter: `3x3`
+    + Padding `1`, Stride `2` for output
+    + Output: `4x4`
+  + Mechanism:
+    + Place the filter on the output map
+    + Multiply the whole filter with corresponded input's entry (compared to the position of filter in output), except the padding positions   
+      ![](Images/Transpose_Conv_1.png)  
+    + Shift the filter and keep multiply with the corresponded input's entry  
+      + In the overlaped output entries, we add the value together  
+      ![](Images/Transpose_Conv_2.png)
+    + Keep do it for the rest  
+      ![](Images/Transpose_Conv_3.png)
+    + Finally, we have the output
+      ![](Images/Transpose_Conv_4.png)
 
 ### U-Net Architecture Intuition
 + Semantic Segmentation Neural Network  
-	![](Images/Segmentation_Architecture_2.png)  
-	+ In the first half: we use `Normal Conv` layers to reduce feature representation
-		+ Lost detailed spatial information, as the dimension is smaller but deeper
-	+ In the second half: we use `Transpose Conv` layers to blow back feature representation
-		+ Create the Segmentation Map
-	+ Also, we have a `Skip connections` between first-half blocks and second-half blocks
-		![](Images/Segmentation_Architecture_2.png)  
-		+ Reserve the detailed spatial information that could capture rich pixel positions
-		+ So the later block both have the lower resolution but high level contextual information (red) and the high resolution but low level textual information (blue) => can make the decision whether the pixel is part of a cat or not
+  ![](Images/Segmentation_Architecture_2.png)  
+  + In the first half: we use `Normal Conv` layers to reduce feature representation
+    + Lost detailed spatial information, as the dimension is smaller but deeper
+  + In the second half: we use `Transpose Conv` layers to blow back feature representation
+    + Create the Segmentation Map
+  + Also, we have a `Skip connections` between first-half blocks and second-half blocks
+    ![](Images/Segmentation_Architecture_2.png)  
+    + Reserve the detailed spatial information that could capture rich pixel positions
+    + So the later block both have the lower resolution but high level contextual information (red) and the high resolution but low level textual information (blue) => can make the decision whether the pixel is part of a cat or not
 
 ### U-Net Architecture
 + U-Net:
-	+ [[Ronneberger et al., 2015, U-Net: Convolutional Networks for Biomedical Image Segmentation]](https://arxiv.org/abs/1505.04597)  
-	![](Images/U-Net_Architecture.png)  
-	+ Image input: `[h x w x 3]`
-	+ The first-half (Encoder):  
-		![](Images/encoder.png)   
-		+ 2 Normal Conv + ReLU
-		+ Max-pooling to decrease dimensions
-		+ Repeat 4 times => Decrease dimension, increase channel
-	+ The second-half (Decoder):  
-		![](Images/decoder.png)  
-		+ Trans Conv to increase dimensions
-		+ Skip-connection: Copy the last layer of each step from the first-half and concat with corresponded layer of the second-half
-		+ 2 Normal Conv + ReLu
-		+ Repeat 4 times => increase dimension, decrease channel
-	+ Finally, use a 1x1 ConV => Segmentation Map Output
-		+ The final output have the size of `[h x w x n_class]`
-	+ Detailed architecture:
-		![](Images/unet.png)
+  + [[Ronneberger et al., 2015, U-Net: Convolutional Networks for Biomedical Image Segmentation]](https://arxiv.org/abs/1505.04597)  
+  ![](Images/U-Net_Architecture.png)  
+  + Image input: `[h x w x 3]`
+  + The first-half (Encoder):  
+    ![](Images/encoder.png)   
+    + 2 Normal Conv + ReLU
+    + Max-pooling to decrease dimensions
+    + Repeat 4 times => Decrease dimension, increase channel
+  + The second-half (Decoder):  
+    ![](Images/decoder.png)  
+    + Trans Conv to increase dimensions
+    + Skip-connection: Copy the last layer of each step from the first-half and concat with corresponded layer of the second-half
+    + 2 Normal Conv + ReLu
+    + Repeat 4 times => increase dimension, decrease channel
+  + Finally, use a 1x1 ConV => Segmentation Map Output
+    + The final output have the size of `[h x w x n_class]`
+  + Detailed architecture:
+    ![](Images/unet.png)
 
 ## Special applications: One-shot learning & Neural style transfer
 > Discover how CNNs can be applied to multiple fields, including art generation and face recognition. Implement your own algorithm to generate art and recognize faces!
@@ -1247,21 +1231,21 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 + The triplet name came from that we are comparing an anchor A with a positive P and a negative N image.
 + Formally we want:
   + Positive distance to be less than negative distance  
-    	  `||f(A) - f(P)||^2  <= ||f(A) - f(N)||^2` or `d(A,P) <= d(A,N)`  
+        `||f(A) - f(P)||^2  <= ||f(A) - f(N)||^2` or `d(A,P) <= d(A,N)`  
   + Then  
-   	 `||f(A) - f(P)||^2  - ||f(A) - f(N)||^2 <= 0`  
+     `||f(A) - f(P)||^2  - ||f(A) - f(N)||^2 <= 0`  
   + To make sure the NN won't get an output of zeros easily:  
-	    `||f(A) - f(P)||^2  - ||f(A) - f(N)||^2 <= -alpha`  
+      `||f(A) - f(P)||^2  - ||f(A) - f(N)||^2 <= -alpha`  
     + `alpha` is a small number. Sometimes its called _**the margin**_.
   + Then  
-    	`||f(A) - f(P)||^2  - ||f(A) - f(N)||^2 + alpha <= 0`  
+      `||f(A) - f(P)||^2  - ||f(A) - f(N)||^2 + alpha <= 0`  
 + **Final Loss function**:
   + Given 3 images (A, P, N):
     + `L(A, P, N) = max(||f(A) - f(P)||^2  - ||f(A) - f(N)||^2 + alpha , 0)` 
     + `J = Sum[L(A[i], P[i], N[i]) , i]` for all triplets of images.
 + You need multiple images of the same person in your dataset. Then get some triplets out of your dataset. So the dataset should be big enough.
-	+ i.e. 10k pictures of 1k person for the training set
-	+ After training, you can use 1 picture per person for one-shot learning
+  + i.e. 10k pictures of 1k person for the training set
+  + After training, you can use 1 picture per person for one-shot learning
 + Choosing the triplets A, P, N:
   + During training if A, P, N are chosen randomly (Subjet to A and P are the same and A and N aren't the same) then one of the problems this constrain is easily satisfied 
     + `d(A, P) + alpha <= d(A, N)` 
@@ -1282,8 +1266,8 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     ![](Images/36.png)
   + The final layer is a sigmoid layer.
   + Then `Y' = Sigmoid(w * |f(x_i) - f(x_j)| + b)` 
-  	+ Where the `|f(x_i) - f(x_j)|` is the Manhattan distance (L1 distance) between `f(x_i)` and `f(x_j)`
-  	+ Some other similarities can used Euclidean distance or Chi-square similarity instead (Chi — X in Greek)
+    + Where the `|f(x_i) - f(x_j)|` is the Manhattan distance (L1 distance) between `f(x_i)` and `f(x_j)`
+    + Some other similarities can used Euclidean distance or Chi-square similarity instead (Chi — X in Greek)
   + The NN here is Siamese means the top and bottom convs has the same parameters.
 + The paper for this work: [[Taigman et al., 2014, DeepFace closing the gap to human level performance]](https://www.cv-foundation.org/openaccess/content_cvpr_2014/html/Taigman_DeepFace_Closing_the_2014_CVPR_paper.html)
 + A good performance/deployment trick:
@@ -1376,14 +1360,14 @@ Here is the course summary as given on the course [link](https://www.coursera.or
       + **_Note_**: The second factor of second fomular should be `a[l](i,j,k')` on the above image  
 + **_Bonus_**: To compute Gram matrix efficiently: 
   + Reshape activation from `H x W x C` to `HW x C`, named as F  
-  	![](Images/gram1.png)   
+    ![](Images/gram1.png)   
   + Then, compute Gram matrix using fomular:  
-  	+ `G[l] = F * F.T`  
-  	![](Images/gram2.png)  
+    + `G[l] = F * F.T`  
+    ![](Images/gram2.png)  
 + Then, the cost function `J_style(S, G)` at layer `l` will be:  
   + `J_style(S, G)[l] = 1/(...) * ||G[l](S) - G[l](G)||^2_F`
   + Or:  
-  	![](Images/J_style_l.png)  
+    ![](Images/J_style_l.png)  
 + Finally, the overall `J_style(S, G)` will be:  
    + `J_style(S, G) = Sum(lamda[l]*J_style(S, G)[l], for all layers)`  
 + **_Bonus_**: Steps to be made if you want to create a tensorflow model for neural style transfer:

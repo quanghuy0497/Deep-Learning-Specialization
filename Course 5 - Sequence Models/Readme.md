@@ -383,7 +383,7 @@ Here are the course summary as its given on the course [link](https://www.course
   - We will use the annotation **O** <sub>idx</sub> for any word that is represented with one-hot like in the image.
   - One of the weaknesses of this representation is that it treats a word as a thing that itself and it doesn't allow an algorithm to generalize across words.
     - For example: "I want a glass of **orange** ______", a model should predict the next word as **juice**.
-    - A similar example "I want a glass of **apple** ______", a model won't easily predict **juice** here if it wasn't trained on it. And if so the two examples aren't related although orange and apple are similar.
+    - A similar example "I want a glass of **apple** ______", a model won't easily predict **juice** here if it wasn't trained on it. And if so the two examples aren't related although "orange" and "apple" are similar.
   - Inner product between any one-hot encoding vector is zero. Also, the distances between them are the same.
 - So, instead of a one-hot presentation, won't it be nice if we can learn a featurized representation with each of these words: man, woman, king, queen, apple, and orange?   
   ![](Images/28.png)
@@ -396,6 +396,7 @@ Here are the course summary as its given on the course [link](https://www.course
   - Orange and apple now share a lot of similar features which makes it easier for an algorithm to generalize between them.
   - We call this representation **Word embeddings**.
 - To visualize word embeddings we use a t-SNE algorithm to reduce the features to 2 dimensions which makes it easy to visualize:    
+    + [[van der Maaten and Hinton, 2008, Visualizing data using t-SNE]](https://www.jmlr.org/papers/v9/vandermaaten08a.html)  
   ![](Images/29.png)
   - You will get a sense that more related words are closer to each other.
 - The **word embeddings** came from that we need to embed a unique vector inside a n-dimensional space.
@@ -404,9 +405,9 @@ Here are the course summary as its given on the course [link](https://www.course
 - Let's see how we can take the feature representation we have extracted from each word and apply it in the Named entity recognition problem.
 - Given this example (from named entity recognition):   
   ![](Images/30.png)
-- **Sally Johnson** is a person's name.
-- After training on this sentence the model should find out that the sentence "**Robert Lin** is an *apple* farmer" contains Robert Lin as a name, as apple and orange have near representations.
-- Now if you have tested your model with this sentence "**Mahmoud Badry** is a *durian* cultivator" the network should learn the name even if it hasn't seen the word *durian* before (during training). That's the power of word representations.
+    - **Sally Johnson** is a person's name.
+    - After training on this sentence the model should find out that the sentence "**Robert Lin** is an *apple* farmer" contains Robert Lin as a name, as apple and orange have near representations.
+    - Now if you have tested your model with this sentence "**Mahmoud Badry** is a *durian* cultivator" the network should learn the name even if it hasn't seen the word *durian* before (during training). That's the power of word representations.
 - The algorithms that are used to learn **word embeddings** can examine billions of words of unlabeled text - for example, 100 billion words and learn the representation from them.
 - Transfer learning and word embeddings:
   1. Learn word embeddings from large text corpus (1-100 billion of words).
@@ -431,8 +432,8 @@ Here are the course summary as its given on the course [link](https://www.course
   - Can we conclude this relation:
     - Man ==> Woman
     - King ==> ??
-  - Lets subtract e<sub>Man</sub> from e<sub>Woman</sub>. This will equal the vector `[-2  0  0  0]`
-  - Similar e<sub>King</sub> - e<sub>Queen</sub> = `[-2  0  0  0]`
+  - Lets subtract e<sub>Man</sub> from e<sub>Woman</sub>. This will approximately equal the vector `[-2  0  0  0]`
+  - Similar e<sub>King</sub> - e<sub>Queen</sub> ≈ `[-2  0  0  0]`
   - So the difference is about the gender in both.   
     ![](Images/33.png)
     - This vector represents the gender.
@@ -442,10 +443,11 @@ Here are the course summary as its given on the course [link](https://www.course
   - It can also be represented mathematically by:   
     ![](Images/34.png)
   - It turns out that e<sub>Queen</sub> is the best solution here that gets the the similar vector.
+  - [[Mikolov et al., 2013, Linguistic Regularities in Continuous Space Word Representations]](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/rvecs.pdf)
 - Cosine similarity - the most commonly used similarity function:
   - Equation:   
     ![](Images/35.png)
-    - `CosineSimilarity(u, v)` = `u . v` / `||u|| ||v||` = cos(&theta;)
+    - `CosineSimilarity(u, v)` = `(u.v)/(||u||.||v||)` = cos(&theta;)
     - The top part represents the inner product of `u` and `v` vectors. It will be large if the vectors are very similar.
 - You can also use Euclidean distance as a similarity function (but it rather measures a dissimilarity, so you should take it with negative sign).
 - We can use this equation to calculate the similarities between word embeddings and on the analogy problem where `u` = e<sub>w</sub> and `v` = e<sub>king</sub> - e<sub>man</sub> + e<sub>woman</sub>
@@ -501,13 +503,11 @@ Here are the course summary as its given on the course [link](https://www.course
   - For example, we have the sentence: "I want a glass of orange juice to go along with my cereal"
   - We will choose **context** and **target**.
   - The target is chosen randomly based on a window with a specific size.
-   
     | Context | Target | How far |
     | ------- | ------ | ------- |
     | orange  | juice  | +1      |
     | orange  | glass  | -2      |
     | orange  | my     | +6      |    
-
     We have converted the problem into a supervised problem.
   - This is not an easy learning problem because learning within -10/+10 words (10 - an example) is hard.
   - We want to learn this to get our word embeddings model.
@@ -520,11 +520,11 @@ Here are the course summary as its given on the course [link](https://www.course
   - Also we will use the cross-entropy loss function.
   - This model is called skip-grams model.
 - The last model has a problem with the softmax layer:   
-  ![](Images/39.png)
+  ![](Images/39.png)  
   - Here we are summing 10,000 numbers which corresponds to the number of words in our vocabulary.
   - If this number is larger say 1 million, the computation will become very slow.
-- One of the solutions for the last problem is to use "**Hierarchical softmax classifier**" which works as a tree classifier.   
-  ![](Images/40.png)
+- One of the solutions for the last problem is to use "**Hierarchical softmax classifier**" which works as a tree classifier.     
+  ![](Images/40.png)  
 - In practice, the hierarchical softmax classifier doesn't use a balanced tree like the drawn one. Common words are at the top and less common are at the bottom.
 - How to sample the context **c**?
   - One way is to choose the context by random from your corpus.
@@ -537,14 +537,13 @@ Here are the course summary as its given on the course [link](https://www.course
 - Given this example:
   - "I want a glass of orange juice to go along with my cereal"
 - The sampling will look like this:
-- | Context | Word  | target |
+  | Context | Word  | target |
   | ------- | ----- | ------ |
   | orange  | juice | 1      |
   | orange  | king  | 0      |
   | orange  | book  | 0      |
   | orange  | the   | 0      |
-  | orange  | of    | 0      |
-
+  | orange  | of    | 0      |  
   We get positive example by using the same skip-grams technique, with a fixed window that goes around.
 - To generate a negative example, we pick a word randomly from the vocabulary.
 - Notice, that we got word "of" as a negative example although it appeared in the same sentence.
@@ -580,7 +579,6 @@ Here are the course summary as its given on the course [link](https://www.course
   - Giving not too much weight for stop words like "is", "the", and "this" which occur many times.
   - Giving not too little weight for infrequent words.
 - **Theta** and **e** are symmetric which helps getting the final word embedding. 
-
 - _Conclusions on word embeddings:_
   - If this is your first try, you should try to download a pre-trained model that has been made and actually works best.
   - If you have enough data, you can try to implement one of the available algorithms.
@@ -642,7 +640,6 @@ Here are the course summary as its given on the course [link](https://www.course
          ![](Images/51.png)
        - To do that, we move grandfather and grandmother to a point where they will be in the middle of the non-bias axis.
        - There are some words you need to do this for in your steps. Number of these words is relatively small.
-
 
 ## Sequence models & Attention mechanism
 
@@ -774,7 +771,6 @@ Here are the course summary as its given on the course [link](https://www.course
   - Y2 = "There is a cat on the mat."
   - Suppose that the machine outputs: "the cat the cat on the mat."
   - The bigrams in the machine output:
-  
     | Pairs      | Count | Count clip |
     | ---------- | ----- | ---------- |
     | the cat    | 2     | 1 (Y1)     |
@@ -782,9 +778,8 @@ Here are the course summary as its given on the course [link](https://www.course
     | cat on     | 1     | 1 (Y2)     |
     | on the     | 1     | 1 (Y1)     |
     | the mat    | 1     | 1 (Y1)     |
-    | **Totals** | 6     | 4          |
-
-    Modified precision = sum(Count clip) / sum(Count) = 4/6
+    | **Totals** | 6     | 4          |  
+    `Modified precision = sum(Count clip) / sum(Count) = 4/6`
 - So here are the equations for modified precision for the n-grams case:   
   ![](Images/60.png)
 - Let's put this together to formalize the BLEU score:
@@ -902,13 +897,11 @@ Here are the course summary as its given on the course [link](https://www.course
   - One disadvantage of this creates a very imbalanced training set. There will be a lot of zeros and few ones.
   - A hack to solve this is to make an output a few ones for several times or for a fixed period of time before reverting back to zero.  
     ![](Images/81.png)  
-    ![](Images/85.png)
-
+    ![](Images/85.png)  
 
 ## Extras
 
 ### Machine translation attention model (from notebooks)
-
 - The model is built with keras layers.
 - The attention model.   
   ![](Images/83.png)

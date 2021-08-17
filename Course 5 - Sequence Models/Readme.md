@@ -649,8 +649,8 @@ Here are the course summary as its given on the course [link](https://www.course
           - Boy - Girl  
        - We want to do this because the distance between grandfather and babysitter is bigger than babysitter and grandmother:   
          ![](Images/51.png)
-       - To do that, we move grandfather and grandmother to a point where they will be in the middle of the non-bias axis.
-          ![](Images/51_equal.png)  
+       - To do that, we move grandfather and grandmother to new points (purple dots) where they will be in the middle of the non-bias axis (green lines).  
+          ![](Images/51_equal.png)   
        - There are some words you need to do this for in your steps. Number of these words is relatively small.
           - We can train the model to identify these words
        - You can read the original papper for the full idea of equalize pair

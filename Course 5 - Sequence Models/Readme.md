@@ -282,8 +282,9 @@ Here are the course summary as its given on the course [link](https://www.course
  
 ### Gated Recurrent Unit (GRU)
 - GRU is an RNN type that can help solve the vanishing gradient problem and can remember the long-term dependencies.
-  - [[Cho et al., 2014, On the properties of neural machine translation: Encoder-decoder approaches]](https://arxiv.org/abs/1409.1259)
-  - [[Chung et al., 20014, Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling]](https://arxiv.org/abs/1412.3555)
+  - Papers: 
+    - [[Cho et al., 2014, On the properties of neural machine translation: Encoder-decoder approaches]](https://arxiv.org/abs/1409.1259)
+    - [[Chung et al., 20014, Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling]](https://arxiv.org/abs/1412.3555)
 - The basic RNN unit can be visualized to be like this:   
   ![](Images/17.png)
 - We will represent the GRU with a similar drawings.
@@ -327,7 +328,7 @@ Here are the course summary as its given on the course [link](https://www.course
 
 ### Long Short Term Memory (LSTM)
 - LSTM - the other type of RNN that can enable you to account for long-term dependencies. It's more powerful and general than GRU.
-  - [[Hochreiter & Schmidhuber, 1997, Long Short-term memory]](www.bioinf.jku.at/publications/older/2604.pdf)
+  - Paper: [[Hochreiter & Schmidhuber, 1997, Long Short-term memory]](www.bioinf.jku.at/publications/older/2604.pdf)
   - It is recommended to read other resources for the details of LSTM rather than using the original paper
 - In LSTM , C<sup>\<t></sup> != a<sup>\<t></sup>
 - Here are the equations of an LSTM unit:   
@@ -396,7 +397,7 @@ Here are the course summary as its given on the course [link](https://www.course
   - Orange and apple now share a lot of similar features which makes it easier for an algorithm to generalize between them.
   - We call this representation **Word embeddings**.
 - To visualize word embeddings we use a t-SNE algorithm to reduce the features to 2 dimensions which makes it easy to visualize:    
-    + [[van der Maaten and Hinton, 2008, Visualizing data using t-SNE]](https://www.jmlr.org/papers/v9/vandermaaten08a.html)  
+    + Paper: [[van der Maaten and Hinton, 2008, Visualizing data using t-SNE]](https://www.jmlr.org/papers/v9/vandermaaten08a.html)  
   ![](Images/29.png)
   - You will get a sense that more related words are closer to each other.
 - The **word embeddings** came from that we need to embed a unique vector inside a n-dimensional space.
@@ -409,7 +410,7 @@ Here are the course summary as its given on the course [link](https://www.course
     - After training on this sentence the model should find out that the sentence "**Robert Lin** is an *apple* farmer" contains Robert Lin as a name, as apple and orange have near representations.
     - Now if you have tested your model with this sentence "**Mahmoud Badry** is a *durian* cultivator" the network should learn the name even if it hasn't seen the word *durian* before (during training). That's the power of word representations.
 - The algorithms that are used to learn **word embeddings** can examine billions of words of unlabeled text - for example, 100 billion words and learn the representation from them.
-- Transfer learning and word embeddings:
+- **Transfer learning and word embeddings**:
   1. Learn word embeddings from large text corpus (1-100 billion of words).
      - Or download pre-trained embedding online.
   2. Transfer embedding to new task with the smaller training set (say, 100k words).
@@ -471,7 +472,7 @@ Here are the course summary as its given on the course [link](https://www.course
 - At the start, word embeddings algorithms were complex but then they got simpler and simpler.
 - We will start by learning the complex examples to make more intuition.
 - **<u>Neural language model</u>**:  
-  - [[Bengio et al., 2003, A Neural Probabilistic Language Model]](https://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf)  
+  - Paper: [[Bengio et al., 2003, A Neural Probabilistic Language Model]](https://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf)  
   - Let's start with an example:   
     ![](Images/37.png)
   - We want to build a language model so that we can predict the next word.
@@ -500,7 +501,7 @@ Here are the course summary as its given on the course [link](https://www.course
 - To summarize, the language modeling problem poses a machines learning problem where you input the context (like the last four words) and predict some target words. And posing that problem allows you to learn good word embeddings.
 
 #### Word2Vec
-- [[Mikolov et al., 2013, Efficient Estimation of Word Representations in Vector Space]](https://arxiv.org/abs/1301.3781)
+- Paper: [[Mikolov et al., 2013, Efficient Estimation of Word Representations in Vector Space]](https://arxiv.org/abs/1301.3781)
 - Before presenting Word2Vec, lets talk about **skip-grams**:
   - For example, we have the sentence: _"I want a glass of orange juice to go along with my cereal."_
   - We will choose **context** and **target**.
@@ -537,7 +538,7 @@ Here are the course summary as its given on the course [link](https://www.course
 
 #### Negative Sampling
 - Negative sampling allows you to do something similar to the skip-gram model, but with a much more efficient learning algorithm. We will create a different learning problem.
-  - [[Mikolow et al., 2013, Distributed Representations of Words and Phrases and their Compositionality]](https://arxiv.org/abs/1310.4546)
+  - Paper: [[Mikolow et al., 2013, Distributed Representations of Words and Phrases and their Compositionality]](https://arxiv.org/abs/1310.4546)
 - Given this example:
   - _"I want a glass of orange juice to go along with my cereal."_ 
 - The sampling will look like this:
@@ -571,7 +572,7 @@ Here are the course summary as its given on the course [link](https://www.course
 
 #### GloVe word vectors
 - GloVe is another algorithm for learning the word embedding. It's the simplest of them.
-  - [[Pennington et al., 2014, GloVe: Global Vectors for Word Representation]](nlp.stanford.edu/pubs/glove.pdf)
+  - Paper: [[Pennington et al., 2014, GloVe: Global Vectors for Word Representation]](nlp.stanford.edu/pubs/glove.pdf)
   - This is not used as much as Word2Vec or skip-gram models, but it has some enthusiasts because of its simplicity.
   - GloVe stands for Global vectors for word representation.
 - Let's use our previous example: _"I want a glass of orange juice to go along with my cereal."_
@@ -596,7 +597,7 @@ Here are the course summary as its given on the course [link](https://www.course
   - A final note that you can't guarantee that the axis used to represent the features will be well-aligned with what might be easily humanly interpretable axis like gender, royal, age.
 
 ### Applications using Word Embeddings
-
+  
 #### Sentiment Classification
 - As we have discussed before, Sentiment classification is the process of finding if a text has a positive or a negative review. Its so useful in NLP and is used in so many applications. An example would be:   
   ![](Images/45.png)
@@ -607,50 +608,53 @@ Here are the course summary as its given on the course [link](https://www.course
   - The embedding matrix may have been trained on say 100 billion words.
   - Number of features in word embedding is 300.
   - We can use **sum** or **average** given all the words then pass it to a softmax classifier. That makes this classifier works for short or long sentences.
-- One of the problems with this simple model is that it ignores words order. For example "Completely lacking in **good** taste, **good** service, and **good** ambience" has the word _good_ 3 times but its a negative review.
+- One of the problems with this simple model is that it ignores words order. For example "Completely lacking in **good** taste, **good** service, and **good** ambience" has the word _"good"_ 3 times but its a negative review.
 - A better model uses an RNN for solving this problem:   
   ![](Images/47.png)
   - And so if you train this algorithm, you end up with a pretty decent sentiment classification algorithm.
-  - Also, it will generalize better even if words weren't in your dataset. For example you have the sentence "Completely **<u>absent</u>** of good taste, good service, and good ambience", then even if the word "absent" is not in your label training set, if it was in your 1 billion or 100 billion word corpus used to train the word embeddings, it might still get this right and generalize much better even to words that were in the training set used to train the word embeddings but not necessarily in the label training set that you had for specifically the sentiment classification problem.
+  - Also, it will generalize better even if words weren't in your dataset. For example you have the sentence _"Completely **<u>absent</u>** of good taste, good service, and good ambience"_, then even if the word "absent" is not in your label training set, if it was in your 1 billion or 100 billion word corpus used to train the word embeddings, it might still get this right and generalize much better even to words that were in the training set used to train the word embeddings but not necessarily in the label training set that you had for specifically the sentiment classification problem.
 
 #### Debiasing word embeddings
 - We want to make sure that our word embeddings are free from undesirable forms of bias, such as gender bias, ethnicity bias and so on.
 - Horrifying results on the trained word embeddings in the context of Analogies:
-  - Man : Computer_programmer as Woman : **Homemaker**
-  - Father : Doctor as Mother : **Nurse**
+  - Man: **Computer_programmer** as Woman: **Homemaker**
+  - Father: **Doctor** as Mother: **Nurse**
 - Word embeddings can reflect gender, ethnicity, age, sexual orientation, and other biases of text used to train the model.
 - Learning algorithms by general are making important decisions and it mustn't be biased.
 - Andrew thinks we actually have better ideas for quickly reducing the bias in AI than for quickly reducing the bias in the human race, although it still needs a lot of work to be done.
 - Addressing bias in word embeddings steps:
-  - Idea from the paper: https://arxiv.org/abs/1607.06520
+  - Paper: [[Bolukbasi et al., 2016, Man is to Computer Programmer as Woman is to Homemaker? Debiasing Word Embeddings]](https://arxiv.org/abs/1607.06520)
   - Given these learned embeddings:   
     ![](Images/48.png)
   - We need to solve the **gender bias** here. The steps we will discuss can help solve any bias problem but we are focusing here on gender bias.
   - Here are the steps:
-    1. Identify the direction:
+    1. **Identify the direction**:
        - Calculate the difference between:
-         - e<sub>he</sub> - e<sub>she</sub>
-         - e<sub>male</sub> - e<sub>female</sub>
+         - e<sub>he</sub> - e<sub>she</sub>  
+         - e<sub>male</sub> - e<sub>female</sub>  
          - ....
        - Choose some k differences and average them.
        - This will help you find this:   
          ![](Images/49.png)
        - By that we have found the bias direction which is 1D vector and the non-bias vector which is 299D vector.
-    2. Neutralize: For every word that is not definitional, project to get rid of bias.
+    2. **Neutralize**: For every word that is not definitional, project to get rid of bias.
        - Babysitter and doctor need to be neutral so we project them on non-bias axis with the direction of the bias:   
-         ![](Images/50.png)
-         - After that they will be equal in the term of gender.
-         - To do this the authors of the paper trained a classifier to tell the words that need to be neutralized or not.
-    3. Equalize pairs
-       - We want each pair to have difference only in gender. Like:
-         - Grandfather - Grandmother
-         - He - She
-         - Boy - Girl
+         ![](Images/50.png)  
+          - After that they will be equal in the term of gender.
+          - To do this the authors of the paper trained a classifier to tell the words that need to be neutralized or not.  
+    3. **Equalize pairs**
+       - We want each pair to have difference only in gender. Like:  
+          - Grandfather - Grandmother  
+          - He - She
+          - Boy - Girl  
        - We want to do this because the distance between grandfather and babysitter is bigger than babysitter and grandmother:   
          ![](Images/51.png)
        - To do that, we move grandfather and grandmother to a point where they will be in the middle of the non-bias axis.
+          ![](Images/51_equal.png)  
        - There are some words you need to do this for in your steps. Number of these words is relatively small.
-
+          - We can train the model to identify these words
+       - You can read the original papper for the full idea of equalize pair
+  
 ## Sequence models & Attention mechanism
 
 > Sequence models can be augmented using an attention mechanism. This algorithm will help your model understand where it should focus its attention given a sequence of inputs. This week, you will also learn about speech recognition and how to deal with audio data.

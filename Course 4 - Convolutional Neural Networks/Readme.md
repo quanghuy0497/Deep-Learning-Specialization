@@ -358,7 +358,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   + The dimensions of the image decreases as the number of channels increases.
   + `Conv ==> Pool ==> Conv ==> Pool ==> FC ==> FC ==> softmax` this type of arrangement is quite common.
   + The activation function used in the paper was Sigmoid and Tanh. Modern implementation uses ReLU in most of the cases.
-  + [[LeCun et al., 1998. Gradient-based learning applied to document recognition]](http://ieeexplore.ieee.org/document/726791/?reload=true)
+  + Paper: [[LeCun et al., 1998. Gradient-based learning applied to document recognition]](http://ieeexplore.ieee.org/document/726791/?reload=true)
 #### AlexNet
   + Named after Alex Krizhevsky who was the first author of this paper. The other authors includes Geoffrey Hinton.
   + The goal for the model was the ImageNet challenge which classifies images into 1000 classes. Here are the drawing of the model:  
@@ -374,7 +374,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     + Multiple GPUs were used because the GPUs were not so fast back then.
     + Researchers proved that Local Response normalization doesn't help much so for now don't bother yourself for understanding or implementing it. 
   + This paper convinced the computer vision researchers that deep learning is so important.
-  + [[Krizhevsky et al., 2012. ImageNet classification with deep convolutional neural networks]](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf)
+  + Paper: [[Krizhevsky et al., 2012. ImageNet classification with deep convolutional neural networks]](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf)
 #### VGG-16
   + A modification for AlexNet.
   + Instead of having a lot of hyperparameters lets have some simpler network.
@@ -391,7 +391,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   + Pooling was the only one who is responsible for shrinking the dimensions.
   + There are another version called **VGG-19** which is a bigger version. But most people uses the VGG-16 instead of the VGG-19 because it does the same.
   + VGG paper is attractive it tries to make some rules regarding using CNNs.
-  + [[Simonyan & Zisserman 2015. Very deep convolutional networks for large-scale image recognition]](https://arxiv.org/abs/1409.1556)
+  + Paper: [[Simonyan & Zisserman 2015. Very deep convolutional networks for large-scale image recognition]](https://arxiv.org/abs/1409.1556)
 
 ### Residual Networks (ResNets)
 + Very, very deep NNs are difficult to train because of vanishing and exploding gradients problems.
@@ -401,7 +401,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     ![](Images/08.png)
   + They add a shortcut/skip connection before the second activation.
   + The authors of this block find that you can train a deeper NNs using stacking this block.
-  + [[He et al., 2015. Deep residual networks for image recognition]](https://arxiv.org/abs/1512.03385)
+  + Paper: [[He et al., 2015. Deep residual networks for image recognition]](https://arxiv.org/abs/1512.03385)
 + **Residual Network**
   + Are a NN that consists of some Residual blocks.  
     ![](Images/09.png)
@@ -466,7 +466,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     + Input: `6x6x32`
     + Conv: `1x1x32` 5 filters.     `# The 1 x 1 Conv`
     + Output: `6x6x5`
-+ The Network in Network is proposed in [[Lin et al., 2013. Network in network]](https://arxiv.org/abs/1312.4400)
++ Paper: [[Lin et al., 2013. Network in network]](https://arxiv.org/abs/1312.4400)
   + It has been used in a lot of modern CNN implementations like ResNet and Inception models.
 + A 1 x 1 convolution is useful when:
   + We want to shrink _the number of channels_. We also call this feature transformation.
@@ -485,7 +485,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   + Hint that max-pool are same here.
   + Input to the inception module are 28 x 28 x 192 and the output are 28 x 28 x 256
   + We have done all the Convs and pools we might want and will let the NN learn and decide which it want to use most.
-  + [[Szegedy et al. 2014. Going deeper with convolutions]](https://arxiv.org/abs/1409.4842)
+  + Paper: [[Szegedy et al. 2014. Going deeper with convolutions]](https://arxiv.org/abs/1409.4842)
 + The problem of computational cost in Inception model:
   + If we have just focused on a 5 x 5 Conv that we have done in the last example.
   + There are 32 same filters of 5 x 5, and the input are 28 x 28 x 192.
@@ -523,7 +523,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   + Some times a Max-Pool block is used before the inception module to reduce the dimensions of the inputs.
   + There are a 3 Sofmax branches at different positions to push the network toward its goal. and helps to ensure that the intermediate features are good enough to the network to learn and it turns out that softmax0 and sofmax1 gives regularization effect.
   + Since the development of the Inception module, the authors and the others have built another versions of this network. Like inception v2, v3, and v4. Also there is a network that has used the inception module and the ResNet together.
-  + [[Szegedy et al., 2014, Going Deeper with Convolutions]](https://arxiv.org/abs/1409.4842)
+  + Paper: [[Szegedy et al., 2014, Going Deeper with Convolutions]](https://arxiv.org/abs/1409.4842)
 
 ### Depthwise Separable Convolution (MobileNet)
 + Motivation for MobileNet
@@ -805,14 +805,14 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   + Another example would be:  
       ![](Images/22.png)
   + This example has a total of 16 sliding windows that shares the computation together.
-  + [[Sermanet et al., 2014, OverFeat: Integrated recognition, localization and detection using convolutional networks]](https://arxiv.org/abs/1312.6229)
+  + Paper: [[Sermanet et al., 2014, OverFeat: Integrated recognition, localization and detection using convolutional networks]](https://arxiv.org/abs/1312.6229)
 + The weakness of the algorithm is that the position of the rectangle wont be so accurate. Maybe none of the rectangles is exactly on the object you want to recognize.  
     ![](Images/23.png)
   + In red, the rectangle we want and in blue is the required car rectangle.
 
 ### Bounding Box Predictions
 + A better algorithm than the one described in the last section is the YOLO algorithm
-  + [[Redmon et al., 2015, You Only Look Once: Unified, Real-Time Object Detection]](https://arxiv.org/abs/1506.02640)
+  + Paper: [[Redmon et al., 2015, You Only Look Once: Unified, Real-Time Object Detection]](https://arxiv.org/abs/1506.02640)
 + YOLO stands for *you only look once* and was developed back in 2015.
 + **YOLO basic idea**:  
     ![](Images/24.png)
@@ -859,7 +859,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   + Car and person grid is same here.
   + In practice this happens rarely.
 + The idea of Anchor boxes helps us solving this issue.
-  + [[Redmon et al., 2015, You Only Look Once: Unified real-time object detection]](https://arxiv.org/abs/1506.02640)
+  + Paper: [[Redmon et al., 2015, You Only Look Once: Unified real-time object detection]](https://arxiv.org/abs/1506.02640)
   + If Y = `[Pc, bx, by, bh, bw, c1, c2, c3]` Then to use two anchor boxes like this:
     + Y = `[Pc, bx, by, bh, bw, c1, c2, c3, Pc, bx, by, bh, bw, c1, c2, c3]`  We simply have repeated the one anchor Y.
     + The two anchor boxes you choose should be known as a shape:  
@@ -879,7 +879,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 ### YOLO Algorithm
 + YOLO is a state-of-the-art object detection model that is fast and accurate
-  + [[Redmon et al., 2016, YOLO9000 Better, faster, stronger]](https://arxiv.org/abs/1612.08242)
+  + Paper: [[Redmon et al., 2016, YOLO9000 Better, faster, stronger]](https://arxiv.org/abs/1612.08242)
 + Lets sum up and introduce the whole YOLO algorithm given an example.
   + Construct the training set:
     + Suppose we need to do object detection for our autonomous driver system. It needs to identify three classes:
@@ -1084,22 +1084,22 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   + R-CNN:
     + Propose regions. Classify proposed regions one at a time. Output label + bounding box.
     + Downside is that its slow.
-    + [[Girshik et al., 2013. Rich feature hierarchies for accurate object detection and semantic segmentation]](https://arxiv.org/abs/1311.2524)
+    + Paper: [[Girshik et al., 2013. Rich feature hierarchies for accurate object detection and semantic segmentation]](https://arxiv.org/abs/1311.2524)
   + Fast R-CNN:
     + Propose regions. Use convolution implementation of sliding windows to classify all the proposed regions.
-    + [[Girshik, 2015, Fast R-CNN]](https://arxiv.org/abs/1504.08083)
+    + Paper: [[Girshik, 2015, Fast R-CNN]](https://arxiv.org/abs/1504.08083)
   + Faster R-CNN:
     + Use convolutional network to propose regions.
-    + [[Ren et al., 2016, Faster R-CNN: Towards real-time object detection with region proposal networks]](https://arxiv.org/abs/1506.01497)
+    + Paper: [[Ren et al., 2016, Faster R-CNN: Towards real-time object detection with region proposal networks]](https://arxiv.org/abs/1506.01497)
   + Mask R-CNN:
     + Combine Faster R-CNN with Fully Convolution Network for object detection and instance segmentation 
-    + [[He et al., 2017, Mask R-CNN]](https://arxiv.org/abs/1703.06870)
+    + Paper: [[He et al., 2017, Mask R-CNN]](https://arxiv.org/abs/1703.06870)
 + Most of the implementation of faster R-CNN are still slower than YOLO.
 + Andrew Ng thinks that the idea behind YOLO is better than R-CNN because you are able to do all the things in just one time instead of two times.
 + Other algorithms that uses one shot to get the output includes **SSD** and **MultiBox**.
-  + [[Wei Liu, et al., 2015, SSD: Single Shot MultiBox Detector]](https://arxiv.org/abs/1512.02325)
+  + Paper: [[Wei Liu, et al., 2015, SSD: Single Shot MultiBox Detector]](https://arxiv.org/abs/1512.02325)
 + **R-FCN** is similar to Faster R-CNN but more efficient.
-  + [[Jifeng Dai, et al., 2016, R-FCN: Object Detection via Region-based Fully Convolutional Networks ]](https://arxiv.org/abs/1605.06409)
+  + Paper: [[Jifeng Dai, et al., 2016, R-FCN: Object Detection via Region-based Fully Convolutional Networks ]](https://arxiv.org/abs/1605.06409)
 
 ### Semantic Segmentation with U-Net
 + Object Detection vs Semantic Segmentation  
@@ -1161,7 +1161,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 ### U-Net Architecture
 + U-Net:
-  + [[Ronneberger et al., 2015, U-Net: Convolutional Networks for Biomedical Image Segmentation]](https://arxiv.org/abs/1505.04597)  
+  + Paper: [[Ronneberger et al., 2015, U-Net: Convolutional Networks for Biomedical Image Segmentation]](https://arxiv.org/abs/1505.04597)  
   ![](Images/U-Net_Architecture.png)  
   + Image input: `[h x w x 3]`
   + The first-half (Encoder):  
@@ -1222,7 +1222,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   + The loss function will be `d(x1, x2) = || f(x1) - f(x2) ||^2`
     + If `X1`, `X2` are the same person, we want `d` to be low
     + If `X1`, `X2` are different persons, we want `d` to be high.
-  + [[Taigman et al., 2014, DeepFace closing the gap to human level performance]](https://www.cv-foundation.org/openaccess/content_cvpr_2014/html/Taigman_DeepFace_Closing_the_2014_CVPR_paper.html)
+  + Paper: [[Taigman et al., 2014, DeepFace closing the gap to human level performance]](https://www.cv-foundation.org/openaccess/content_cvpr_2014/html/Taigman_DeepFace_Closing_the_2014_CVPR_paper.html)
 
 #### Triplet Loss
 + Triplet Loss is one of the loss functions we can use to solve the similarity distance in a Siamese network.
@@ -1256,7 +1256,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
       + `d(A, P) ~= d(A, N)`  
       => increase the computational efficiency of the learning algorithm  
     + This can be achieved by i.e. choosing people with high similar appearance for P and N
-    + Details of choosing triplets are in this paper [[Schroff et al.,2015, FaceNet: A unified embedding for face recognition and clustering]](https://arxiv.org/abs/1503.03832)
+    + Details of choosing triplets: [[Schroff et al.,2015, FaceNet: A unified embedding for face recognition and clustering]](https://arxiv.org/abs/1503.03832)
 + Commercial recognition systems are trained on a large datasets like 10/100 million images.
 + There are a lot of pretrained models and parameters online for face recognition.
 
@@ -1269,7 +1269,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     + Where the `|f(x_i) - f(x_j)|` is the Manhattan distance (L1 distance) between `f(x_i)` and `f(x_j)`
     + Some other similarities can used Euclidean distance or Chi-square similarity instead (Chi — X in Greek)
   + The NN here is Siamese means the top and bottom convs has the same parameters.
-+ The paper for this work: [[Taigman et al., 2014, DeepFace closing the gap to human level performance]](https://www.cv-foundation.org/openaccess/content_cvpr_2014/html/Taigman_DeepFace_Closing_the_2014_CVPR_paper.html)
++ Paper: [[Taigman et al., 2014, DeepFace closing the gap to human level performance]](https://www.cv-foundation.org/openaccess/content_cvpr_2014/html/Taigman_DeepFace_Closing_the_2014_CVPR_paper.html)
 + A good performance/deployment trick:
   + Pre-compute all the images that you are using as a comparison to the vector `f(x_j)`
   + When a new image that needs to be compared, get its vector `f(x_i)` then put it with all the pre computed vectors and pass it to the sigmoid function.
@@ -1302,7 +1302,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 + You will find out that each layer are learning more complex representations.  
     ![](Images/39.png)
 + The first layer was created using the weights of the first layer. Other images are generated using the receptive field in the image that triggered the neuron to be max.
-+ [[Zeiler and Fergus., 2013, Visualizing and understanding convolutional networks]](https://arxiv.org/abs/1311.2901)
++ Paper: [[Zeiler and Fergus., 2013, Visualizing and understanding convolutional networks]](https://arxiv.org/abs/1311.2901)
 + A good explanation on how to get **receptive field** given a layer:  
     ![](Images/receptiveField.png)
   + From [A guide to receptive field arithmetic for Convolutional Neural Networks](https://medium.com/@nikasa1889/a-guide-to-receptive-field-arithmetic-for-convolutional-neural-networks-e0f514068807)
@@ -1314,7 +1314,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   + `J_content(C, G)` measures how similar is the generated image to the Content image.
   + `J_style(S, G)` measures how similar is the generated image to the Style image.
   + `alpha` and `beta` are relative weighting to the similarity and these are hyperparameters.
-+ [[Gatys et al., 2015, A neural algorithm of artistic style]](https://arxiv.org/abs/1508.06576) 
++ Paper: [[Gatys et al., 2015, A neural algorithm of artistic style]](https://arxiv.org/abs/1508.06576) 
 + Find the generated image G:
   1. Initiate G randomly
      + For example G: `100 x 100 x 3`

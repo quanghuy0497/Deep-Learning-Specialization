@@ -759,11 +759,11 @@ Here are the course summary as its given on the course [link](https://www.course
     - We now want to know who to blame - the RNN or the beam search.
   - To do that, we calculate P(y<sup>*</sup> | X) and P(y&#770; | X). There are two cases:
     - Case 1: P(y<sup>*</sup> | X) > P(y&#770; | X)
-      - Beam search chose y&#770;. But y<sup>*</sup> attains higher P(y | X)
-      - **Conclusion**: Beam search is at fault.
-    - Case 2: P(y<sup>*</sup> | X) <= P(y&#770; | X)  
-      - y<sup>*</sup> is a better translation than y&#770;. But RNN predicted P(y<sup>*</sup> | X) <= P(y&#770; | X) 
-      - **Conclusion**: RNN model is at fault.
+        - Beam search chose y&#770;. But y<sup>*</sup> attains higher P(y | X)
+        - **Conclusion**: Beam search is at fault.
+    - Case 2: P(y<sup>*</sup> | X) &#8804; P(y&#770; | X)  
+        - y<sup>*</sup> is a better translation than y&#770;. But RNN predicted otherwise
+        - **Conclusion**: RNN model is at fault.
 - The error analysis process is as following:
   - You choose N error examples and make the following table:   
     ![](Images/59.png)

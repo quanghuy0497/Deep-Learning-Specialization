@@ -46,12 +46,18 @@ This is the fifth and final course of the deep learning specialization at [Cours
       * [Speech recognition - Audio data](#speech-recognition---audio-data)
          * [Speech recognition](#speech-recognition)
          * [Trigger Word Detection](#trigger-word-detection)
+    * [Transformer Network](#Transformers-Network)
+      * [Transformers](#transformers)
+         * [Transformer Network Intuition](#transformer-network-intuition)
+         * [Self-Attention](#self-attention)
+         * [Multi-Head Attention](#multi-head-attention)
+         * [Transformer Network](#transformer-network)
    * [Extras](#extras)
       * [Machine translation attention model (From notebooks)](#machine-translation-attention-model-from-notebooks)
 
 
 ## Course summary
-Here are the course summary as its given on the course [link](https://www.coursera.org/learn/nlp-sequence-models):
+Here is the course summary as its given on the course [link](https://www.coursera.org/learn/nlp-sequence-models):
 
 > This course will teach you how to build models for natural language, audio, and other sequence data. Thanks to deep learning, sequence algorithms are working far better than just two years ago, and this is enabling numerous exciting applications in speech recognition, music synthesis, chatbots, machine translation, natural language understanding, and many others. 
 >
@@ -59,6 +65,7 @@ Here are the course summary as its given on the course [link](https://www.course
 > - Understand how to build and train Recurrent Neural Networks (RNNs), and commonly-used variants such as GRUs and LSTMs.
 > - Be able to apply sequence models to natural language problems, including text synthesis. 
 > - Be able to apply sequence models to audio applications, including speech recognition and music synthesis.
+> - Build and train a Transformer model to implement a Question Answering model
 >
 > This is the fifth and final course of the Deep Learning Specialization.
 
@@ -925,6 +932,89 @@ Here are the course summary as its given on the course [link](https://www.course
     ![](Images/81.png)  
     ![](Images/85.png)  
 
+## Transformer Network
+
+> Sequence models can be augmented with Transformer network. This week, you will also build a Question Answering model with transformer.
+
+### Transformers
+
+#### Transformer Network Intuition
++ Many of the most effective algorithms NLP (and also Computer Vision) today are based on Transformer architecture. 
+   + It is a relatively complex neural network architecture
++ Previous sequence models: RNN => GRU => LSTM
+   + Improved control over the flow of information, also increase in computation complexity
+   + They still ingested the input one word/token at the time 
+      + So each unit is like a bottleneck to the flow of information. As to compute the output of the final unit, you have to compute the outputs of all units that come before
++ **_Transformer Network Intuition_**: allows you to run these computations for an entire sequence in parallel
+   + You can ingest the sequence at the same time rather than just processing words one by one from left to right
+   + Paper: [[Vaswani et al., 2017, Attention Is All You Need]](https://arxiv.org/abs/1706.03762)
+   + Transformer: Combination of the use of **Attention** representations with **CNN** style of processing
+      + RNN may process one output at a time
+         + Attention is a way of computing very rich, very useful representations of words
+      + CNN takes a lot of inputs (pixels) and computes representation at parallel
+   + Two key ideas:
+      + Self-Attention: compute `n` representations for `n` words in parallel
+      + Multi-Head Attention: basically a for loop over self-attention => multiple versions of these representations
+
+#### Self-Attention
++ Example: _"Jane visite l'Afrique en semptembre"_
++ For each word, we have:
+   + A(q, K, V) = attention-based vector representation of a word
+   + Calculate for each word, we have A<sup><1></sup>,...,A<sup><1></sup>
+      + Normally, one way to represent a particular word is using word embedding. But depending on the context we might choose to represent it differently. (like _l'Afrique_ can be historical interest, continent, festival destination,...)
+      + With a particular representation, i.e. A<sup><3></sup> _l'Afrique_, it will look at the surrounding words to try to figure out the content (how we talk about Africa), then find the most appropriate representation for this.
+         + It is simmilar to the Attention mechanism in the previous as applied for RNNs, but this time, the model compute these representations in parallel for all five words in a sentence.
++ Equation for A(q, k, v):  
+   ![](Images/86.png)  
+   + For every word, we have 3 values **_query_** q<sup>\<i></sup>, **_key_** K<sup>\<i></sup>, and **_value_** V<sup>\<i></sup>
+      + q<sup>\<i></sup> let you ask a question about that word i, like what's happening there?
+      + K<sup>\<i></sup> help you figure out if this word gives the most relevant answer to that question, i.e. K<sup><1></sup> is a person, K<sup>\<1></sup> is an action
+      +  V<sup>\<i></sup> determines this particular word i should be represented within the representation A<sup>\<i></sup>
+   + For calculate a representation A<sup>\<3></sup>:
+      + Firstly:
+         + q<sup>\<3></sup> = W<sup>q</sup> . x<sup>\<3></sup> (with W<sup>q</sup> is a learned weight matrix)
+         + K<sup>\<3></sup> = W<sup>K</sup> . x<sup>\<3></sup> 
+         + V<sup>\<3></sup> = W<sup>V</sup> . x<sup>\<3></sup>
+      + After that, we calculate the inner product between q<sup>\<3></sup> and other K<sup>\<1:5></sup> => how good is a word i.e. _visite_ is an answer to the question of what happened in _l'Afrique_
+         + Then compute the Softmax for each (with the blue block (q<sup>\<3></sup>.K<sup>\<2></sup> has the largest value))
+      + Then, we multiply with the corresponding V<sup>\<i></sup> and sum them up for A<sup>\<3></sup>  
+         ![](Images/88.png)
+         + The key advantage of this computation is the word _l'Afrique_ lets the self-attention mechanism realise that this word is the destination of a _visite_, rather than a fixed word embedding => compute richer, more useful representation of this word
+      + Eventualy, we do the same with other word representations
++ Finally, the Self-Attention is calculated by:
+   + `Attention(Q, K, V) = softmax(Q.dot(K.T)/sqrt(d_k)).V`
+   + This formular is the reason with the Self-Attention is also called the scaled dot-product attention
+
+#### Multi-Head Attention
++ Each time you calculate the self-attention is called the head
++ With multi-head attention, you take the same set of [query, key, value] as input and calculate multiple self-attentions for the Attention(W<sup>Q1</sup>Q, W<sup>K1</sup>K, W<sup>V1</sup>V) (visite) to answer what's happened?
++ Then, we repeat the process with a new set of W<sup>Q2</sup>, W<sup>K2</sup>, W<sup>V2</sup>, to answer the question i.e, When?, and so on (Who, what,...)
+   + For each, we have a different attention for different word, like red for September (when), black for Jane (who),... and this time, we call it a *head*
+   + These heads are then concatentation together, and called **Multi-Head Attention**
++ Finally, the Multi-Head Attention is calculated by:
+    + `Multihead(Q,K,V) = concat(heads).W0`  
+   ![](Images/87.png)
+
+#### Transformer Network
++ We have a sentence with embeddings(also 2 tokens <SOS> and <EOS> at the start and end)
++ **Transformer Network main idea**:
+   + First, the embedding `e` are feed into the Encoder with Multi-Head Attention with Q, K, V, then go through a Feed-Forward Neural Network
+      + This Encoder block is repeated N times, with N is typically 6
+   + The Decoder block takes input from the first few words of whatever we've generated of the translation (in the beginning, the translation begin with token <SOS>), the feed to the Multi-Head Attention to generate Q matrix
+      + Then the Q matrix is combined with K and V from Encoder output and feed to the second Multi-Head Attention block
+      + The Q from the first block is what we've generated so far, combined with the K and Q from the original French words to decide what is the next word in the sequence to generate
+      + Finally, the out of the second block is feed to the Feed-Forward NN, and the Decoder block is also repeated N times, with the output of the Decoder block is feed to its input for another round of generating the most appropriate next (English) word.  
+   ![](Images/88.png)
++ **Some techniques to make the Transformer even better**:
+   + We can apply the **_Positional Encoding_** to encode the position of words within the sentence in the input of Encoder and Decoder blocks
+      + For example, the word embedding is a 4-value vector
+      + We create the position vector `p` with the same dimension, with the `pos` is the position, and `i=0:3` is the index of `p`. The value inside `p` is identical and follows the sin/cos plot. Then, the value of p is the corresponded value at the `pos` in X-axis for each i.
+   + We can also apply
+      + The **_skip-connection_** to the Encoder/Decoder and **_Add & Norm_** block (similar to the batch norm) throughout the architecture
+      + A Linear and Softmax at the output of the Decoder block to predict the next one word at the time  
+   + The first Multi-Head Attention of the Decoder can be changed to the **_Masked Multi-Head Attention_** pretends the network had perfectly translated the first few words and hide the remaining words to see if given a perfect first part of the translation, whether the NN can predict the next word in the sentence accurately (mimic what the network will need to do during prediction  
+   ![](Images/90.png)  
+  
 ## Extras
 
 ### Machine translation attention model (from notebooks)

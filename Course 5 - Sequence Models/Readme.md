@@ -65,7 +65,7 @@ Here is the course summary as its given on the course [link](https://www.courser
 > - Understand how to build and train Recurrent Neural Networks (RNNs), and commonly-used variants such as GRUs and LSTMs.
 > - Be able to apply sequence models to natural language problems, including text synthesis. 
 > - Be able to apply sequence models to audio applications, including speech recognition and music synthesis.
-> - Build and train a Transformer model to implement a Question Answering model
+> - Build and train a Transformer model 
 >
 > This is the fifth and final course of the Deep Learning Specialization.
 
@@ -451,7 +451,7 @@ Here is the course summary as its given on the course [link](https://www.courser
   - It can also be represented mathematically by:   
     ![](Images/34.png)
   - It turns out that e<sub>Queen</sub> is the best solution here that gets the the similar vector.
-  - [[Mikolov et al., 2013, Linguistic Regularities in Continuous Space Word Representations]](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/rvecs.pdf)
+  - Paper: [[Mikolov et al., 2013, Linguistic Regularities in Continuous Space Word Representations]](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/rvecs.pdf)
 - Cosine similarity - the most commonly used similarity function:
   - Equation:   
     ![](Images/35.png)
@@ -934,7 +934,7 @@ Here is the course summary as its given on the course [link](https://www.courser
 
 ## Transformer Network
 
-> Sequence models can be augmented with Transformer network. This week, you will also build a Question Answering model with transformer.
+> Sequence models can be augmented with Transformer network. This week, you will also implement a transformer network and build a Named-Entity Recognition or Question Answering model.
 
 ### Transformers
 
@@ -1026,6 +1026,9 @@ Here is the course summary as its given on the course [link](https://www.courser
 - What one "Attention" step does to calculate the attention variables &alpha;<sup>`<t, t>`</sup>, which are used to compute the context variable context<sup>`<t>`</sup> for each timestep in the output (t=1, ..., T<sub>y</sub>).
   ![](Images/84.png)
   - The diagram uses a `RepeatVector` node to copy s<sup>`<t-1>`</sup>'s value T<sub>x</sub> times, and then `Concatenation` to concatenate s<sup>`<t-1>`</sup> and a<sup>`<t>`</sup> to compute e<sup>`<t, t>`</sup>, which is then passed through a softmax to compute &alpha;<sup>`<t, t>`</sup>.
+
+
+
 
 
 

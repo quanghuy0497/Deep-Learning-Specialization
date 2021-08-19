@@ -4,6 +4,8 @@ Coursera's [Deep Learning specialization](https://www.coursera.org/specializatio
 
 Instructor: [Andrew Ng](http://www.andrewng.org/)
 
+[**Verified Certificate**](https://www.coursera.org/account/accomplishments/specialization/E9JNL2K42KUW)
+
 The Lecture Notes were created by [Mahmoud Badry](https://github.com/mbadry1/DeepLearning.ai-Summary), updated by [quanghuy0497](https://github.com/quanghuy0497/Deep-Learning-Specialization)
 
 

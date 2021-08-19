@@ -714,9 +714,9 @@ Here are the course summary as its given on the course [link](https://www.course
 - The algorithm has a parameter `B`  which is the beam width. Lets take `B = 3` which means the algorithm will consider/get 3 possibility outputs at a time.
   - For the first step you will get [_"in"_, _"jane"_, _"september"_] words that are the most likely 3 best candidates for the first words (top 3) among 10.000 possibilities.  
       ![](Images/Beam_search_1.png)  
-  - Then for each word in the first output, get B next (second) words and select top best B combinations where the best are those what give the highest value of multiplying both probabilities - P(y<sup>\<1></sup>,y<sup>\<2></sup>|x) = P(y<sup>\<1></sup>|x) * P(y<sup>\<2></sup>|x, y<sup>\<1></sup>)
+  - Then for each word in the first output, get B next (second) words and select top best B combinations where the best are those what give the highest value of multiplying both probabilities: P(y<sup>\<1></sup>,y<sup>\<2></sup>|x) = P(y<sup>\<1></sup>|x) * P(y<sup>\<2></sup>|x, y<sup>\<1></sup>)
       ![](Images/Beam_search_2.png)  
-    - Which means, we have to work with 30,000 choices of word in total. ANd we have to make 3 copies of the network to evaluate the possible output (10,000 possibilities for each)
+    - Which means, we have to work with 30,000 choices of word in total. And we have to make 3 copies of the network to evaluate the possible output (10,000 possibilities for each)
     - Then we will have [_"in september_", _"jane is"_, _"jane visit"_]. Notice, that we automatically discard _"september"_ as a first word if Beam Search chose this triplet.
   - Repeat the same process and get the next best B words for [_"in september_", _"jane is"_, _"jane visit"_] and so on until the end of sentence (<EOS>).
     ![](Images/Beam_search_3.png)  
@@ -728,54 +728,56 @@ Here are the course summary as its given on the course [link](https://www.course
 - The first thing is **Length optimization**
   - In beam search we are trying to optimize:   
     ![](Images/56.png)
-  - And to do that we multiply:   
-    P(y<sup>\<1></sup> | x) * P(y<sup>\<2></sup> | x, y<sup>\<1></sup>) * ... * P(y<sup>\<t></sup> | x, y<sup>\<y(t-1)></sup>)
-  - Each probability is a fraction, most of the time a small fraction.
-  - Multiplying small fractions will cause a **numerical overflow**. Meaning that it's too small for the floating part representation in your computer to store accurately.
+    - And to do that we multiply: P(y<sup>\<1></sup> | x) * P(y<sup>\<2></sup> | x, y<sup>\<1></sup>) * ... * P(y<sup>\<t></sup> | x, y<sup>\<y(t-1)></sup>)
+      - Each probability is a fraction, most of the time a small fraction.
+     - However, multiplying small fractions will cause a **numerical overflow**. Meaning that it's too small for the floating part representation in your computer to store accurately.
   - So in practice we use **summing logs of probabilities** instead of multiplying directly.   
     ![](Images/57.png)
-  - But there's another problem. The two optimization functions we have mentioned are preferring small sequences rather than long ones. Because multiplying more fractions gives a smaller value, so fewer fractions - bigger result.
+    - But there's another problem. The two optimization functions we have mentioned are preferring small sequences rather than long ones. Because multiplying more fractions gives a smaller value, so fewer fractions - bigger result.
   - So there's another step - dividing by the number of elements in the sequence.   
     ![](Images/58.png)
-    - alpha is a hyperparameter to tune.
-    - If alpha = 0 - no sequence length normalization.
-    - If alpha = 1 - full sequence length normalization.
-    - In practice alpha = 0.7 is a good thing (somewhere in between two extremes).
-- The second thing is how can we choose best `B`?
-  - The larger B - the larger possibilities, the better are the results. But it will be more computationally expensive.
-  - In practice, you might see in the production setting `B=10`
-  - `B=100`, `B=1000` are uncommon (sometimes used in research settings)
-  - Unlike exact search algorithms like BFS (Breadth First Search) or  DFS (Depth First Search), Beam Search runs faster but is not guaranteed to find the exact solution.
+    - with `alpha` is a hyperparameter to tune.
+      - If `alpha = 0` - no sequence length normalization.
+      - If `alpha = 1` - full sequence length normalization.
+    - In practice `alpha = 0.7` is a good thing (somewhere in between two extremes).
+- The second thing is **how can we choose best beam width** `B`?
+  - The larger B is chosen, the larger possibilities are considered, the better the result is achieved.
+    - However, increasing `B` also comes with increasing computationally expensive.
+  - In practice, you might see in the production setting `B=10`  
+    - `B=100`, `B=1000` are uncommon (sometimes used in research settings)
+  - Unlike exact search algorithms like BFS (Breadth First Search) or  DFS (Depth First Search), Beam Search runs faster but is not guaranteed to find the exact solution.  
 
 #### Error analysis in beam search
 - We have talked before on **Error analysis** in _"Structuring Machine Learning Projects"_ course. We will apply these concepts to improve our beam search algorithm.
 - We will use error analysis to figure out if the `B` hyperparameter of the beam search is the problem (it doesn't get an optimal solution) or in our RNN part.
 - Let's take an example:
   - Initial info:
-    - x = "Jane visite l’Afrique en septembre."
-    - y<sup>*</sup> = "Jane visits Africa in September." - right answer
-    - y&#770; = "Jane visited Africa last September." - answer produced by model
+    - x = _"Jane visite l’Afrique en septembre."_
+    - y<sup>*</sup> = _"Jane visits Africa in September."_ - right answer (human)
+    - y&#770; = _"Jane visited Africa last September."_ - answer produced by model
   - Our model that has produced not a good result.
-  - We now want to know who to blame - the RNN or the beam search.
+    - We now want to know who to blame - the RNN or the beam search.
   - To do that, we calculate P(y<sup>*</sup> | X) and P(y&#770; | X). There are two cases:
-    - Case 1 (P(y<sup>*</sup> | X)  > P(y&#770; | X)): 
-      - Conclusion: Beam search is at fault.
-    - Case 2 (P(y<sup>*</sup> | X)  <= P(y&#770; | X)): 
-      - Conclusion: RNN model is at fault.
+    - Case 1: P(y<sup>*</sup> | X) > P(y&#770; | X)
+      - Beam search chose y&#770;. But y<sup>*</sup> attains higher P(y | X)
+      - **Conclusion**: Beam search is at fault.
+    - Case 2: P(y<sup>*</sup> | X) <= P(y&#770; | X)  
+      - y<sup>*</sup> is a better translation than y&#770;. But RNN predicted P(y<sup>*</sup> | X) <= P(y&#770; | X) 
+      - **Conclusion**: RNN model is at fault.
 - The error analysis process is as following:
   - You choose N error examples and make the following table:   
     ![](Images/59.png)
   - `B` for beam search, `R` is for the RNN.
-  - Get counts and decide what to work on next.
+  - Get counts and then decide what to work on next.
 
 #### BLEU Score
 - One of the challenges of machine translation, is that given a sentence in a language there are one or more possible good translation in another language. So how do we evaluate our results?
 - The way we do this is by using **BLEU score**. BLEU stands for _bilingual evaluation understudy_.
 - The intuition is: as long as the machine-generated translation is pretty close to any of the references provided by humans, then it will get a high BLEU score.
 - Let's take an example:
-  - X = "Le chat est sur le tapis."
-  - Y1 = "The cat is on the mat." (human reference 1)
-  - Y2 = "There is a cat on the mat." (human reference 2)
+  - X = _"Le chat est sur le tapis."_
+  - Y1 = _"The cat is on the mat."_ (human reference 1)
+  - Y2 = _"There is a cat on the mat."_ (human reference 2)
   - Suppose that the machine outputs: "the the the the the the the."
   - One way to evaluate the machine output is to look at each word in the output and check if it is in the references. This is called _precision_:
     - precision = 7/7  because "the" appeared in Y1 or Y2
@@ -786,10 +788,10 @@ Here are the course summary as its given on the course [link](https://www.course
   - Here we are looking at one word at a time - unigrams, we may look at n-grams too
 - BLEU score on bigrams
   - The **n-grams** typically are collected from a text or speech corpus. When the items are words, **n-grams** may also be called shingles. An **n-gram** of size 1 is referred to as a "unigram"; size 2 is a "bigram" (or, less commonly, a "digram"); size 3 is a "trigram".
-  - X = "Le chat est sur le tapis."
-  - Y1 = "The cat is on the mat."
-  - Y2 = "There is a cat on the mat."
-  - Suppose that the machine outputs: "the cat the cat on the mat."
+  - X = _"Le chat est sur le tapis."_
+  - Y1 = _"The cat is on the mat."_
+  - Y2 = _"There is a cat on the mat."_
+  - Suppose that the machine outputs: _"the cat the cat on the mat."_
   - The bigrams in the machine output:
     | Pairs      | Count | Count clip |
     | ---------- | ----- | ---------- |
@@ -799,7 +801,7 @@ Here are the course summary as its given on the course [link](https://www.course
     | on the     | 1     | 1 (Y1)     |
     | the mat    | 1     | 1 (Y1)     |
     | **Totals** | 6     | 4          |  
-    `Modified precision = sum(Count clip) / sum(Count) = 4/6`
+    - `Modified precision = sum(Count clip) / sum(Count) = 4/6`
 - So here are the equations for modified precision for the n-grams case:   
   ![](Images/60.png)
 - Let's put this together to formalize the BLEU score:

@@ -671,28 +671,29 @@ Here are the course summary as its given on the course [link](https://www.course
   - After that the decoder network, also RNN, takes the sequence built by the encoder and outputs the new sequence.   
   ![](Images/53.png)
   - These ideas are from the following papers:
-    - [Sutskever et al., 2014. Sequence to sequence learning with neural networks](https://arxiv.org/abs/1409.3215)
-    - [Cho et al., 2014. Learning phrase representations using RNN encoder-decoder for statistical machine translation](https://arxiv.org/abs/1406.1078)
+    - [[Sutskever et al., 2014, Sequence to sequence learning with neural networks]](https://arxiv.org/abs/1409.3215)  
+    - [[Cho et al., 2014, Learning phrase representations using RNN encoder-decoder for statistical machine translation]](https://arxiv.org/abs/1406.1078)
 - An architecture similar to the mentioned above works for image captioning problem:
   - In this problem X is an image, while Y is a sentence (caption).
   - The model architecture image:   
     ![](Images/54.png)
   - The architecture uses a pretrained CNN (like AlexNet) as an encoder for the image, and the decoder is an RNN.
   - Ideas are from the following papers (they share similar ideas):
-    - [Maoet et. al., 2014. Deep captioning with multimodal recurrent neural networks](https://arxiv.org/abs/1412.6632)
-    - [Vinyals et. al., 2014. Show and tell: Neural image caption generator](https://arxiv.org/abs/1411.4555)
-    - [Karpathy and Li, 2015. Deep visual-semantic alignments for generating image descriptions](https://cs.stanford.edu/people/karpathy/cvpr2015.pdf)
+    - [[Maoet et. al., 2014, Deep captioning with multimodal recurrent neural networks]](https://arxiv.org/abs/1412.6632)
+    - [[Vinyals et. al., 2014, Show and tell: Neural image caption generator]](https://arxiv.org/abs/1411.4555)
+    - [[Karpathy and Li, 2015, Deep visual-semantic alignments for generating image descriptions]](https://cs.stanford.edu/people/karpathy/cvpr2015.pdf)
 
 #### Picking the most likely sentence
-- There are some similarities between the language model we have learned previously, and the machine translation model we have just discussed, but there are some differences as well.
+- There are some similarities between the _language model_ we have learned previously, and the _machine translation_ model we have just discussed, but there are some differences as well.
 - The language model we have learned is very similar to the decoder part of the machine translation model, except for a<sup>\<0></sup>   
-  ![](Images/55.png)
+  ![](Images/55.png)  
+    - Rather than starting with an initial representation with all zeros in language model, the machine translation have an encoded network to figure out some representation for input sentence => **Conditional language model**  
 - Problems formulations also are different:
   - In language model: P(y<sup>\<1></sup>, ..., y<sup>\<Ty></sup>)
   - In machine translation: P(y<sup>\<1></sup>, ..., y<sup>\<Ty></sup> | x<sup>\<1></sup>, ..., x<sup>\<Tx></sup>)
 - What we don't want in machine translation model, is not to sample the output at random. This may provide some choices as an output. Sometimes you may sample a bad output.
   - Example: 
-    - X = "Jane visite l’Afrique en septembre."
+    - X = _"Jane visite l’Afrique en septembre."_
     - Y may be:
       - Jane is visiting Africa in September.
       - Jane is going to be visiting Africa in September.
@@ -703,19 +704,24 @@ Here are the course summary as its given on the course [link](https://www.course
 - Why not use greedy search? Why not get the best choices each time?
   - It turns out that this approach doesn't really work!
   - Lets explain it with an example:
-    - The best output for the example we talked about is "Jane is visiting Africa in September."
-    - Suppose that when you are choosing with greedy approach, the first two words were "Jane is", the word that may come after that will be "going" as "going" is the most common word that comes after "<Noun> is" so the result may look like this: "Jane is going to be visiting Africa in September.". And that isn't the best/optimal solution.
+    - The best output for the example we talked about is _"Jane is visiting Africa in September."_
+    - Suppose that when you are choosing with greedy approach, the first two words were _"Jane is"_, the word that may come after that will be _"going"_ as _"going"_ is the most common word that comes after "<Noun> is" so the result may look like this: _"Jane is going to be visiting Africa in September."_. And that isn't the best/optimal solution.
 - So what is better than greedy approach, is to get an approximate solution, that will try to maximize the output (the last equation above).
 
 #### Beam Search
 - Beam search is the most widely used algorithm to get the best output sequence. It's a heuristic search algorithm.
-- To illustrate the algorithm we will stick with the example from the previous section. We need Y = "Jane is visiting Africa in September."
-- The algorithm has a parameter `B`  which is the beam width. Lets take `B = 3` which means the algorithm will get 3 outputs at a time.
-- For the first step you will get ["in", "jane", "september"] words that are the best candidates.
-- Then for each word in the first output, get B next (second) words and select top best B combinations where the best are those what give the highest value of multiplying both probabilities - P(y<sup>\<1></sup>|x) * P(y<sup>\<2></sup>|x,y<sup>\<1></sup>). Se we will have then ["in september", "jane is", "jane visit"]. Notice, that we automatically discard _september_ as a first word.
-- Repeat the same process and get the best B words for ["september", "is", "visit"]  and so on.
-- In this algorithm, keep only B instances of your network.
-- If `B = 1` this will become the greedy search.
+- To illustrate the algorithm we will stick with the example from the previous section. We need Y = _"Jane is visiting Africa in September."_
+- The algorithm has a parameter `B`  which is the beam width. Lets take `B = 3` which means the algorithm will consider/get 3 possibility outputs at a time.
+  - For the first step you will get [_"in"_, _"jane"_, _"september"_] words that are the most likely 3 best candidates for the first words (top 3) among 10.000 possibilities.  
+      ![](Images/Beam_search_1.png)  
+  - Then for each word in the first output, get B next (second) words and select top best B combinations where the best are those what give the highest value of multiplying both probabilities - P(y<sup>\<1></sup>,y<sup>\<2></sup>|x) = P(y<sup>\<1></sup>|x) * P(y<sup>\<2></sup>|x, y<sup>\<1></sup>)
+      ![](Images/Beam_search_2.png)  
+    - Which means, we have to work with 30,000 choices of word in total. ANd we have to make 3 copies of the network to evaluate the possible output (10,000 possibilities for each)
+    - Then we will have [_"in september_", _"jane is"_, _"jane visit"_]. Notice, that we automatically discard _"september"_ as a first word if Beam Search chose this triplet.
+  - Repeat the same process and get the next best B words for [_"in september_", _"jane is"_, _"jane visit"_] and so on until the end of sentence (<EOS>).
+    ![](Images/Beam_search_3.png)  
+- In this algorithm, keep only B instances of your network. Which means we have to work with `B*N` choices for each step
+  - If `B = 1` this will become the greedy search.
 
 #### Refinements to Beam Search
 - In the previous section, we have discussed the basic beam search. In this section, we will try to do some refinements to it.

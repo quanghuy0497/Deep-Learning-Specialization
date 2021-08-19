@@ -773,33 +773,34 @@ Here are the course summary as its given on the course [link](https://www.course
 #### BLEU Score
 - One of the challenges of machine translation, is that given a sentence in a language there are one or more possible good translation in another language. So how do we evaluate our results?
 - The way we do this is by using **BLEU score**. BLEU stands for _bilingual evaluation understudy_.
-- The intuition is: as long as the machine-generated translation is pretty close to any of the references provided by humans, then it will get a high BLEU score.
+  - Paper: [[Papineni et al., 2002, BLEU: a Method for Automatic Evaluation of Machine Translation]](https://aclanthology.org/P02-1040.pdf)  
+  - The intuition is: as long as the machine-generated translation is pretty close to any of the references provided by humans, then it will get a high BLEU score.
 - Let's take an example:
   - X = _"Le chat est sur le tapis."_
   - Y1 = _"The cat is on the mat."_ (human reference 1)
   - Y2 = _"There is a cat on the mat."_ (human reference 2)
-  - Suppose that the machine outputs: "the the the the the the the."
+  - Suppose that the machine outputs: _"the the the the the the the."_
   - One way to evaluate the machine output is to look at each word in the output and check if it is in the references. This is called _precision_:
-    - precision = 7/7  because "the" appeared in Y1 or Y2
-  - This is not a useful measure!
-  - We can use a modified precision in which we are looking for the reference with the maximum number of a particular word and set the maximum appearing of this word to this number. So:
-    - modified precision = 2/7 because the max is 2 in Y1
+    - In this case: _precision_ = 7/7 because "the" appeared in Y1 or Y2
+    - This is not a useful measure!
+  - We can use a _modified precision_ in which we are looking for the reference with the maximum number of a particular word and set the maximum appearing of this word to this number. So:
+    - _modified precision_ = 2/7 because the max is 2 in Y1
     - We clipped the 7 times by the max which is 2.
   - Here we are looking at one word at a time - unigrams, we may look at n-grams too
-- BLEU score on bigrams
+- **BLEU score on bigrams**
   - The **n-grams** typically are collected from a text or speech corpus. When the items are words, **n-grams** may also be called shingles. An **n-gram** of size 1 is referred to as a "unigram"; size 2 is a "bigram" (or, less commonly, a "digram"); size 3 is a "trigram".
   - X = _"Le chat est sur le tapis."_
   - Y1 = _"The cat is on the mat."_
   - Y2 = _"There is a cat on the mat."_
-  - Suppose that the machine outputs: _"the cat the cat on the mat."_
+  - Suppose that the machine outputs: _"The cat the cat on the mat."_  
   - The bigrams in the machine output:
     | Pairs      | Count | Count clip |
     | ---------- | ----- | ---------- |
     | the cat    | 2     | 1 (Y1)     |
     | cat the    | 1     | 0          |
     | cat on     | 1     | 1 (Y2)     |
-    | on the     | 1     | 1 (Y1)     |
-    | the mat    | 1     | 1 (Y1)     |
+    | on the     | 1     | 1 (Y1 & Y2)|
+    | the mat    | 1     | 1 (Y1 & Y2)|
     | **Totals** | 6     | 4          |  
     - `Modified precision = sum(Count clip) / sum(Count) = 4/6`
 - So here are the equations for modified precision for the n-grams case:   
@@ -809,7 +810,7 @@ Here are the course summary as its given on the course [link](https://www.course
   - **Combined BLEU score** = BP * exp(1/n * sum(P<sub>n</sub>))
     - For example if we want BLEU for 4, we compute P<sub>1</sub>, P<sub>2</sub>, P<sub>3</sub>, P<sub>4</sub> and then average them and take the exp.
   - **BP** is called **BP penalty** which stands for brevity penalty. It turns out that if a machine outputs a small number of words it will get a better score so we need to handle that.   
-    ![](Images/62.png)
+    ![](Images/62_fix.png)
 - BLEU score has several open source implementations. 
 - It is used in a variety of systems like machine translation and image captioning.
 
@@ -828,40 +829,43 @@ Here are the course summary as its given on the course [link](https://www.course
 - In this section we will give just some intuitions about the attention model and in the next section we will discuss it's details.
 - At first the attention model was developed for machine translation but then other applications used it like computer vision and new architectures like Neural Turing machine.
 - The attention model was descried in this paper:
-  - [Bahdanau et. al., 2014. Neural machine translation by jointly learning to align and translate](https://arxiv.org/abs/1409.0473)
+  - [[Bahdanau et al., 2014. Neural machine translation by jointly learning to align and translate]](https://arxiv.org/abs/1409.0473)  
 - Now for the intuition:
   - Suppose that our encoder is a bidirectional RNN:
     ![](Images/65.png)
   - We give the French sentence to the encoder and it should generate a vector that represents the inputs.
   - Now to generate the first word in English which is "Jane" we will make another RNN which is the decoder.
-  - Attention weights are used to specify which words are needed when to generate a word. So to generate "jane" we will look at "jane", "visite", "l'Afrique"   
+  - Attention weights are used to specify which words are needed when to generate a word. So to generate _"Iane"_ we will look at _"jane"_, _"visite"_, _"l'Afrique"_   
     ![](Images/66.png)
-  - alpha<sup>\<1,1></sup>, alpha<sup>\<1,2></sup>, and alpha<sup>\<1,3></sup> are the attention weights being used.
+    - S<sup>\<0></sup>, S<sup>\<1></sup>,... is the hidden state activation of the other RNN (same as a<sup>\<0></sup>, a<sup>\<1></sup>,... but with other denote to avoid confusion)  
+    - alpha<sup>\<1,1></sup>, alpha<sup>\<1,2></sup>, and alpha<sup>\<1,3></sup> are the attention weights being used
   - And so to generate any word there will be a set of attention weights that controls which words we are looking at right now.   
     ![](Images/67.png)
+      - With alpha<sup>\<3, t></sup> can be affected by a<sup>\<t></sup> forward, alpha<sup>\<t></sup> backward (as we used the Bidirectional RNN) and the state from previous step S<sup>\<2></sup> => how much you pay attention to  S<sup>\<3></sup>
 
 #### Attention Model
 - Lets formalize the intuition from the last section into the exact details on how this can be implemented.
 - First we will have an bidirectional RNN (most common is LSTMs) that encodes French language:   
   ![](Images/68.png)
-- For learning purposes, lets assume that a<sup>\<t'></sup> will include the both directions activations at time step t'.
+    - For learning purposes, lets assume that a<sup>\<t'></sup> will include the both directions activations at time step t' a<sup>\<t'></sup> = (a<sup>\<t'></sup> forward, a<sup>\<t'></sup> backward) 
 - We will have a unidirectional RNN to produce the output using a context `c` which is computed using the attention weights, which denote how much information does the output needs to look in a<sup>\<t'></sup>   
   ![](Images/69.png)
 - Sum of the attention weights for each element in the sequence should be 1:   
   ![](Images/70.png)
 - The context `c` is calculated using this equation:   
   ![](Images/71.png)
-- Lets see how can we compute the attention weights:
+- compute the attention weights alpha<sup>\<t, t'></sup>:
   - So alpha<sup>\<t, t'></sup> = amount of attention y<sup>\<t></sup> should pay to a<sup>\<t'></sup>
     - Like for example we payed attention to the first three words through alpha<sup>\<1,1></sup>, alpha<sup>\<1,2></sup>, alpha<sup>\<1,3></sup>
   - We are going to softmax the attention weights so that their sum is 1:   
     ![](Images/72.png)
   - Now we need to know how to calculate e<sup>\<t, t'></sup>. We will compute e using a small neural network (usually 1-layer, because we will need to compute this a lot):   
     ![](Images/73.png)
-    - s<sup>\<t-1></sup> is the hidden state of the RNN s, and a<sup>\<t'></sup> is the activation of the other bidirectional RNN. 
-- One of the disadvantages of this algorithm is that it takes quadratic time or quadratic cost to run.
+    - S<sup>\<t-1></sup> is the hidden state S of the RNN, and a<sup>\<t'></sup> is the activation of the other bidirectional RNN. 
+  - One of the disadvantages of this algorithm is that it takes quadratic time or quadratic cost to run.
+  - Other application of attention in image captioning: [[Xu et al., 2015, Show, attend and tell: Neural image caption generation with visual attention]](https://arxiv.org/abs/1502.03044)
 - One fun way to see how attention works is by visualizing the attention weights:   
-  ![](Images/74.png)
+  ![](Images/74.png)  
 
 ### Speech recognition - Audio data
 
@@ -898,7 +902,7 @@ Here are the course summary as its given on the course [link](https://www.course
     - Basic rule for CTC: collapse repeated characters not separated by "blank"
   - So the 19 character in our Y can be generated into 1000 character output using CTC and it's special blanks.
   - The ideas were taken from this paper:
-    - [Graves et al., 2006. Connectionist Temporal Classification: Labeling unsegmented sequence data with recurrent neural networks](https://dl.acm.org/citation.cfm?id=1143891)
+    - [[Graves et al., 2006, Connectionist Temporal Classification: Labeling unsegmented sequence data with recurrent neural networks]](https://dl.acm.org/citation.cfm?id=1143891)
     - This paper's ideas were also used by Baidu's DeepSpeech.
 - Using both attention model and CTC cost can help you to build an accurate speech recognition system.
 

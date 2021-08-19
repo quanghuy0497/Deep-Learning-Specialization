@@ -978,7 +978,7 @@ Here is the course summary as its given on the course [link](https://www.courser
       + After that, we calculate the inner product between q<sup>\<3></sup> and other K<sup>\<1:5></sup> => how good is a word i.e. _visite_ is an answer to the question of what happened in _l'Afrique_
          + Then compute the Softmax for each (with the blue block (q<sup>\<3></sup>.K<sup>\<2></sup> has the largest value))
       + Then, we multiply with the corresponding V<sup>\<i></sup> and sum them up for A<sup>\<3></sup>  
-         ![](Images/88.png)
+         ![](Images/87.png)
          + The key advantage of this computation is the word _l'Afrique_ lets the self-attention mechanism realise that this word is the destination of a _visite_, rather than a fixed word embedding => compute richer, more useful representation of this word
       + Eventualy, we do the same with other word representations
 + Finally, the Self-Attention is calculated by:
@@ -990,10 +990,10 @@ Here is the course summary as its given on the course [link](https://www.courser
 + With multi-head attention, you take the same set of [query, key, value] as input and calculate multiple self-attentions for the Attention(W<sup>Q1</sup>Q, W<sup>K1</sup>K, W<sup>V1</sup>V) (visite) to answer what's happened?
 + Then, we repeat the process with a new set of W<sup>Q2</sup>, W<sup>K2</sup>, W<sup>V2</sup>, to answer the question i.e, When?, and so on (Who, what,...)
    + For each, we have a different attention for different word, like red for September (when), black for Jane (who),... and this time, we call it a *head*
-   + These heads are then concatentation together, and called **Multi-Head Attention**
-+ Finally, the Multi-Head Attention is calculated by:
-    + `Multihead(Q,K,V) = concat(heads).W0`  
-   ![](Images/87.png)
+   + These heads are then concatentation together, and called **Multi-Head Attention**  
+  ![](Images/88.png)
++ The Multi-Head Attention is calculated by:
+    + `Multihead(Q,K,V) = concat(heads).W0`
 
 #### Transformer Network
 + We have a sentence with embeddings(also 2 tokens <SOS> and <EOS> at the start and end)
@@ -1004,7 +1004,7 @@ Here is the course summary as its given on the course [link](https://www.courser
       + Then the Q matrix is combined with K and V from Encoder output and feed to the second Multi-Head Attention block
       + The Q from the first block is what we've generated so far, combined with the K and Q from the original French words to decide what is the next word in the sequence to generate
       + Finally, the out of the second block is feed to the Feed-Forward NN, and the Decoder block is also repeated N times, with the output of the Decoder block is feed to its input for another round of generating the most appropriate next (English) word.  
-   ![](Images/88.png)
+   ![](Images/89.png)
 + **Some techniques to make the Transformer even better**:
    + We can apply the **_Positional Encoding_** to encode the position of words within the sentence in the input of Encoder and Decoder blocks
       + For example, the word embedding is a 4-value vector

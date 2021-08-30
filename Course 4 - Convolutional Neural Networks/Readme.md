@@ -461,7 +461,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   + Lets first consider an example:
     + Input: `6x6x10`
     + Conv: `1x1x10` one filter.        `# The 1 x 1 Conv`
-    + Output: `6x6x10`
+    + Output: `6x6x1`
   + Another example:
     + Input: `6x6x32`
     + Conv: `1x1x32` 5 filters.     `# The 1 x 1 Conv`
